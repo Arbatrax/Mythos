@@ -30,10 +30,9 @@ function UpdateTimer( data )
 	//$.Schedule( 0.1, UpdateTimer );
 }
 
-
-function AddTimer()
+function AddTimer( data )
 {
-	$.Msg( "This was loaded. ");
+	//$.Msg( "This was loaded. ");
 }
 
 function ShowTimer( data )
@@ -51,7 +50,18 @@ function HideTimer( data )
 	$( "#TimerBox" ).AddClass( "timerbox_hidden" );
 }
 
+function ChangeUI( data )
+{
+	GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_TIMEOFDAY, false );
+	GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_HEROES, false );
+
+	//<CustomUIElement type="HudTopBar"           layoutfile="file://{resources}/layout/custom_game/multiteam_top_scoreboard.xml" />
+
+	ShowTimer()
+}
+
 (function () {
+	GameEvents.Subscribe( "change_ui", ChangeUI );
 	GameEvents.Subscribe( "countdown", UpdateTimer );
 	GameEvents.Subscribe( "show_timer", ShowTimer );
     GameEvents.Subscribe( "timer_alert", AlertTimer );

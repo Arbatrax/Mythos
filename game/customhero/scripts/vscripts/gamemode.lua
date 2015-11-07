@@ -4,10 +4,10 @@ _G.nCOUNTDOWNTIMER = 16
 
 -- Set this to true if you want to see a complete debug output of all events/processes done by barebones
 -- You can also change the cvar 'barebones_spew' at any time to 1 or 0 for output/no output
-BAREBONES_DEBUG_SPEW = false 
+Mythos_DEBUG_SPEW = false 
 
 if GameMode == nil then
-    DebugPrint( '[BAREBONES] creating barebones game mode' )
+    DebugPrint( '[MYTHOS] creating barebones game mode' )
     _G.GameMode = class({})
 end
 
@@ -57,7 +57,7 @@ LinkLuaModifier( "modifier_kiss_transform", "heroes/sailor/modifier_kiss_transfo
   This function should generally only be used if the Precache() function in addon_game_mode.lua is not working.
 ]]
 function GameMode:PostLoadPrecache()
-  DebugPrint("[BAREBONES] Performing Post-Load precache")    
+  DebugPrint("[MYTHOS] Performing Post-Load precache")    
   --PrecacheItemByNameAsync("item_example_item", function(...) end)
   --PrecacheItemByNameAsync("example_ability", function(...) end)
 
@@ -70,7 +70,7 @@ end
   It can be used to initialize state that isn't initializeable in InitGameMode() but needs to be done before everyone loads in.
 ]]
 function GameMode:OnFirstPlayerLoaded()
-  DebugPrint("[BAREBONES] First Player has loaded")
+  DebugPrint("[MYTHOS] First Player has loaded")
 end
 
 --[[
@@ -78,7 +78,7 @@ end
   It can be used to initialize non-hero player state or adjust the hero selection (i.e. force random etc)
 ]]
 function GameMode:OnAllPlayersLoaded()
-  DebugPrint("[BAREBONES] All Players have loaded into the game")
+  DebugPrint("[MYTHOS] All Players have loaded into the game")
  
 end
 
@@ -124,42 +124,56 @@ function GameMode:OnPlayerPickHero(keys)
 
 end
 
-function Activate()
+function GameMode:Activate()
   InitGameMode()
 end
 
+-- This function initializes the game mode and is called before anyone loads into the game
+-- It can be used to pre-initialize any values/tables that will be needed later
 function GameMode:InitGameMode()
-  print("Game is loaded.")
-  
-  -- body
+  GameMode = self
+  DebugPrint('[MYTHOS] Starting to load Mythos gamemode...')
+  print('Mythos gamemode loading.')
+
+  -- Call the internal function to set up the rules/behaviors specified in constants.lua
+  -- This also sets up event hooks for all event handlers in events.lua
+  -- Check out internals/gamemode to see/modify the exact code
+  GameMode:_InitGameMode()
+  GameRules.DropTable = LoadKeyValues("scripts/kv/item_drops.kv")
+  GameRules.TreasureChest = LoadKeyValues("scripts/kv/treasure_chest.kv")
+  GameRules.FactionTable = LoadKeyValues("scripts/kv/factions.kv")
+  -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
+  Convars:RegisterCommand( "command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
+
+  DebugPrint('[MYTHOS] Done loading Mythos gamemode!\n\n')
+  print('Mythos gamemode loaded.')
 end
 
 function GameMode:OnHeroInGame(hero)
-  print("[BAREBONES] Hero spawned in game for first time -- " .. hero:GetUnitName())
+  print("[MYTHOS] Hero spawned in game for first time -- " .. hero:GetUnitName())
   
-  
- 
-  if GetMapName() == "plateau" then
-    CustomGameEventManager:Send_ServerToAllClients( "show_timer", {} )
-  else
-    CustomGameEventManager:Send_ServerToAllClients( "hide_timer", {} )
-  end
-
-  -- This line for example will set the starting gold of every hero to 500 unreliable gold
-  hero:SetGold(500, false)
-
   -- These lines will create an item and add it to the player, effectively ensuring they start with the item
   local item = CreateItem("item_blink", hero, hero)
   hero:AddItem(item)
-  if GetMapName() == "mythos" then
+  if GetMapName() == "plateau" then
+    CustomGameEventManager:Send_ServerToAllClients( "change_ui", {} )
+  elseif GetMapName() == "mythos" then 
+    CustomGameEventManager:Send_ServerToAllClients( "hide_timer", {} )
     item = CreateItem("item_gate_jumper", hero, hero)
     hero:AddItem(item)
     item = CreateItem("item_purple_orb", hero, hero)
     hero:AddItem(item)
     item = CreateItem("item_green_orb", hero, hero)
     hero:AddItem(item)
+  else
+    print('Hero in unknown map')
   end
 
+  -- This line for example will set the starting gold of every hero to 500 unreliable gold
+  hero:SetGold(500, false)
+
+  -- These lines will create an item and add it to the player, effectively ensuring they start with the item
+  
   --[[ --These lines if uncommented will replace the W ability of any hero that loads into the game
     --with the "example_ability" ability
 
@@ -174,9 +188,9 @@ end
   is useful for starting any game logic timers/thinkers, beginning the first round, etc.
 ]]
 function GameMode:OnGameInProgress()
-  DebugPrint("[BAREBONES] The game has officially begun")
+  DebugPrint("[MYTHOS] The game has officially begun")
   print("Game started.")
-  Notifications:TopToAll("Top Notification for 5 seconds", 5.0)
+  --Notifications:TopToAll("Top Notification for 5 seconds", 5.0)
 
   if GetMapName() == "mythos" then
     print("Mythos map selected.")
@@ -209,7 +223,7 @@ function GameMode:OnGameInProgress()
     end)
   elseif GetMapName() == "plateau" then
     self.m_GatheredShuffledTeams = {}
-    self.TEAM_KILLS_TO_WIN = 20
+    self.TEAM_KILLS_TO_WIN = 2000
     self.countdownEnabled = true
     print("Countdown should be enabled ", self.countdownEnabled)
     self.isGameTied = true
@@ -221,14 +235,9 @@ function GameMode:OnGameInProgress()
          GameMode:OnThink()
          return 1
       end)
-
-
-
   else
     print("Not loaded into any known map.")
-    
   end
-  
 end
 
 function SpawnLaneCreeps()
@@ -242,7 +251,6 @@ function SpawnLaneCreeps()
   local right_bot_creeps = {}
   local left_top_creeps = {}
   local right_top_creeps = {}
-
 
   --Sets up 4 checkers at each of the corners of the lanes that send the creeps on to the next check point ----------------------------------
   Timers:CreateTimer(function()
@@ -293,7 +301,6 @@ function SpawnLaneCreeps()
       return 0.5 
   end) 
 
-
   --Spawns bottoms  creeps for the left and right side ------------------------------------------------------
   for i=1,3 do
     left_bot_creeps[i] = CreateUnitByName("lane_creep_melee_light", bot_spawner, true, nil, nil, DOTA_TEAM_GOODGUYS)
@@ -319,7 +326,6 @@ function SpawnLaneCreeps()
     light_ranged2:MoveToPositionAggressive(bot_right)
   end) 
 
-
   --Spawns top creeps for the left and right side -------------------------------------------------------------
   for i=1,3 do
     left_top_creeps[i] = CreateUnitByName("lane_creep_melee_dark", top_spawner, true, nil, nil, DOTA_TEAM_BADGUYS)
@@ -344,7 +350,6 @@ function SpawnLaneCreeps()
   Timers:CreateTimer(0.35, function()
     dark_ranged2:MoveToPositionAggressive(top_right)
   end) 
-
 end
 
 function SpawnGods()
@@ -372,7 +377,6 @@ end
 
 
 function SpawnCreeps()
-  
   --Spawns Bot side neutral camps
   if ClearCamp("bot_neutral_camp1") == true then
     SpawnCamp("bot_neutral_camp1", "neutral_dinosaur_baby", 2)
@@ -395,7 +399,6 @@ function SpawnCreeps()
   if ClearCamp("bot_neutral_vision") == true then
     SpawnCamp("bot_neutral_vision", "neutral_harpy_vision", 1)
   end
-
   --Spawns Top side neutral camps
   if ClearCamp("top_neutral_camp1") == true then
     SpawnCamp("top_neutral_camp1", "neutral_forest_lord", 1)
@@ -455,8 +458,7 @@ function Leash(point, neutral)
       end
     end
     return 1 
-  end
-  )
+  end)
 end
 
 function SpawnCamp(camp, neutral, num)
@@ -475,26 +477,6 @@ function ClearCamp(camp)
     return true
   end
 end
--- This function initializes the game mode and is called before anyone loads into the game
--- It can be used to pre-initialize any values/tables that will be needed later
-function GameMode:InitGameMode()
-  GameMode = self
-  DebugPrint('[BAREBONES] Starting to load Barebones gamemode...')
-
-
-  -- Call the internal function to set up the rules/behaviors specified in constants.lua
-  -- This also sets up event hooks for all event handlers in events.lua
-  -- Check out internals/gamemode to see/modify the exact code
-  GameMode:_InitGameMode()
-  GameRules.DropTable = LoadKeyValues("scripts/kv/item_drops.kv")
-  GameRules.TreasureChest = LoadKeyValues("scripts/kv/treasure_chest.kv")
-  GameRules.FactionTable = LoadKeyValues("scripts/kv/factions.kv")
-  -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
-  Convars:RegisterCommand( "command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
-
-  DebugPrint('[BAREBONES] Done loading Barebones gamemode!\n\n')
-end
-
 -- This is an example console command
 function GameMode:ExampleConsoleCommand()
   print( '******* Example Console Command ***************' )
@@ -509,9 +491,7 @@ function GameMode:ExampleConsoleCommand()
 
   print( '*********************************************' )
 end
-
 --C+P from overthrow
-
 function GameMode:ColorForTeam( teamID )
   local color = self.m_TeamColors[ teamID ]
   if color == nil then
@@ -542,7 +522,7 @@ function GameMode:UpdateScoreboard()
   end
   -- Leader effects (moved from OnTeamKillCredit)
   local leader = sortedTeams[1].teamID
-  --print("Leader = " .. leader)
+  print("Leader = " .. leader)
   self.leadingTeam = leader
   self.runnerupTeam = sortedTeams[2].teamID
   self.leadingTeamScore = sortedTeams[1].teamScore
