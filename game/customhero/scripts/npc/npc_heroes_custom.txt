@@ -1,0 +1,279 @@
+"DOTAHeroes"
+{
+    "rogue"
+    {
+        "AbilityLayout" "4"
+        "override_hero"     "npc_dota_hero_slark"
+        "Ability1"           "reef_strike"
+        "Ability2"           "elude"
+        "Ability3"           "camouflage"
+        "Ability4"           "shelf_snail_poison"
+
+        // Armor
+        //-------------------------------------------------------------------------------------------------------------
+        "ArmorPhysical"             "1"                                        // Physical protection.
+
+        // Attributes
+        //-------------------------------------------------------------------------------------------------------------
+        "AttributePrimary"          "DOTA_ATTRIBUTE_AGILITY"
+        "AttributeBaseStrength"     "19"                                    // Base strength
+        "AttributeStrengthGain"     "1.8"                                   // Strength bonus per level.
+        "AttributeBaseIntelligence" "19"                                    // Base intelligence
+        "AttributeIntelligenceGain" "1.9"                                   // Intelligence bonus per level.
+        "AttributeBaseAgility"      "21"                                    // Base agility
+        "AttributeAgilityGain"      "2.5"                                   // Agility bonus per level.
+    }
+
+    "champion_of_ferocity"
+    {
+        "AbilityLayout" "4"
+        "override_hero"     "npc_dota_hero_lycan"
+        "model" "models\heroes\lycan\lycan_wolf.vmdl"
+        
+        "ability1" "sever"
+        "Ability2" "packrunning"
+        "ability3" "go_for_the_throat"
+        "Ability4" "leap_to_kill"
+    }
+    "champion_of_strength"
+    {
+        
+        "override_hero"     "npc_dota_hero_ursa"
+        "model" "models/heroes/lone_druid/spirit_bear.vmdl"
+        "SoundSet"                  "LoneDruid_SpiritBear"
+        "AbilityLayout" "5"
+        "Ability1" "charge"
+        "Ability2" "earthshock"
+        "Ability4" "iron_fur"
+    }
+    "champion_of_cunning"
+    {
+        "AbilityLayout" "4"
+        "override_hero"     "npc_dota_hero_broodmother"
+    }
+
+
+    "arena"
+    {
+        "override_hero"     "npc_dota_hero_legion_commander"
+        "AbilityLayout" "5"
+        "Ability1"           "intimidate"
+        "Ability2"           "blood_pact"
+        "Ability3"           "dash"
+        "Ability4"           "roar_of_the_crowd"
+        "Ability5"           "gladiator_stance"
+        "Ability6"           "guardian_stance"
+        "Ability7"           "duel"
+
+    }
+    "ember_king"
+    {
+        "override_hero"     "npc_dota_hero_invoker"
+        "AbilityLayout" "4"
+        "Ability1"           "incinerate"
+        "Ability2"           "arcane_accelerant"
+        "Ability3"           "cauterize"
+        "Ability4"           "summon_phoenix"
+        "Ability5"           ""
+        "Ability6"                  ""
+        "Ability7"                  ""
+        "Ability8"                  "" 
+        "Ability9"                  ""        
+        "Ability10"                 ""
+        "Ability11"                 ""
+        "Ability12"                 ""
+        "Ability13"                 ""
+        "Ability14"                 ""
+        "Ability15"                 ""
+        "Ability16"                 ""
+
+        "MovementSpeed"             "290"
+
+        "AttackDamageMin"           "24"                                    // Damage range min.
+        "AttackDamageMax"           "29"                                    // Damage range max.
+
+        "AttributeBaseStrength"         "19"                                    // Base strength
+        "AttributeStrengthGain"         "1.1"                                   // Strength bonus per level.
+        "AttributeBaseIntelligence"     "22"                                    // Base intelligence
+        "AttributeIntelligenceGain"     "3.2"                                   // Intelligence bonus per level.
+        "AttributeBaseAgility"          "20"                                    // Base agility
+        "AttributeAgilityGain"          "1.9"                                   // Agility bonus per level.
+    }
+
+    "deathspeaker"
+    {
+        "override_hero"     "npc_dota_hero_necrolyte"
+        "AbilityLayout"     "4"
+        //"model" "models\creeps\neutral_creeps\n_creep_satyr_b\n_creep_satyr_b.vmdl"
+        "ModelScale"       "1.0"
+    }
+
+    "storm_lord"
+    {
+        "override_hero"     "npc_dota_hero_storm_spirit"
+        "AbilityLayout" "5"
+        "Ability1"           "storm_swell"
+        "Ability2"           "dispersion"
+        "Ability3"           "tempest"
+        "Ability4"           "overcharge"
+        "Ability5"           "hurricane"
+
+        // Armor
+        //-------------------------------------------------------------------------------------------------------------
+        "ArmorPhysical"             "1"                                     // Physical protection.
+
+        // Attack
+        //------------------------------------------------------------------------------------------------------------
+        "AttackDamageMin"           "12"                                    // Damage range min.
+        "AttackDamageMax"           "22"                                    // Damage range max.
+       
+        "AttackRange"               "450"                                   // Range within a target can be attacked.
+
+        // Attributes
+        //-------------------------------------------------------------------------------------------------------------
+        "AttributePrimary"              "DOTA_ATTRIBUTE_AGILITY"
+        "AttributeBaseStrength"         "19"                                    // Base strength
+        "AttributeStrengthGain"         "1.0"                                   // Strength bonus per level.
+        "AttributeBaseIntelligence"     "14"                                    // Base intelligence
+        "AttributeIntelligenceGain"     "1.2"                                   // Intelligence bonus per level.
+        "AttributeBaseAgility"          "22"                                    // Base agility
+        "AttributeAgilityGain"          "2.8"                                   // Agility bonus per level.
+        "AttributeBaseFaith"            "19"
+        "AttributeFaithGain"            "2.9"
+
+        // Movement
+        //-------------------------------------------------------------------------------------------------------------
+        "MovementSpeed"             "310"                                   // Speed.
+        "MovementTurnRate"          "0.8"                                   // Turning rate.
+    }
+
+    "fungus"
+    {
+        "override_hero"      "npc_dota_hero_treant"
+        "AbilityLayout" "5"
+        "Ability1"           "fungal_spore"
+        "Ability2"           "spore_disemination"
+        "Ability3"           "fungal_desecration"
+        "Ability4"           "plant_mushroom"
+        "Ability5"           "flesh_eating_fungus"
+
+
+        // Armor
+        //-------------------------------------------------------------------------------------------------------------
+        "ArmorPhysical"             "0"                                     // Physical protection.
+
+        // Attack
+        //------------------------------------------------------------------------------------------------------------
+        "AttackDamageMin"           "28"                                    // Damage range min.
+        "AttackDamageMax"           "38"                                    // Damage range max.
+
+        // Attributes
+        //-------------------------------------------------------------------------------------------------------------
+        "AttributePrimary"              "DOTA_ATTRIBUTE_INTELLECT"
+        "AttributeBaseStrength"         "23"                                    // Base strength
+        "AttributeStrengthGain"         "2.7"                                   // Strength bonus per level.
+        "AttributeBaseIntelligence"     "18"                                    // Base intelligence
+        "AttributeIntelligenceGain"     "2.6"                                   // Intelligence bonus per level.
+        "AttributeBaseAgility"          "14"                                    // Base agility
+        "AttributeAgilityGain"          "1.2"                                   // Agility bonus per level.
+
+        // Movement
+        //-------------------------------------------------------------------------------------------------------------
+        "MovementSpeed"             "290"                                   // Speed.
+        "MovementTurnRate"          "0.7"                                   // Turning rate.
+    }
+
+    "lich"
+    {
+        "override_hero"      "npc_dota_hero_lich"
+        "AbilityLayout" "4"
+        "Ability1"           "shatter"
+        "Ability2"           "crazed_acolyte"
+        "Ability3"           "icy_rune"
+        "Ability4"           "frozen_tomb"    
+    }
+
+    "trickster"
+    {
+        "override_hero"      "npc_dota_hero_shadow_demon"
+        "AbilityLayout" "5"
+        "Ability1"           "masquerade"
+        "Ability2"           "touch_of_darkness"
+        "Ability3"           "dominate_mind"
+        "Ability4"           "final_gift"
+        "Ability5"           "dimensional_lightning"   
+    }
+
+    "hunter"
+    {
+        "override_hero"      "npc_dota_hero_night_stalker"
+        "AbilityLayout" "5"
+        "Ability1"           "shatter"
+        "Ability2"           "unbreakable"
+        "Ability3"           "vampirism"
+        "Ability4"           "blood_of_the_innocent"  
+        "Ability5"           "hysteria"  
+    }
+
+    "sailor"
+    {
+        "override_hero"      "npc_dota_hero_kunkka"
+        "AbilityLayout" "4"
+        "Ability1"           "favorable_winds"
+        "Ability2"           "gunblade"
+        "Ability3"           "vampirism"
+        "Ability4"           "kiss_of_the_serpent_queen"  
+
+         // Armor
+        //-------------------------------------------------------------------------------------------------------------
+        "ArmorPhysical"             "2"                                     // Physical protection.
+
+        // Attack
+        //------------------------------------------------------------------------------------------------------------
+        "AttackDamageMin"           "31"                                    // Damage range min.
+        "AttackDamageMax"           "41"                                    // Damage range max.
+
+        // Attributes
+        //-------------------------------------------------------------------------------------------------------------
+        "AttributePrimary"              "DOTA_ATTRIBUTE_AGILITY"
+        "AttributeBaseStrength"         "20"                                    // Base strength
+        "AttributeStrengthGain"         "2.3"                                   // Strength bonus per level.
+        "AttributeBaseIntelligence"     "18"                                    // Base intelligence
+        "AttributeIntelligenceGain"     "2.0"                                   // Intelligence bonus per level.
+        "AttributeBaseAgility"          "19"                                    // Base agility
+        "AttributeAgilityGain"          "2.6"                                   // Agility bonus per level.
+
+        // Movement
+        //-------------------------------------------------------------------------------------------------------------
+        "MovementSpeed"             "310"                                   // Speed.
+        "MovementTurnRate"          "0.7"                                   // Turning rate.
+    }
+
+    "puck"
+    {
+        "override_hero"      "npc_dota_hero_puck"
+        "AbilityLayout" "4"
+        "Ability1"           "favorable_winds"
+        "Ability2"           "gunblade"
+        "Ability3"           "vampirism"
+        "Ability4"           "blood_of_the_innocent"  
+
+         // Armor
+        //-------------------------------------------------------------------------------------------------------------
+        "ArmorPhysical"             "2"                                     // Physical protection.
+
+        // Attributes
+        //-------------------------------------------------------------------------------------------------------------
+        "AttributeBaseStrength"         "20"                                    // Base strength
+        "AttributeStrengthGain"         "2.3"                                   // Strength bonus per level.
+        "AttributeBaseIntelligence"     "18"                                    // Base intelligence
+        "AttributeIntelligenceGain"     "2.0"                                   // Intelligence bonus per level.
+        "AttributeBaseAgility"          "19"                                    // Base agility
+        "AttributeAgilityGain"          "2.6"                                   // Agility bonus per level.
+
+        // Movement
+        //-------------------------------------------------------------------------------------------------------------
+        "MovementSpeed"             "310"                                   // Speed.
+        "MovementTurnRate"          "0.7"                                   // Turning rate.
+    }
+}
