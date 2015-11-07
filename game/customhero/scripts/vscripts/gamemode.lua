@@ -1,6 +1,6 @@
 -- This is the primary barebones gamemode script and should be used to assist in initializing your game mode
 
-_G.nCOUNTDOWNTIMER = 16
+_G.nCOUNTDOWNTIMER = 1201
 
 -- Set this to true if you want to see a complete debug output of all events/processes done by barebones
 -- You can also change the cvar 'barebones_spew' at any time to 1 or 0 for output/no output
@@ -60,7 +60,6 @@ function GameMode:PostLoadPrecache()
   DebugPrint("[MYTHOS] Performing Post-Load precache")    
   --PrecacheItemByNameAsync("item_example_item", function(...) end)
   --PrecacheItemByNameAsync("example_ability", function(...) end)
-
   --PrecacheUnitByNameAsync("npc_dota_hero_viper", function(...) end)
   --PrecacheUnitByNameAsync("npc_dota_hero_enigma", function(...) end)
 end
@@ -79,7 +78,6 @@ end
 ]]
 function GameMode:OnAllPlayersLoaded()
   DebugPrint("[MYTHOS] All Players have loaded into the game")
- 
 end
 
 --[[
@@ -89,8 +87,6 @@ end
 
   The hero parameter is the hero entity that just spawned in
 ]]
-
-
 
 --This function runs right after a hero is picked.
 function GameMode:OnPlayerPickHero(keys)
@@ -157,6 +153,24 @@ function GameMode:OnHeroInGame(hero)
   hero:AddItem(item)
   if GetMapName() == "plateau" then
     CustomGameEventManager:Send_ServerToAllClients( "change_ui", {} )
+    self.m_TeamColors = {}
+	self.m_TeamColors[DOTA_TEAM_GOODGUYS] = { 61, 210, 150 }	--		Teal
+	self.m_TeamColors[DOTA_TEAM_BADGUYS]  = { 243, 201, 9 }		--		Yellow
+	self.m_TeamColors[DOTA_TEAM_CUSTOM_1] = { 197, 77, 168 }	--      Pink
+	self.m_TeamColors[DOTA_TEAM_CUSTOM_2] = { 255, 108, 0 }		--		Orange
+	self.m_TeamColors[DOTA_TEAM_CUSTOM_3] = { 52, 85, 255 }		--		Blue
+	self.m_TeamColors[DOTA_TEAM_CUSTOM_4] = { 101, 212, 19 }	--		Green
+	self.m_TeamColors[DOTA_TEAM_CUSTOM_5] = { 129, 83, 54 }		--		Brown
+	self.m_TeamColors[DOTA_TEAM_CUSTOM_6] = { 27, 192, 216 }	--		Cyan
+	self.m_TeamColors[DOTA_TEAM_CUSTOM_7] = { 199, 228, 13 }	--		Olive
+	self.m_TeamColors[DOTA_TEAM_CUSTOM_8] = { 140, 42, 244 }	--		Purple
+
+	for team = 0, (DOTA_TEAM_COUNT-1) do
+		color = self.m_TeamColors[ team ]
+		if color then
+			SetTeamCustomHealthbarColor( team, color[1], color[2], color[3] )
+		end
+	end
   elseif GetMapName() == "mythos" then 
     CustomGameEventManager:Send_ServerToAllClients( "hide_timer", {} )
     CustomGameEventManager:Send_ServerToAllClients( "hide_board", {} )
@@ -232,6 +246,7 @@ function GameMode:OnGameInProgress()
     self.runnerupTeam = -1
     self.leadingTeamScore = 0
     self.runnerupTeamScore = 0
+    self:GatherAndRegisterValidTeams()
     Timers:CreateTimer( function()
          GameMode:OnThink()
          return 1
@@ -376,7 +391,6 @@ function SpawnGods()
   AddFOWViewer(2, point, 500, 18000, false)
 end
 
-
 function SpawnCreeps()
   --Spawns Bot side neutral camps
   if ClearCamp("bot_neutral_camp1") == true then
@@ -493,6 +507,53 @@ function GameMode:ExampleConsoleCommand()
   print( '*********************************************' )
 end
 --C+P from overthrow
+
+---------------------------------------------------------------------------
+-- Scan the map to see which teams have spawn points
+---------------------------------------------------------------------------
+function GameMode:GatherAndRegisterValidTeams()
+--	print( "GatherValidTeams:" )
+
+	local foundTeams = {}
+	for _, playerStart in pairs( Entities:FindAllByClassname( "info_player_start_dota" ) ) do
+		foundTeams[  playerStart:GetTeam() ] = true
+	end
+
+	local numTeams = TableCount(foundTeams)
+	print( "GatherValidTeams - Found spawns for a total of " .. numTeams .. " teams" )
+	
+	local foundTeamsList = {}
+	for t, _ in pairs( foundTeams ) do
+		table.insert( foundTeamsList, t )
+	end
+
+	if numTeams == 0 then
+		print( "GatherValidTeams - NO team spawns detected, defaulting to GOOD/BAD" )
+		table.insert( foundTeamsList, DOTA_TEAM_GOODGUYS )
+		table.insert( foundTeamsList, DOTA_TEAM_BADGUYS )
+		numTeams = 2
+	end
+
+	local maxPlayersPerValidTeam = math.floor( 10 / numTeams )
+
+	self.m_GatheredShuffledTeams = ShuffledList( foundTeamsList )
+
+	print( "Final shuffled team list:" )
+	for _, team in pairs( self.m_GatheredShuffledTeams ) do
+		print( " - " .. team .. " ( " .. GetTeamName( team ) .. " )" )
+	end
+
+	print( "Setting up teams:" )
+	for team = 0, (DOTA_TEAM_COUNT-1) do
+		local maxPlayers = 0
+		if ( nil ~= TableFindKey( foundTeamsList, team ) ) then
+			maxPlayers = maxPlayersPerValidTeam
+		end
+		print( " - " .. team .. " ( " .. GetTeamName( team ) .. " ) -> max players = " .. tostring(maxPlayers) )
+		GameRules:SetCustomGameTeamMaxPlayers( team, maxPlayers )
+	end
+end
+-- Checks teamcolor default white
 function GameMode:ColorForTeam( teamID )
   local color = self.m_TeamColors[ teamID ]
   if color == nil then
@@ -500,7 +561,7 @@ function GameMode:ColorForTeam( teamID )
   end
   return color
 end
-
+--UpdatesScoreboard
 function GameMode:UpdateScoreboard()
   local sortedTeams = {}
   for _, team in pairs( self.m_GatheredShuffledTeams ) do
@@ -563,12 +624,14 @@ end
 
 
 function GameMode:OnThink()
+  print("1")
   self:UpdateScoreboard()
   -- Stop thinking if game is paused
   if GameRules:IsGamePaused() == true then
         return 1
   end
-  print(self.countdownEnabled)
+  print(2)
+  -- print(self.countdownEnabled)
   if self.countdownEnabled == true then
     CountdownTimer()
     if nCOUNTDOWNTIMER == 30 then
@@ -589,5 +652,5 @@ function GameMode:OnThink()
       end
     end
   end
-  print('Here.')
+  print('3')
 end
