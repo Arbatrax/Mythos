@@ -1,6 +1,6 @@
 -- This is the primary barebones gamemode script and should be used to assist in initializing your game mode
 
-_G.nCOUNTDOWNTIMER = 1201
+_G.nCOUNTDOWNTIMER = 16
 
 -- Set this to true if you want to see a complete debug output of all events/processes done by barebones
 -- You can also change the cvar 'barebones_spew' at any time to 1 or 0 for output/no output
@@ -151,12 +151,14 @@ function GameMode:OnHeroInGame(hero)
   -- These lines will create an item and add it to the player, effectively ensuring they start with the item
   local item = CreateItem("item_blink", hero, hero)
   hero:AddItem(item)
-  item = CreateItem("item_gate_jumper", hero, hero)
-  hero:AddItem(item)
-  item = CreateItem("item_purple_orb", hero, hero)
-  hero:AddItem(item)
-  item = CreateItem("item_green_orb", hero, hero)
-  hero:AddItem(item)
+  if GetMapName() == "mythos" then
+    item = CreateItem("item_gate_jumper", hero, hero)
+    hero:AddItem(item)
+    item = CreateItem("item_purple_orb", hero, hero)
+    hero:AddItem(item)
+    item = CreateItem("item_green_orb", hero, hero)
+    hero:AddItem(item)
+  end
 
   --[[ --These lines if uncommented will replace the W ability of any hero that loads into the game
     --with the "example_ability" ability
@@ -206,10 +208,22 @@ function GameMode:OnGameInProgress()
       return 30
     end)
   elseif GetMapName() == "plateau" then
+    self.m_GatheredShuffledTeams = {}
+    self.TEAM_KILLS_TO_WIN = 20
+    self.countdownEnabled = true
+    print("Countdown should be enabled ", self.countdownEnabled)
+    self.isGameTied = true
+    self.leadingTeam = -1
+    self.runnerupTeam = -1
+    self.leadingTeamScore = 0
+    self.runnerupTeamScore = 0
     Timers:CreateTimer( function()
          GameMode:OnThink()
          return 1
       end)
+
+
+
   else
     print("Not loaded into any known map.")
     
@@ -496,11 +510,103 @@ function GameMode:ExampleConsoleCommand()
   print( '*********************************************' )
 end
 
+--C+P from overthrow
+
+function GameMode:ColorForTeam( teamID )
+  local color = self.m_TeamColors[ teamID ]
+  if color == nil then
+    color = { 255, 255, 255 } -- default to white
+  end
+  return color
+end
+
+function GameMode:UpdateScoreboard()
+  local sortedTeams = {}
+  for _, team in pairs( self.m_GatheredShuffledTeams ) do
+    table.insert( sortedTeams, { teamID = team, teamScore = GetTeamHeroKills( team ) } )
+  end
+
+  -- reverse-sort by score
+  table.sort( sortedTeams, function(a,b) return ( a.teamScore > b.teamScore ) end )
+
+  for _, t in pairs( sortedTeams ) do
+    local clr = self:ColorForTeam( t.teamID )
+
+    -- Scaleform UI Scoreboard
+    local score = 
+    {
+      team_id = t.teamID,
+      team_score = t.teamScore
+    }
+    FireGameEvent( "score_board", score )
+  end
+  -- Leader effects (moved from OnTeamKillCredit)
+  local leader = sortedTeams[1].teamID
+  --print("Leader = " .. leader)
+  self.leadingTeam = leader
+  self.runnerupTeam = sortedTeams[2].teamID
+  self.leadingTeamScore = sortedTeams[1].teamScore
+  self.runnerupTeamScore = sortedTeams[2].teamScore
+  if sortedTeams[1].teamScore == sortedTeams[2].teamScore then
+    self.isGameTied = true
+  else
+    self.isGameTied = false
+  end
+  local allHeroes = HeroList:GetAllHeroes()
+  for _,entity in pairs( allHeroes) do
+    if entity:GetTeamNumber() == leader and sortedTeams[1].teamScore ~= sortedTeams[2].teamScore then
+      if entity:IsAlive() == true then
+        -- Attaching a particle to the leading team heroes
+        local existingParticle = entity:Attribute_GetIntValue( "particleID", -1 )
+            if existingParticle == -1 then
+              local particleLeader = ParticleManager:CreateParticle( "particles/leader/leader_overhead.vpcf", PATTACH_OVERHEAD_FOLLOW, entity )
+          ParticleManager:SetParticleControlEnt( particleLeader, PATTACH_OVERHEAD_FOLLOW, entity, PATTACH_OVERHEAD_FOLLOW, "follow_overhead", entity:GetAbsOrigin(), true )
+          entity:Attribute_SetIntValue( "particleID", particleLeader )
+        end
+      else
+        local particleLeader = entity:Attribute_GetIntValue( "particleID", -1 )
+        if particleLeader ~= -1 then
+          ParticleManager:DestroyParticle( particleLeader, true )
+          entity:DeleteAttribute( "particleID" )
+        end
+      end
+    else
+      local particleLeader = entity:Attribute_GetIntValue( "particleID", -1 )
+      if particleLeader ~= -1 then
+        ParticleManager:DestroyParticle( particleLeader, true )
+        entity:DeleteAttribute( "particleID" )
+      end
+    end
+  end
+end
+
+
 function GameMode:OnThink()
+  self:UpdateScoreboard()
   -- Stop thinking if game is paused
   if GameRules:IsGamePaused() == true then
         return 1
+  end
+  print(self.countdownEnabled)
+  if self.countdownEnabled == true then
+    CountdownTimer()
+    if nCOUNTDOWNTIMER == 30 then
+      CustomGameEventManager:Send_ServerToAllClients( "timer_alert", {} )
     end
-  CountdownTimer()
+    if nCOUNTDOWNTIMER <= 0 then
+      --Check to see if there's a tie
+      if self.isGameTied == false then
+        GameRules:SetGameWinner( self.leadingTeam )
+        self.countdownEnabled = false
+      else
+        self.TEAM_KILLS_TO_WIN = self.leadingTeamScore + 1
+        local broadcast_killcount = 
+        {
+          killcount = self.TEAM_KILLS_TO_WIN
+        }
+        CustomGameEventManager:Send_ServerToAllClients( "overtime_alert", broadcast_killcount )
+      end
+    end
+  end
   print('Here.')
 end

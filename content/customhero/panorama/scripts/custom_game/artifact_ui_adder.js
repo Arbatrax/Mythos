@@ -57,4 +57,5 @@ function HideTimer( data )
     GameEvents.Subscribe( "timer_alert", AlertTimer );
 	GameEvents.Subscribe( "add_timer", AddTimer );
 	GameEvents.Subscribe( "hide_timer", HideTimer );
+	GameEvents.Subscribe( "overtime_alert", HideTimer );
 })();
