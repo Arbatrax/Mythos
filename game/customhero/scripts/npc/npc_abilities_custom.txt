@@ -6287,7 +6287,7 @@
     "precache"
     {
       "particle"      "particles\units\heroes\hero_night_stalker\nightstalker_crippling_fear.vpcf"
-
+      "particle"     "particles/units/heroes/hero_death_prophet/death_prophet_silence.vpcf"
     }
 
     // Casting
@@ -6299,7 +6299,7 @@
     // Cost
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"       "75"
-    "AbilityCooldown"        "22"
+    "AbilityCooldown"        "39 30 28 19"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -6308,12 +6308,12 @@
       "01"
       {
         "var_type"        "FIELD_INTEGER"
-        "duration"       "7"
+        "duration"       "4"
       }
       "02"
       {
         "var_type"        "FIELD_INTEGER"
-        "reduction"   "10 20 30 40"
+        "radius"   "300"
       }
       "03"
       {
@@ -6346,6 +6346,15 @@
         "EffectName"    "particles/units/heroes/hero_night_stalker/nightstalker_void.vpcf"
         "EffectAttachType"  "follow_origin"
 
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "heroes/hunter/unbreakable.lua"
+            "Function"    "UnbreakableSetUp"
+          }
+        }
+
         "OnTakeDamage"
         // "%attack_damage" is set to the damage value after mitigation
         {
@@ -6356,33 +6365,63 @@
             "attack_damage" "%attack_damage"
           }
         }
+
+        "OnDestroy"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "heroes/hunter/unbreakable.lua"
+            "Function"    "UnbreakableExplode"
+          }
+
+          "FireEffect"
+          {
+              "EffectName"        "particles/units/heroes/hero_death_prophet/death_prophet_silence.vpcf"
+              "EffectAttachType"  "follow_origin"
+              "ControlPoints"
+              {
+                  "01"    "%radius 0 0"
+              }
+          }
+
+          "FireSound"
+          {
+            "EffectName"  "Hero_Nightstalker.Void"
+            "Target"     "CASTER"
+          }
+        }
       }
     }
   }
 
-  "colony_rush"
+  "blinding_swarm"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
-    "AbilityTextureName"      "night_stalker_crippling_fear"
+    "AbilityTextureName"      "bane_brain_sap"
 
     // Precache
     //-------------------------------------------------------------------------------------------------------------
     "precache"
     {
-      "soundfile"     "soundevents/game_sounds_heroes/game_sounds_nightstalker.vsndevts"
-      "particle"      "particles\units\heroes\hero_night_stalker\nightstalker_crippling_fear.vpcf"
+      "soundfile"     "soundevents/game_sounds_heroes/game_sounds_bane.vsndevts"
+      "particle"      "particles\units\heroes\hunter\trap.vpcf"
+      "particle"  "particles\econ\items\nightstalker\nightstalker_black_nihility\nightstalker_black_nihility_void_hit.vpcf"
     }
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"        "0.0 0.0 0.0"
+    "AbilityCastPoint"        "0.4"
+    "AbilityCooldown"        "10.0"
+    "AbilityCastRange"        "700"
+    "AbilityCastAnimation"  "ACT_DOTA_CAST_ABILITY_2"
+    "AOERadius"                     "%radius"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "100 100 100"
+    "AbilityManaCost"       "85 95 105 115"
 
 
     // Special
@@ -6392,17 +6431,78 @@
       "01"
       {
         "var_type"        "FIELD_INTEGER"
-        "damage"       "50 75 100"
+        "damage"       "75 150 225 300"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "radius"       "275"
+      }
+      "03"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "duration"       "1"
       }
     }
 
     "OnSpellStart"
     {
-      "RunScript"
+      "ActOnTargets"
       {
-        "ScriptFile"  "heroes/hunter/colony_rush.lua"
-        "Function"    "ColonyRush"
-        "Target"    "POINT"
+        "Target"
+        {
+          "Center"    "POINT"
+          "Radius"   "%radius"
+          "Teams"   "DOTA_UNIT_TARGET_TEAM_ENEMY"
+          "Types"   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        }
+      
+        "Action"    
+        {
+          "Damage"
+          {
+            "Target"    "TARGET"
+            "Type"      "DAMAGE_TYPE_MAGICAL"
+            "Damage"    "%damage"
+          }
+
+          "FireEffect"
+          {
+            "EffectName"  "particles\econ\items\nightstalker\nightstalker_black_nihility\nightstalker_black_nihility_void_hit.vpcf"
+            "EffectAttachType"  "follow_origin"
+            "Target"    "TARGET"
+          }
+
+          "FireSound"
+          {
+            "EffectName"  "Hero_Bane.ProjectileImpact"
+            "Target"     "TARGET"
+          }
+
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_blinding_swarm"
+            "Target"     "TARGET"
+            "Duration"    "%duration"
+          }
+        }
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_blinding_swarm"
+      {
+        "IsDebuff"      "1"
+    
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "heroes/hunter/blinding_swarm.lua"
+            "Function"    "Blind"
+          }
+        }
       }
     }
   }
@@ -6983,7 +7083,6 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"        "1200"
     "AbilityCastPoint"        "0.0"
-    "AbilityCastAnimation"      ""
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -7069,6 +7168,91 @@
       {
         "ScriptFile"  "heroes/sailor/fire.lua"
         "Function"    "Damage"
+      }
+    }
+  }
+
+  
+
+  "kiss_of_the_serpent_queen"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"       "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityTextureName"      "tidehunter_kraken_shell"
+
+    //Ability Leveling
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityType"             "DOTA_ABILITY_TYPE_ULTIMATE"
+    "MaxLevel"              "3"
+    "RequiredLevel"        "1"
+    "LevelsBetweenUpgrades" "5"
+
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {  
+      "particle" "particles\hw_fx\hw_rosh_fireball.vpcf"
+      "model" "models\heroes\tidehunter\tidehunter.vmdl"
+    }
+
+    "AbilityCooldown"        "14 11 8"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "bonus_health"       "300 450 600"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "duration"   "8"
+      }
+      "03"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "cooldown"   "14 11 8"
+      }
+      "04"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "threshold"   "20"
+      }
+    }
+    
+    "Modifiers"
+    {
+      "modifier_kiss_passive"
+      {
+        "Passive"      "1"
+        "IsHidden"      "1"
+
+
+        "OnTakeDamage"
+        // "%attack_damage" is set to the damage value after mitigation
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "heroes/sailor/kiss.lua"
+            "Function"    "TakeDamage"
+            "attack_damage" "%attack_damage"
+          }
+        }
+      }
+
+      "modifier_kiss_buff"
+      {      
+        "IsHidden" "1"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+        }
       }
     }
   }

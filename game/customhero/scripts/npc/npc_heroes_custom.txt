@@ -208,7 +208,7 @@
     {
         "override_hero"      "npc_dota_hero_night_stalker"
         "AbilityLayout" "5"
-        "Ability1"           "shatter"
+        "Ability1"           "colony_trap"
         "Ability2"           "unbreakable"
         "Ability3"           "vampirism"
         "Ability4"           "blood_of_the_innocent"  
