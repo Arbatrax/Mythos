@@ -117,32 +117,42 @@ function GameMode:OnPlayerPickHero(keys)
   end
 
   player.faith = 10
-
-end
-
-function GameMode:Activate()
-  InitGameMode()
 end
 
 -- This function initializes the game mode and is called before anyone loads into the game
 -- It can be used to pre-initialize any values/tables that will be needed later
 function GameMode:InitGameMode()
   GameMode = self
-  DebugPrint('[MYTHOS] Starting to load Mythos gamemode...')
-  print('Mythos gamemode loading.')
+  if GetMapName() == "mythos" then
+    DebugPrint('[MYTHOS] Starting to load Mythos gamemode...')
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 4 )
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 4 )
 
-  -- Call the internal function to set up the rules/behaviors specified in constants.lua
-  -- This also sets up event hooks for all event handlers in events.lua
-  -- Check out internals/gamemode to see/modify the exact code
-  GameMode:_InitGameMode()
-  GameRules.DropTable = LoadKeyValues("scripts/kv/item_drops.kv")
-  GameRules.TreasureChest = LoadKeyValues("scripts/kv/treasure_chest.kv")
-  GameRules.FactionTable = LoadKeyValues("scripts/kv/factions.kv")
-  -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
-  Convars:RegisterCommand( "command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
+    print('Mythos gamemode loading.')
 
-  DebugPrint('[MYTHOS] Done loading Mythos gamemode!\n\n')
-  print('Mythos gamemode loaded.')
+    -- Call the internal function to set up the rules/behaviors specified in constants.lua
+    -- This also sets up event hooks for all event handlers in events.lua
+    -- Check out internals/gamemode to see/modify the exact code
+    GameMode:_InitGameMode()
+    GameRules.DropTable = LoadKeyValues("scripts/kv/item_drops.kv")
+    GameRules.TreasureChest = LoadKeyValues("scripts/kv/treasure_chest.kv")
+    GameRules.FactionTable = LoadKeyValues("scripts/kv/factions.kv")
+    -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
+    Convars:RegisterCommand( "command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
+
+    DebugPrint('[MYTHOS] Done loading Mythos gamemode!\n\n')
+    print('Mythos gamemode loaded.')
+  elseif GetMapName() == 'plateau' then
+    print('Mythos: Artifact gamemode loading.')
+    GameMode:_InitGameMode()
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 3 )
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 3 )
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_CUSTOM_1, 3 )
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_CUSTOM_2, 3 )
+    print('Mythos: Artifact gamemode loaded.')
+  else
+    print("Unknown Map")
+  end
 end
 
 function GameMode:OnHeroInGame(hero)
@@ -154,23 +164,23 @@ function GameMode:OnHeroInGame(hero)
   if GetMapName() == "plateau" then
     CustomGameEventManager:Send_ServerToAllClients( "change_ui", {} )
     self.m_TeamColors = {}
-	self.m_TeamColors[DOTA_TEAM_GOODGUYS] = { 61, 210, 150 }	--		Teal
-	self.m_TeamColors[DOTA_TEAM_BADGUYS]  = { 243, 201, 9 }		--		Yellow
-	self.m_TeamColors[DOTA_TEAM_CUSTOM_1] = { 197, 77, 168 }	--      Pink
-	self.m_TeamColors[DOTA_TEAM_CUSTOM_2] = { 255, 108, 0 }		--		Orange
-	self.m_TeamColors[DOTA_TEAM_CUSTOM_3] = { 52, 85, 255 }		--		Blue
-	self.m_TeamColors[DOTA_TEAM_CUSTOM_4] = { 101, 212, 19 }	--		Green
-	self.m_TeamColors[DOTA_TEAM_CUSTOM_5] = { 129, 83, 54 }		--		Brown
-	self.m_TeamColors[DOTA_TEAM_CUSTOM_6] = { 27, 192, 216 }	--		Cyan
-	self.m_TeamColors[DOTA_TEAM_CUSTOM_7] = { 199, 228, 13 }	--		Olive
-	self.m_TeamColors[DOTA_TEAM_CUSTOM_8] = { 140, 42, 244 }	--		Purple
+  	self.m_TeamColors[DOTA_TEAM_GOODGUYS] = { 61, 210, 150 }	--		Teal
+  	self.m_TeamColors[DOTA_TEAM_BADGUYS]  = { 243, 201, 9 }		--		Yellow
+  	self.m_TeamColors[DOTA_TEAM_CUSTOM_1] = { 197, 77, 168 }	--      Pink
+  	self.m_TeamColors[DOTA_TEAM_CUSTOM_2] = { 255, 108, 0 }		--		Orange
+  	self.m_TeamColors[DOTA_TEAM_CUSTOM_3] = { 52, 85, 255 }		--		Blue
+  	self.m_TeamColors[DOTA_TEAM_CUSTOM_4] = { 101, 212, 19 }	--		Green
+  	self.m_TeamColors[DOTA_TEAM_CUSTOM_5] = { 129, 83, 54 }		--		Brown
+  	self.m_TeamColors[DOTA_TEAM_CUSTOM_6] = { 27, 192, 216 }	--		Cyan
+  	self.m_TeamColors[DOTA_TEAM_CUSTOM_7] = { 199, 228, 13 }	--		Olive
+  	self.m_TeamColors[DOTA_TEAM_CUSTOM_8] = { 140, 42, 244 }	--		Purple
 
-	for team = 0, (DOTA_TEAM_COUNT-1) do
-		color = self.m_TeamColors[ team ]
-		if color then
-			SetTeamCustomHealthbarColor( team, color[1], color[2], color[3] )
-		end
-	end
+  	for team = 0, (DOTA_TEAM_COUNT-1) do
+  		color = self.m_TeamColors[ team ]
+  		if color then
+  			SetTeamCustomHealthbarColor( team, color[1], color[2], color[3] )
+  		end
+  	end
   elseif GetMapName() == "mythos" then 
     CustomGameEventManager:Send_ServerToAllClients( "hide_timer", {} )
     CustomGameEventManager:Send_ServerToAllClients( "hide_board", {} )
@@ -196,7 +206,6 @@ function GameMode:OnHeroInGame(hero)
   hero:RemoveAbility(abil:GetAbilityName())
   hero:AddAbility("example_ability")]]
 end
-
 --[[
   This function is called once and only once when the game completely begins (about 0:00 on the clock).  At this point,
   gold will begin to go up in ticks if configured, creeps will spawn, towers will become damageable etc.  This function
@@ -621,7 +630,6 @@ function GameMode:UpdateScoreboard()
     end
   end
 end
-
 
 function GameMode:OnThink()
   print("1")
