@@ -49,6 +49,7 @@
   <Panel>
     <!-- CustomUIElements go here.  They are not provided currently as valve's parser reads commented lines and attempts to link them in.-->
     <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/mythos_hud_base.xml" />
-     <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/artifact_ui_adder.xml" />
+    <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/artifact_ui_adder.xml" /> 
+    <CustomUIElement type="HudTopBar" layoutfile="file://{resources}/layout/custom_game/multiteam_top_scoreboard.xml" />
   </Panel>
 </root>

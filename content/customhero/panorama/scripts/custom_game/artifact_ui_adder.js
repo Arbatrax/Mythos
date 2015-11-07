@@ -54,9 +54,7 @@ function ChangeUI( data )
 {
 	GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_TIMEOFDAY, false );
 	GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_HEROES, false );
-
-	//<CustomUIElement type="HudTopBar"           layoutfile="file://{resources}/layout/custom_game/multiteam_top_scoreboard.xml" />
-
+	//$( '#ArtifactTopBar').append("<CustomUIElement type='HudTopBar'           layoutfile='file://{resources}/layout/custom_game/multiteam_top_scoreboard.xml' />");
 	ShowTimer()
 }
 
