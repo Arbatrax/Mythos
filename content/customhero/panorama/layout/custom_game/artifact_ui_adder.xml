@@ -1,0 +1,14 @@
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/dotastyles.vcss_c" />
+		<include src="file://{resources}/styles/custom_game/artifact_ui_adder.css" />
+	</styles>
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/artifact_ui_adder.js" />
+	</scripts>
+	<Panel class="TimerBox">
+		<Panel id="TimerBox">
+			<Label id="Timer" text="--:--" />
+		</Panel>
+	</Panel>
+</root>

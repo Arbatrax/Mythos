@@ -1,0 +1,46 @@
+
+#TimerBox
+{
+    background-image: url("file://{images}/custom_game/goal_logo.psd");
+    
+    background-repeat: no-repeat;
+    background-size: 100%;
+    x: 250px;
+    y: 0px;
+    width: 200px;
+    height: 150px;
+}
+
+#TimerBox.timerbox_hidden
+{
+    opacity: 0;
+}
+
+#Timer
+{
+	margin-top: 36px;
+    font-size: 28px;
+    horizontal-align: center;
+    vertical-align: middle;
+    font-weight: bolder;
+    color: white;
+	text-shadow: 2px 2px 2px #7b612b;
+    text-align: center;
+	width: 100%;
+    text-overflow: clip;
+}
+
+#Timer.timer_visible
+{
+    opacity: 1;
+}
+
+#Timer.timer_hidden
+{
+    opacity: 0;
+}
+
+#Timer.timer_alert
+{
+    color: red;
+}

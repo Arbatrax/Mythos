@@ -48,7 +48,8 @@
 
   <Panel>
     <!-- CustomUIElements go here.  They are not provided currently as valve's parser reads commented lines and attempts to link them in.-->
-    <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/mythos_hud_base.xml" /> 
+    <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/mythos_hud_base.xml" />
+     <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/artifact_ui_adder.xml" /> 
     <CustomUIElement type="HudTopBar"           layoutfile="file://{resources}/layout/custom_game/multiteam_top_scoreboard.xml" />
     <CustomUIElement type="GameSetup"           layoutfile="file://{resources}/layout/custom_game/team_select.xml" />
     <CustomUIElement type="FlyoutScoreboard"    layoutfile="file://{resources}/layout/custom_game/multiteam_flyout_scoreboard.xml" />

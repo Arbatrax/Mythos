@@ -1,5 +1,6 @@
 -- This is the primary barebones gamemode script and should be used to assist in initializing your game mode
 
+_G.nCOUNTDOWNTIMER = 1201
 
 -- Set this to true if you want to see a complete debug output of all events/processes done by barebones
 -- You can also change the cvar 'barebones_spew' at any time to 1 or 0 for output/no output
@@ -27,6 +28,8 @@ require('internal/events')
 
 -- settings.lua is where you can specify many different properties for your game mode and is one of the core barebones files.
 require('settings')
+-- utility_functions has many utility functions
+require('utility_functions')
 -- events.lua is where you can specify the actions to be taken when any event occurs and is one of the core barebones files.
 require('events')
 
@@ -87,6 +90,8 @@ end
   The hero parameter is the hero entity that just spawned in
 ]]
 
+
+
 --This function runs right after a hero is picked.
 function GameMode:OnPlayerPickHero(keys)
   local hero = EntIndexToHScript(keys.heroindex)
@@ -119,8 +124,26 @@ function GameMode:OnPlayerPickHero(keys)
 
 end
 
+function Activate()
+  InitGameMode()
+end
+
+function GameMode:InitGameMode()
+  print("Game is loaded.")
+  
+  -- body
+end
+
 function GameMode:OnHeroInGame(hero)
   print("[BAREBONES] Hero spawned in game for first time -- " .. hero:GetUnitName())
+  
+  
+ 
+  if GetMapName() == "plateau" then
+    CustomGameEventManager:Send_ServerToAllClients( "show_timer", {} )
+  else
+    CustomGameEventManager:Send_ServerToAllClients( "hide_timer", {} )
+  end
 
   -- This line for example will set the starting gold of every hero to 500 unreliable gold
   hero:SetGold(500, false)
@@ -150,33 +173,47 @@ end
 ]]
 function GameMode:OnGameInProgress()
   DebugPrint("[BAREBONES] The game has officially begun")
+  print("Game started.")
+  Notifications:TopToAll("Top Notification for 5 seconds", 5.0)
+
+  if GetMapName() == "mythos" then
+    print("Mythos map selected.")
 
   --Creates timers for spawning creeps every min
-  Timers:CreateTimer( function()
-       SpawnCreeps()
-       return 60
+    Timers:CreateTimer( function()
+         SpawnCreeps()
+         return 60
+      end)
+
+    Timers:CreateTimer(5, function()
+    SpawnNeutralIsland()
     end)
 
-  Timers:CreateTimer(5, function()
-    SpawnNeutralIsland()
-  end)
+    SpawnGods()
 
-  SpawnGods()
+    local point = Entities:FindByName( nil, "bonus_spawn1"):GetAbsOrigin()
+    local item = CreateItem("item_imp_portal", nil, nil)
+    local drop = CreateItemOnPositionSync( point, item )
 
-  local point = Entities:FindByName( nil, "bonus_spawn1"):GetAbsOrigin()
-  local item = CreateItem("item_imp_portal", nil, nil)
-  local drop = CreateItemOnPositionSync( point, item )
+    point = Entities:FindByName( nil, "bonus_spawn2"):GetAbsOrigin()
+    local unit = CreateUnitByName("mountain_brawler", point, true, nil, nil, DOTA_TEAM_NEUTRALS )   
 
-  point = Entities:FindByName( nil, "bonus_spawn2"):GetAbsOrigin()
-  local unit = CreateUnitByName("mountain_brawler", point, true, nil, nil, DOTA_TEAM_NEUTRALS )   
+    point = Entities:FindByName( nil, "gate_spawner"):GetAbsOrigin()
+    local unit = CreateUnitByName("gate", point, true, nil, nil, DOTA_TEAM_NEUTRALS )   
 
-  point = Entities:FindByName( nil, "gate_spawner"):GetAbsOrigin()
-  local unit = CreateUnitByName("gate", point, true, nil, nil, DOTA_TEAM_NEUTRALS )   
-
-  Timers:CreateTimer( function()
-    SpawnLaneCreeps()
-    return 30
-  end)
+    Timers:CreateTimer( function()
+      SpawnLaneCreeps()
+      return 30
+    end)
+  elseif GetMapName() == "plateau" then
+    Timers:CreateTimer( function()
+         GameMode:OnThink()
+         return 1
+      end)
+  else
+    print("Not loaded into any known map.")
+    
+  end
   
 end
 
@@ -457,4 +494,13 @@ function GameMode:ExampleConsoleCommand()
   end
 
   print( '*********************************************' )
+end
+
+function GameMode:OnThink()
+  -- Stop thinking if game is paused
+  if GameRules:IsGamePaused() == true then
+        return 1
+    end
+  CountdownTimer()
+  print('Here.')
 end
