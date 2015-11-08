@@ -7174,7 +7174,7 @@
 
   
 
-  "kiss_of_the_serpent_queen"
+  "fire!"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
@@ -7335,6 +7335,126 @@
         "Properties"
         {
           "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+        }
+      }
+    }
+  }
+
+  "fracture"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"       "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+    "AbilityTextureName"      "tidehunter_kraken_shell"
+
+    //Ability Leveling
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityType"             "DOTA_ABILITY_TYPE_ULTIMATE"
+    "MaxLevel"              "3"
+    "RequiredLevel"        "1"
+    "LevelsBetweenUpgrades" "5"
+
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {  
+      "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike.vpcf"
+        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_cracks.vpcf"
+        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_cracks_center.vpcf"
+        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_cracks_background.vpcf"
+        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_dust.vpcf"
+        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_debris.vpcf"
+        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_eruption.vpcf"
+        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_eruption_ripple_b.vpcf"
+        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_eruption_ripple.vpcf"
+        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_eruption_rocks.vpcf"
+        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_eruption_dust.vpcf"
+        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_eruption_dirt.vpcf"
+        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_eruption_ripple_dust.vpcf"
+        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_ground.vpcf"
+      "model" "models\heroes\tidehunter\tidehunter.vmdl"
+    }
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "800"
+    "AbilityCastPoint"        "0.2"
+    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
+    "AoERadius"              "%radius"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "90"
+    "AbilityCooldown"        "60"
+
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "radius"       "250 300 350"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "duration"   "3"
+      }
+      "03"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "threshold"   "20"
+      }
+    }
+
+    "OnSpellStart"
+    {
+      "ActOnTargets"
+      {
+        "Target"
+        {
+          "Center"    "POINT"
+          "Radius"   "%radius"
+          "Teams"   "DOTA_UNIT_TARGET_TEAM_ENEMY"
+          "Types"   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        }
+      
+        "Action"    
+        {
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_fracture"
+            "Target"     "TARGET"
+            "Duration"    "%duration"
+          }
+
+          "FireEffect"
+          {
+            "EffectName"                "particles/units/heroes/hero_sandking/sandking_burrowstrike.vpcf"
+            "EffectAttachType"          "start_at_customorigin"
+            "Target"                    "CASTER"
+            "ControlPoints"
+            {
+                "01"                    "POINT"
+            }
+          }
+        }
+      }
+    }
+    
+    "Modifiers"
+    {
+      "modifier_fracture"
+      {
+        "IsDebuff" "1"
+
+
+        "States"
+        {
+          "MODIFIER_STATE_ROOTED"    "MODIFIER_STATE_VALUE_ENABLED"
         }
       }
     }

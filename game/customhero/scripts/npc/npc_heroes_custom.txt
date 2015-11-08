@@ -276,4 +276,15 @@
         "MovementSpeed"             "310"                                   // Speed.
         "MovementTurnRate"          "0.7"                                   // Turning rate.
     }
+
+    "sandbro"
+    {
+        "override_hero"      "npc_dota_hero_sand_king"
+        "AbilityLayout" "4"
+        "Ability1"           "fracture"
+        "Ability2"           "gunblade"
+        "Ability3"           "vampirism"
+        "Ability4"           "blood_of_the_innocent"  
+    }
+
 }

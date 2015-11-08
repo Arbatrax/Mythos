@@ -970,4 +970,52 @@
       }
     }
   }
+
+  "item_artifact_final"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"           "item_datadriven"
+    "ID"              "1118"  //Valve's version of this item uses the ID "17".
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "Model"             "models/props_gameplay/red_box.vmdl"  
+    "Effect"            "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"      "item_octarine_core"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"            "0"
+    "ItemQuality"         "legendary"
+    "ItemPurchasable"     "0"
+    "ItemKillable"        "0"
+
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "melee"    "5"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_artifact_final"
+      {
+        "Passive"      "1"
+        "IsHidden"      "0"
+    
+        "OnDeath"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "items/artifact/drop.lua"
+            "Function"    "Drop"
+          }
+        }
+      }
+    }
+  }
 }
