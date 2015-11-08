@@ -1,14 +1,14 @@
 
 #TimerBox
 {
-    background-image: url("file://{images}/custom_game/goal_logo.psd");
-    
-    background-repeat: no-repeat;
-    background-size: 100%;
-    x: 250px;
-    y: 0px;
+    background-color: gray;
+    x:250px;
+    y:0px;
     width: 200px;
-    height: 150px;
+    height: 100px;
+    vertical-align: bottom;
+    border-radius: 0px 0px 75px 75px;
+    border: 3px solid yellow;
 }
 
 #TimerBox.timerbox_hidden
@@ -18,10 +18,10 @@
 
 #Timer
 {
-	margin-top: 36px;
-    font-size: 28px;
+    margin-top: 20px;
+    font-size: 36px;
     horizontal-align: center;
-    vertical-align: middle;
+    vertical-align: top;
     font-weight: bolder;
     color: white;
 	text-shadow: 2px 2px 2px #7b612b;
