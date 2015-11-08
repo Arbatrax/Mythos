@@ -1,13 +1,13 @@
 -- This is the primary barebones gamemode script and should be used to assist in initializing your game mode
 
-_G.nCOUNTDOWNTIMER = 16
+_G.nCOUNTDOWNTIMER = 1201
 
 -- Set this to true if you want to see a complete debug output of all events/processes done by barebones
 -- You can also change the cvar 'barebones_spew' at any time to 1 or 0 for output/no output
-BAREBONES_DEBUG_SPEW = false 
+Mythos_DEBUG_SPEW = false 
 
 if GameMode == nil then
-    DebugPrint( '[BAREBONES] creating barebones game mode' )
+    DebugPrint( '[MYTHOS] creating barebones game mode' )
     _G.GameMode = class({})
 end
 
@@ -43,24 +43,20 @@ LinkLuaModifier( "modifier_kiss_transform", "heroes/sailor/modifier_kiss_transfo
 
 --[[
   This function should be used to set up Async precache calls at the beginning of the gameplay.
-
   In this function, place all of your PrecacheItemByNameAsync and PrecacheUnitByNameAsync.  These calls will be made
   after all players have loaded in, but before they have selected their heroes. PrecacheItemByNameAsync can also
   be used to precache dynamically-added datadriven abilities instead of items.  PrecacheUnitByNameAsync will 
   precache the precache{} block statement of the unit and all precache{} block statements for every Ability# 
   defined on the unit.
-
   This function should only be called once.  If you want to/need to precache more items/abilities/units at a later
   time, you can call the functions individually (for example if you want to precache units in a new wave of
   holdout).
-
   This function should generally only be used if the Precache() function in addon_game_mode.lua is not working.
 ]]
 function GameMode:PostLoadPrecache()
-  DebugPrint("[BAREBONES] Performing Post-Load precache")    
+  DebugPrint("[MYTHOS] Performing Post-Load precache")    
   --PrecacheItemByNameAsync("item_example_item", function(...) end)
   --PrecacheItemByNameAsync("example_ability", function(...) end)
-
   --PrecacheUnitByNameAsync("npc_dota_hero_viper", function(...) end)
   --PrecacheUnitByNameAsync("npc_dota_hero_enigma", function(...) end)
 end
@@ -70,7 +66,7 @@ end
   It can be used to initialize state that isn't initializeable in InitGameMode() but needs to be done before everyone loads in.
 ]]
 function GameMode:OnFirstPlayerLoaded()
-  DebugPrint("[BAREBONES] First Player has loaded")
+  DebugPrint("[MYTHOS] First Player has loaded")
 end
 
 --[[
@@ -78,19 +74,15 @@ end
   It can be used to initialize non-hero player state or adjust the hero selection (i.e. force random etc)
 ]]
 function GameMode:OnAllPlayersLoaded()
-  DebugPrint("[BAREBONES] All Players have loaded into the game")
- 
+  DebugPrint("[MYTHOS] All Players have loaded into the game")
 end
 
 --[[
   This function is called once and only once for every player when they spawn into the game for the first time.  It is also called
   if the player's hero is replaced with a new hero for any reason.  This function is useful for initializing heroes, such as adding
   levels, changing the starting gold, removing/adding abilities, adding physics, etc.
-
   The hero parameter is the hero entity that just spawned in
 ]]
-
-
 
 --This function runs right after a hero is picked.
 function GameMode:OnPlayerPickHero(keys)
@@ -121,62 +113,103 @@ function GameMode:OnPlayerPickHero(keys)
   end
 
   player.faith = 10
-
 end
 
-function Activate()
-  InitGameMode()
-end
-
+-- This function initializes the game mode and is called before anyone loads into the game
+-- It can be used to pre-initialize any values/tables that will be needed later
 function GameMode:InitGameMode()
-  print("Game is loaded.")
-  
-  -- body
+  GameMode = self
+  if GetMapName() == "mythos" then
+    DebugPrint('[MYTHOS] Starting to load Mythos gamemode...')
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 4 )
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 4 )
+
+    print('Mythos gamemode loading.')
+
+    -- Call the internal function to set up the rules/behaviors specified in constants.lua
+    -- This also sets up event hooks for all event handlers in events.lua
+    -- Check out internals/gamemode to see/modify the exact code
+    GameMode:_InitGameMode()
+    GameRules.DropTable = LoadKeyValues("scripts/kv/item_drops.kv")
+    GameRules.TreasureChest = LoadKeyValues("scripts/kv/treasure_chest.kv")
+    GameRules.FactionTable = LoadKeyValues("scripts/kv/factions.kv")
+    -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
+    Convars:RegisterCommand( "command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
+
+    DebugPrint('[MYTHOS] Done loading Mythos gamemode!\n\n')
+    print('Mythos gamemode loaded.')
+  elseif GetMapName() == 'plateau' then
+    print('Mythos: Artifact gamemode loading.')
+    GameMode:_InitGameMode()
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 3 )
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 3 )
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_CUSTOM_1, 3 )
+    GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_CUSTOM_2, 3 )
+    print('Mythos: Artifact gamemode loaded.')
+  else
+    print("Unknown Map")
+  end
 end
 
 function GameMode:OnHeroInGame(hero)
-  print("[BAREBONES] Hero spawned in game for first time -- " .. hero:GetUnitName())
+  print("[MYTHOS] Hero spawned in game for first time -- " .. hero:GetUnitName())
   
-  
- 
+  -- These lines will create an item and add it to the player, effectively ensuring they start with the item
+  local item = CreateItem("item_blink", hero, hero)
+  hero:AddItem(item)
   if GetMapName() == "plateau" then
-    CustomGameEventManager:Send_ServerToAllClients( "show_timer", {} )
-  else
+    CustomGameEventManager:Send_ServerToAllClients( "change_ui", {} )
+    self.m_TeamColors = {}
+    self.m_TeamColors[DOTA_TEAM_GOODGUYS] = { 61, 210, 150 }  --    Teal
+    self.m_TeamColors[DOTA_TEAM_BADGUYS]  = { 243, 201, 9 }   --    Yellow
+    self.m_TeamColors[DOTA_TEAM_CUSTOM_1] = { 197, 77, 168 }  --      Pink
+    self.m_TeamColors[DOTA_TEAM_CUSTOM_2] = { 255, 108, 0 }   --    Orange
+    self.m_TeamColors[DOTA_TEAM_CUSTOM_3] = { 52, 85, 255 }   --    Blue
+    self.m_TeamColors[DOTA_TEAM_CUSTOM_4] = { 101, 212, 19 }  --    Green
+    self.m_TeamColors[DOTA_TEAM_CUSTOM_5] = { 129, 83, 54 }   --    Brown
+    self.m_TeamColors[DOTA_TEAM_CUSTOM_6] = { 27, 192, 216 }  --    Cyan
+    self.m_TeamColors[DOTA_TEAM_CUSTOM_7] = { 199, 228, 13 }  --    Olive
+    self.m_TeamColors[DOTA_TEAM_CUSTOM_8] = { 140, 42, 244 }  --    Purple
+
+    for team = 0, (DOTA_TEAM_COUNT-1) do
+      color = self.m_TeamColors[ team ]
+      if color then
+        SetTeamCustomHealthbarColor( team, color[1], color[2], color[3] )
+      end
+    end
+  elseif GetMapName() == "mythos" then 
     CustomGameEventManager:Send_ServerToAllClients( "hide_timer", {} )
+    CustomGameEventManager:Send_ServerToAllClients( "hide_board", {} )
+    item = CreateItem("item_gate_jumper", hero, hero)
+    hero:AddItem(item)
+    item = CreateItem("item_purple_orb", hero, hero)
+    hero:AddItem(item)
+    item = CreateItem("item_green_orb", hero, hero)
+    hero:AddItem(item)
+  else
+    print('Hero in unknown map')
   end
 
   -- This line for example will set the starting gold of every hero to 500 unreliable gold
   hero:SetGold(500, false)
 
   -- These lines will create an item and add it to the player, effectively ensuring they start with the item
-  local item = CreateItem("item_blink", hero, hero)
-  hero:AddItem(item)
-  if GetMapName() == "mythos" then
-    item = CreateItem("item_artifact_final", hero, hero)
-    hero:AddItem(item)
-    item = CreateItem("item_purple_orb", hero, hero)
-    hero:AddItem(item)
-    item = CreateItem("item_green_orb", hero, hero)
-    hero:AddItem(item)
-  end
-
+  
   --[[ --These lines if uncommented will replace the W ability of any hero that loads into the game
     --with the "example_ability" ability
-
   local abil = hero:GetAbilityByIndex(1)
   hero:RemoveAbility(abil:GetAbilityName())
   hero:AddAbility("example_ability")]]
 end
-
 --[[
   This function is called once and only once when the game completely begins (about 0:00 on the clock).  At this point,
   gold will begin to go up in ticks if configured, creeps will spawn, towers will become damageable etc.  This function
   is useful for starting any game logic timers/thinkers, beginning the first round, etc.
 ]]
 function GameMode:OnGameInProgress()
-  DebugPrint("[BAREBONES] The game has officially begun")
+  DebugPrint("[MYTHOS] The game has officially begun")
   print("Game started.")
-  Notifications:TopToAll("Top Notification for 5 seconds", 5.0)
+  --Notifications:TopToAll("Top Notification for 5 seconds", 5.0)
 
   if GetMapName() == "mythos" then
     print("Mythos map selected.")
@@ -209,7 +242,7 @@ function GameMode:OnGameInProgress()
     end)
   elseif GetMapName() == "plateau" then
     self.m_GatheredShuffledTeams = {}
-    self.TEAM_KILLS_TO_WIN = 20
+    self.TEAM_KILLS_TO_WIN = 2000
     self.countdownEnabled = true
     print("Countdown should be enabled ", self.countdownEnabled)
     self.isGameTied = true
@@ -217,18 +250,14 @@ function GameMode:OnGameInProgress()
     self.runnerupTeam = -1
     self.leadingTeamScore = 0
     self.runnerupTeamScore = 0
+    self:GatherAndRegisterValidTeams()
     Timers:CreateTimer( function()
          GameMode:OnThink()
          return 1
       end)
-
-
-
   else
     print("Not loaded into any known map.")
-    
   end
-  
 end
 
 function SpawnLaneCreeps()
@@ -242,7 +271,6 @@ function SpawnLaneCreeps()
   local right_bot_creeps = {}
   local left_top_creeps = {}
   local right_top_creeps = {}
-
 
   --Sets up 4 checkers at each of the corners of the lanes that send the creeps on to the next check point ----------------------------------
   Timers:CreateTimer(function()
@@ -293,7 +321,6 @@ function SpawnLaneCreeps()
       return 0.5 
   end) 
 
-
   --Spawns bottoms  creeps for the left and right side ------------------------------------------------------
   for i=1,3 do
     left_bot_creeps[i] = CreateUnitByName("lane_creep_melee_light", bot_spawner, true, nil, nil, DOTA_TEAM_GOODGUYS)
@@ -319,7 +346,6 @@ function SpawnLaneCreeps()
     light_ranged2:MoveToPositionAggressive(bot_right)
   end) 
 
-
   --Spawns top creeps for the left and right side -------------------------------------------------------------
   for i=1,3 do
     left_top_creeps[i] = CreateUnitByName("lane_creep_melee_dark", top_spawner, true, nil, nil, DOTA_TEAM_BADGUYS)
@@ -344,7 +370,6 @@ function SpawnLaneCreeps()
   Timers:CreateTimer(0.35, function()
     dark_ranged2:MoveToPositionAggressive(top_right)
   end) 
-
 end
 
 function SpawnGods()
@@ -370,9 +395,7 @@ function SpawnGods()
   AddFOWViewer(2, point, 500, 18000, false)
 end
 
-
 function SpawnCreeps()
-  
   --Spawns Bot side neutral camps
   if ClearCamp("bot_neutral_camp1") == true then
     SpawnCamp("bot_neutral_camp1", "neutral_dinosaur_baby", 2)
@@ -395,7 +418,6 @@ function SpawnCreeps()
   if ClearCamp("bot_neutral_vision") == true then
     SpawnCamp("bot_neutral_vision", "neutral_harpy_vision", 1)
   end
-
   --Spawns Top side neutral camps
   if ClearCamp("top_neutral_camp1") == true then
     SpawnCamp("top_neutral_camp1", "neutral_forest_lord", 1)
@@ -455,8 +477,7 @@ function Leash(point, neutral)
       end
     end
     return 1 
-  end
-  )
+  end)
 end
 
 function SpawnCamp(camp, neutral, num)
@@ -475,26 +496,6 @@ function ClearCamp(camp)
     return true
   end
 end
--- This function initializes the game mode and is called before anyone loads into the game
--- It can be used to pre-initialize any values/tables that will be needed later
-function GameMode:InitGameMode()
-  GameMode = self
-  DebugPrint('[BAREBONES] Starting to load Barebones gamemode...')
-
-
-  -- Call the internal function to set up the rules/behaviors specified in constants.lua
-  -- This also sets up event hooks for all event handlers in events.lua
-  -- Check out internals/gamemode to see/modify the exact code
-  GameMode:_InitGameMode()
-  GameRules.DropTable = LoadKeyValues("scripts/kv/item_drops.kv")
-  GameRules.TreasureChest = LoadKeyValues("scripts/kv/treasure_chest.kv")
-  GameRules.FactionTable = LoadKeyValues("scripts/kv/factions.kv")
-  -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
-  Convars:RegisterCommand( "command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
-
-  DebugPrint('[BAREBONES] Done loading Barebones gamemode!\n\n')
-end
-
 -- This is an example console command
 function GameMode:ExampleConsoleCommand()
   print( '******* Example Console Command ***************' )
@@ -509,9 +510,54 @@ function GameMode:ExampleConsoleCommand()
 
   print( '*********************************************' )
 end
-
 --C+P from overthrow
 
+---------------------------------------------------------------------------
+-- Scan the map to see which teams have spawn points
+---------------------------------------------------------------------------
+function GameMode:GatherAndRegisterValidTeams()
+--  print( "GatherValidTeams:" )
+
+  local foundTeams = {}
+  for _, playerStart in pairs( Entities:FindAllByClassname( "info_player_start_dota" ) ) do
+    foundTeams[  playerStart:GetTeam() ] = true
+  end
+
+  local numTeams = TableCount(foundTeams)
+  print( "GatherValidTeams - Found spawns for a total of " .. numTeams .. " teams" )
+  
+  local foundTeamsList = {}
+  for t, _ in pairs( foundTeams ) do
+    table.insert( foundTeamsList, t )
+  end
+
+  if numTeams == 0 then
+    print( "GatherValidTeams - NO team spawns detected, defaulting to GOOD/BAD" )
+    table.insert( foundTeamsList, DOTA_TEAM_GOODGUYS )
+    table.insert( foundTeamsList, DOTA_TEAM_BADGUYS )
+    numTeams = 2
+  end
+
+  local maxPlayersPerValidTeam = math.floor( 10 / numTeams )
+
+  self.m_GatheredShuffledTeams = ShuffledList( foundTeamsList )
+
+  print( "Final shuffled team list:" )
+  for _, team in pairs( self.m_GatheredShuffledTeams ) do
+    print( " - " .. team .. " ( " .. GetTeamName( team ) .. " )" )
+  end
+
+  print( "Setting up teams:" )
+  for team = 0, (DOTA_TEAM_COUNT-1) do
+    local maxPlayers = 0
+    if ( nil ~= TableFindKey( foundTeamsList, team ) ) then
+      maxPlayers = maxPlayersPerValidTeam
+    end
+    print( " - " .. team .. " ( " .. GetTeamName( team ) .. " ) -> max players = " .. tostring(maxPlayers) )
+    GameRules:SetCustomGameTeamMaxPlayers( team, maxPlayers )
+  end
+end
+-- Checks teamcolor default white
 function GameMode:ColorForTeam( teamID )
   local color = self.m_TeamColors[ teamID ]
   if color == nil then
@@ -519,7 +565,7 @@ function GameMode:ColorForTeam( teamID )
   end
   return color
 end
-
+--UpdatesScoreboard
 function GameMode:UpdateScoreboard()
   local sortedTeams = {}
   for _, team in pairs( self.m_GatheredShuffledTeams ) do
@@ -542,7 +588,7 @@ function GameMode:UpdateScoreboard()
   end
   -- Leader effects (moved from OnTeamKillCredit)
   local leader = sortedTeams[1].teamID
-  --print("Leader = " .. leader)
+  print("Leader = " .. leader)
   self.leadingTeam = leader
   self.runnerupTeam = sortedTeams[2].teamID
   self.leadingTeamScore = sortedTeams[1].teamScore
@@ -580,14 +626,15 @@ function GameMode:UpdateScoreboard()
   end
 end
 
-
 function GameMode:OnThink()
+  print("1")
   self:UpdateScoreboard()
   -- Stop thinking if game is paused
   if GameRules:IsGamePaused() == true then
         return 1
   end
-  print(self.countdownEnabled)
+  print(2)
+  -- print(self.countdownEnabled)
   if self.countdownEnabled == true then
     CountdownTimer()
     if nCOUNTDOWNTIMER == 30 then
@@ -608,5 +655,5 @@ function GameMode:OnThink()
       end
     end
   end
-  print('Here.')
+  print('3')
 end
