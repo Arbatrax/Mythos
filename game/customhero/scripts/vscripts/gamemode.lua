@@ -152,7 +152,7 @@ function GameMode:OnHeroInGame(hero)
   local item = CreateItem("item_blink", hero, hero)
   hero:AddItem(item)
   if GetMapName() == "mythos" then
-    item = CreateItem("item_gate_jumper", hero, hero)
+    item = CreateItem("item_artifact_final", hero, hero)
     hero:AddItem(item)
     item = CreateItem("item_purple_orb", hero, hero)
     hero:AddItem(item)
