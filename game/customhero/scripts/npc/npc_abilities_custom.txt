@@ -7346,33 +7346,20 @@
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
-    "AbilityTextureName"      "tidehunter_kraken_shell"
+    "AbilityTextureName"      "tidehunter_ravage"
 
     //Ability Leveling
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityType"             "DOTA_ABILITY_TYPE_ULTIMATE"
     "MaxLevel"              "3"
-    "RequiredLevel"        "1"
+    "RequiredLevel"        "5"
     "LevelsBetweenUpgrades" "5"
 
     // Precache
     //-------------------------------------------------------------------------------------------------------------
     "precache"
     {  
-      "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike.vpcf"
-        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_cracks.vpcf"
-        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_cracks_center.vpcf"
-        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_cracks_background.vpcf"
-        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_dust.vpcf"
-        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_debris.vpcf"
-        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_eruption.vpcf"
-        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_eruption_ripple_b.vpcf"
-        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_eruption_ripple.vpcf"
-        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_eruption_rocks.vpcf"
-        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_eruption_dust.vpcf"
-        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_eruption_dirt.vpcf"
-        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_eruption_ripple_dust.vpcf"
-        "particle"              "particles/units/heroes/hero_sandking/sandking_burrowstrike_ground.vpcf"
+      "particle"              "particles\units\heroes\hero_nyx_assassin\nyx_assassin_impale_burrow_soil.vpcf"
+      "particle"  "particles\fracturefallback_mid_egset.vpcf"
       "model" "models\heroes\tidehunter\tidehunter.vmdl"
     }
 
@@ -7410,38 +7397,33 @@
       }
     }
 
+    "OnUpgrade"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "heroes/arena/gladiator_stance.lua"
+        "Function"    "LevelUpAbility"
+        "ability_name"  "quake"
+      }
+    }
+
     "OnSpellStart"
     {
-      "ActOnTargets"
+      "FireEffect"
       {
-        "Target"
+        "EffectName"        "particles\fracturefallback_mid_egset.vpcf"
+        "EffectAttachType"  "start_at_customorigin"
+        "ControlPoints"
         {
-          "Center"    "POINT"
-          "Radius"   "%radius"
-          "Teams"   "DOTA_UNIT_TARGET_TEAM_ENEMY"
-          "Types"   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+          "00"  "POINT"    
         }
-      
-        "Action"    
-        {
-          "ApplyModifier"
-          {
-            "ModifierName"  "modifier_fracture"
-            "Target"     "TARGET"
-            "Duration"    "%duration"
-          }
+      }
 
-          "FireEffect"
-          {
-            "EffectName"                "particles/units/heroes/hero_sandking/sandking_burrowstrike.vpcf"
-            "EffectAttachType"          "start_at_customorigin"
-            "Target"                    "CASTER"
-            "ControlPoints"
-            {
-                "01"                    "POINT"
-            }
-          }
-        }
+      "RunScript"
+      {
+        "ScriptFile"  "heroes/sandbro/fracture.lua"
+        "Function"    "FractureDummy"
+        "Target"      "POINT"
       }
     }
     
@@ -7451,10 +7433,157 @@
       {
         "IsDebuff" "1"
 
+        "EffectName"                "particles\units\heroes\hero_nyx_assassin\nyx_assassin_impale_burrow_soil.vpcf"
+        "EffectAttachType"          "attach_origin"
 
         "States"
         {
           "MODIFIER_STATE_ROOTED"    "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+
+      "modifier_fracture_dummy"
+      {
+        "Aura"            "modifier_fracture"
+        "Aura_Radius"     "%radius"
+        "Aura_Teams"      "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "Aura_Types"      "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+        "States"
+        {
+          "MODIFIER_STATE_INVULNERABLE"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_STUNNED"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NO_HEALTH_BAR"    "MODIFIER_STATE_VALUE_ENABLED"   
+          "MODIFIER_STATE_NO_UNIT_COLLISION"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_FLYING"    "MODIFIER_STATE_VALUE_ENABLED"   
+        }
+      }
+    }
+  }
+
+  "quake"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"       "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+    "AbilityTextureName"      "tidehunter_kraken_shell"
+
+    //Ability Leveling
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityType"             "DOTA_ABILITY_TYPE_ULTIMATE"
+    "MaxLevel"              "3"
+    "RequiredLevel"        "5"
+    "LevelsBetweenUpgrades" "5"
+
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {  
+      "particle"              "particles\units\heroes\hero_nyx_assassin\nyx_assassin_impale_burrow_soil.vpcf"
+      "particle"  "particles\fracturefallback_mid_egset.vpcf"
+      "model" "models\heroes\tidehunter\tidehunter.vmdl"
+    }
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "400"
+    "AbilityCastPoint"        "0.0"
+    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "90"
+    "AbilityCooldown"        "60"
+
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "radius"       "400"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "duration"   "5"
+      }
+      "03"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "damage"   "50 100 150"
+      }
+      "04"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "multiplier"   "1.25"
+      }
+      "05"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "slow"   "-20 -25 -30"
+      }
+    }
+
+    "OnUpgrade"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "heroes/arena/gladiator_stance.lua"
+        "Function"    "LevelUpAbility"
+        "ability_name"  "fracture"
+      }
+    }
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "heroes/sandbro/quake.lua"
+        "Function"    "Quake"
+      }
+      
+      "ApplyModifier"
+      {
+        "ModifierName"  "modifier_quake_immunity"
+        "Target"     "CASTER"
+        "Duration"    "%duration"
+      }
+    }
+    
+    "Modifiers"
+    {
+      "modifier_quake_immunity"
+      {
+        "ThinkInterval"  "1.0"
+        "OnIntervalThink"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "heroes/sandbro/quake.lua"
+            "Function"    "QuakeDamage"
+          }
+        }
+
+        "States"
+        {
+          "MODIFIER_STATE_INVULNERABLE"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_STUNNED"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NO_HEALTH_BAR"    "MODIFIER_STATE_VALUE_ENABLED"        
+        }
+      }
+
+      "modifier_quake_fracture"
+      {
+        "IsDebuff" "1"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%slow" 
         }
       }
     }

@@ -280,11 +280,12 @@
     "sandbro"
     {
         "override_hero"      "npc_dota_hero_sand_king"
-        "AbilityLayout" "4"
-        "Ability1"           "fracture"
+        "AbilityLayout" "5"
+        "Ability1"           "favorable_winds"
         "Ability2"           "gunblade"
         "Ability3"           "vampirism"
-        "Ability4"           "blood_of_the_innocent"  
+        "Ability4"           "fracture"  
+        "Ability5"           "quake"
     }
 
 }

@@ -2768,4 +2768,48 @@
             }
         }
     }
+
+    "fracture_dummy"
+    {
+        // General
+        //----------------------------------------------------------------
+        "BaseClass"                 "npc_dota_creature" // Class of entity of link to.
+        "Level"                     "1"
+        "Model"                     "models\heroes\drow\drow.vmdl" // Model.
+        "ModelScale"                "0.75"
+        "AttackCapabilities"       "DOTA_UNIT_CAP_NO_ATTACK"
+
+        // Precache
+        //----------------------------------------------------------------
+         "precache"
+        {
+
+        }
+
+        "AttackDamageMin"            "0"       // Damage range min.
+        "AttackDamageMax"            "0"       // Damage range max.
+        "AttackRate"                 "1.0"     // Speed of attack.
+        "AttackAnimationPoint"       "0.35"    // Normalized time in animation cycle to attack.       
+
+        // Armor
+        //----------------------------------------------------------------
+        "ArmorPhysical"             "0"         // Physical protection.
+        "MagicalResistance"         "0"
+
+        // Bounds
+        //----------------------------------------------------------------
+        "BoundsHullName"            "DOTA_HULL_SIZE_REGULAR"            // Hull type used for navigation/locomotion.
+        "HealthBarOffset"           "120"
+
+        // Movement
+        //----------------------------------------------------------------
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_NONE"            // Type of locomotion - ground, air
+        "MovementSpeed"             "325"
+
+        // Team
+        //----------------------------------------------------------------
+        "TeamName"                  "DOTA_TEAM_GOODGUYS"            // Team name.
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_WEAK"
+    }
 }
