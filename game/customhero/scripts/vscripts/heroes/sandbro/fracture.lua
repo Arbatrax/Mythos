@@ -8,4 +8,5 @@ function FractureDummy(keys)
 	ability:ApplyDataDrivenModifier(caster, unit, "modifier_fracture_dummy", {})
 	unit:AddNewModifier(caster, ability, "modifier_kill", {duration=duration})
 	unit:AddNoDraw()
+	StartSoundEvent("Hero_EarthShaker.EchoSlam", unit)
 end

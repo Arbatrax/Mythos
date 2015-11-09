@@ -40,10 +40,12 @@ function QuakeDamage(keys)
 	local radius = ability:GetLevelSpecialValueFor( "radius", ability:GetLevel() - 1 )
 	local multiplier = ability:GetLevelSpecialValueFor( "multiplier", ability:GetLevel() - 1 )
 	local casterLocation = caster:GetAbsOrigin()
-	local nearbyUnits = FindUnitsInRadius(caster:GetTeam(), casterLocation, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
-	local fracture = FindUnitsInRadius(caster:GetTeam(), casterLocation, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false)
+	local nearbyUnits = FindUnitsInRadius(caster:GetTeam(), casterLocation, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO+DOTA_UNIT_TARGET_CREEP, 0, 0, false)
 	local count = table.getn(nearbyUnits)
+	local particle_name = "particles/units/heroes/hero_sandking/sandking_epicenter.vpcf"
 	caster.quake_count = caster.quake_count + 1
+
+	StartSoundEventFromPosition("Hero_EarthShaker.Fissure", casterLocation)
 
 	if caster.fracture_check == true then
 		for i=1,count do
@@ -70,4 +72,7 @@ function QuakeDamage(keys)
 			ApplyDamage(damageTable)
 		end
 	end
+
+	local particle = ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN, caster)
+    ParticleManager:SetParticleControl(particle, 1, Vector(radius, radius, radius))
 end
