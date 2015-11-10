@@ -593,7 +593,7 @@ function GameMode:UpdateScoreboard()
   end
   -- Leader effects (moved from OnTeamKillCredit)
   local leader = sortedTeams[1].teamID
-  print("Leader = " .. leader)
+  -- print("Leader = " .. leader)
   self.leadingTeam = leader
   self.runnerupTeam = sortedTeams[2].teamID
   self.leadingTeamScore = sortedTeams[1].teamScore
@@ -632,13 +632,13 @@ function GameMode:UpdateScoreboard()
 end
 
 function GameMode:OnThink()
-  print("1")
+ --  print("1")
   self:UpdateScoreboard()
   -- Stop thinking if game is paused
   if GameRules:IsGamePaused() == true then
         return 1
   end
-  print(2)
+  -- print(2)
   -- print(self.countdownEnabled)
   if self.countdownEnabled == true then
     CountdownTimer()
@@ -660,5 +660,5 @@ function GameMode:OnThink()
       end
     end
   end
-  print('3')
+  -- print('3')
 end
