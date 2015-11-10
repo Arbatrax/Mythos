@@ -8,7 +8,8 @@ function Quake(keys)
 	local fracture = FindUnitsInRadius(caster:GetTeam(), casterLocation, nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false)
 	local count = table.getn(nearbyUnits)
 
-	caster:AddNoDraw()
+	--caster:AddNoDraw()
+	caster:AddNewModifier(caster, ability, "modifier_quake_transform", {duration=duration-.1})
 
 	Timers:CreateTimer(duration, function()
 		caster:RemoveNoDraw()
@@ -75,4 +76,12 @@ function QuakeDamage(keys)
 
 	local particle = ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN, caster)
     ParticleManager:SetParticleControl(particle, 1, Vector(radius, radius, radius))
+end
+
+function QuakeEnd(keys)
+	local caster = keys.caster
+	
+	caster:Stop()
+
+	StartAnimation(caster, {duration=1.5, activity=ACT_DOTA_SAND_KING_BURROW_OUT, rate=1})
 end

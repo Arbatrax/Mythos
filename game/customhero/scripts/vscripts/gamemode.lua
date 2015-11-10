@@ -41,6 +41,9 @@ LinkLuaModifier( "modifier_dimensional_lightning_transform", "heroes/trickster/m
 sailor_kiss_lua = class({})
 LinkLuaModifier( "modifier_kiss_transform", "heroes/sailor/modifier_kiss_transform", LUA_MODIFIER_MOTION_NONE )
 
+sandbro_quake_lua = class({})
+LinkLuaModifier( "modifier_quake_transform", "heroes/sandbro/modifier_quake_transform", LUA_MODIFIER_MOTION_NONE )
+
 --[[
   This function should be used to set up Async precache calls at the beginning of the gameplay.
 

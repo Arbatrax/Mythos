@@ -7366,14 +7366,14 @@
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"        "800"
-    "AbilityCastPoint"        "0.2"
-    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_1"
+    "AbilityCastPoint"        "0.3"
+    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_2"
     "AoERadius"              "%radius"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "90"
-    "AbilityCooldown"        "60"
+    "AbilityManaCost"       "85"
+    "AbilityCooldown"        "45"
 
 
     // Special
@@ -7383,17 +7383,12 @@
       "01"
       {
         "var_type"        "FIELD_FLOAT"
-        "radius"       "250 300 350"
+        "radius"       "300 350 400"
       }
       "02"
       {
         "var_type"        "FIELD_FLOAT"
-        "duration"   "3"
-      }
-      "03"
-      {
-        "var_type"        "FIELD_FLOAT"
-        "threshold"   "20"
+        "duration"   "3.5"
       }
     }
 
@@ -7484,7 +7479,10 @@
       "particle"          "particles\units\heroes\hero_nyx_assassin\nyx_assassin_impale_burrow_soil.vpcf"
       "particle"          "particles\fracturefallback_mid_egset.vpcf"
       "particle"          "particles/units/heroes/hero_sandking/sandking_epicenter.vpcf"
+      "particle"          "particles\units\heroes\hero_nyx_assassin\nyx_assassin_burrow.vpcf"
+      "particle"          "particles\units\heroes\hero_nyx_assassin\nyx_assassin_burrow_exit.vpcf"
       "soundfile"         "soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts"
+      "model"             "models\heroes\nerubian_assassin\mound.vmdl"
     }
 
     // Casting
@@ -7495,8 +7493,8 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "90"
-    "AbilityCooldown"        "60"
+    "AbilityManaCost"       "100"
+    "AbilityCooldown"        "90 80 70"
 
 
     // Special
@@ -7516,7 +7514,7 @@
       "03"
       {
         "var_type"        "FIELD_INTEGER"
-        "damage"   "50 100 150"
+        "damage"   "30 60 90"
       }
       "04"
       {
@@ -7542,6 +7540,13 @@
 
     "OnSpellStart"
     {
+      "FireEffect"
+      {
+        "EffectName"        "particles\units\heroes\hero_nyx_assassin\nyx_assassin_burrow.vpcf"
+        "EffectAttachType"  "follow_origin"
+        "Target"            "CASTER"
+      }
+
       "FireEffect"
       {
         "EffectName"        "particles/units/heroes/hero_sandking/sandking_epicenter.vpcf"
@@ -7571,6 +7576,8 @@
     {
       "modifier_quake_immunity"
       {
+        "IsHidden" "1"
+
         "ThinkInterval"  "1.0"
         "OnIntervalThink"
         {
@@ -7586,6 +7593,22 @@
           "MODIFIER_STATE_INVULNERABLE"    "MODIFIER_STATE_VALUE_ENABLED"
           "MODIFIER_STATE_STUNNED"    "MODIFIER_STATE_VALUE_ENABLED"
           "MODIFIER_STATE_NO_HEALTH_BAR"    "MODIFIER_STATE_VALUE_ENABLED"        
+        }
+
+        "OnDestroy"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "heroes/sandbro/quake.lua"
+            "Function"    "QuakeEnd"
+          }
+
+          "FireEffect"
+          {
+            "EffectName"        "particles\units\heroes\hero_nyx_assassin\nyx_assassin_burrow_exit.vpcf"
+            "EffectAttachType"  "follow_origin"
+            "Target"            "CASTER"
+          }
         }
       }
 
