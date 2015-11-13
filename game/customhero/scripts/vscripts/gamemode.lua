@@ -1,13 +1,13 @@
--- This is the primary barebones gamemode script and should be used to assist in initializing your game mode
+-- This is the primary mythos gamemode script and should be used to assist in initializing your game mode
 
 _G.nCOUNTDOWNTIMER = 1201
 
--- Set this to true if you want to see a complete debug output of all events/processes done by barebones
--- You can also change the cvar 'barebones_spew' at any time to 1 or 0 for output/no output
-Mythos_DEBUG_SPEW = false 
+-- Set this to true if you want to see a complete debug output of all events/processes done by mythos
+-- You can also change the cvar 'mythos_spew' at any time to 1 or 0 for output/no output
+MYTHOS_DEBUG_SPEW = false 
 
 if GameMode == nil then
-    DebugPrint( '[MYTHOS] creating barebones game mode' )
+    DebugPrint( '[MYTHOS] creating mythos game mode' )
     _G.GameMode = class({})
 end
 
@@ -22,15 +22,15 @@ require('libraries/notifications')
 
 require('libraries/animations')
 
--- These internal libraries set up barebones's events and processes.  Feel free to inspect them/change them if you need to.
+-- These internal libraries set up mythos's events and processes.  Feel free to inspect them/change them if you need to.
 require('internal/gamemode')
 require('internal/events')
 
--- settings.lua is where you can specify many different properties for your game mode and is one of the core barebones files.
+-- settings.lua is where you can specify many different properties for your game mode and is one of the core mythos files.
 require('settings')
 -- utility_functions has many utility functions
 require('utility_functions')
--- events.lua is where you can specify the actions to be taken when any event occurs and is one of the core barebones files.
+-- events.lua is where you can specify the actions to be taken when any event occurs and is one of the core mythos files.
 require('events')
 
 require('CosmeticLib')

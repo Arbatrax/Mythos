@@ -51,9 +51,9 @@ function GameMode:_InitGameMode()
       SetTeamCustomHealthbarColor(team, color[1], color[2], color[3])
     end
   end
-  DebugPrint('[BAREBONES] GameRules set')
+  DebugPrint('[MYTHOS] GameRules set')
 
-  --InitLogFile( "log/barebones.txt","")
+  InitLogFile( "log/mythos.txt","")
 
   -- Event Hooks
   -- All of these events can potentially be fired by the game, though only the uncommented ones have had
@@ -106,10 +106,10 @@ function GameMode:_InitGameMode()
     end, "events test", 0)]]
 
   local spew = 0
-  if BAREBONES_DEBUG_SPEW then
+  if MYTHOS_DEBUG_SPEW then
     spew = 1
   end
-  Convars:RegisterConvar('barebones_spew', tostring(spew), 'Set to 1 to start spewing barebones debug info.  Set to 0 to disable.', 0)
+  Convars:RegisterConvar('mythos_spew', tostring(spew), 'Set to 1 to start spewing mythos debug info.  Set to 0 to disable.', 0)
 
   -- Change random seed
   local timeTxt = string.gsub(string.gsub(GetSystemTime(), ':', ''), '0','')
@@ -118,7 +118,7 @@ function GameMode:_InitGameMode()
   -- Initialized tables for tracking state
   self.bSeenWaitForPlayers = false
 
-  DebugPrint('[BAREBONES] Done loading Barebones gamemode!\n\n')
+  DebugPrint('[MYTHOS] Done loading Mythos gamemode!\n\n')
 end
 
 mode = nil
