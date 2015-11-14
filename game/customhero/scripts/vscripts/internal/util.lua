@@ -1,24 +1,24 @@
-function DebugPrint(...)
-  local spew = Convars:GetInt('mythos_spew') or -1
-  if spew == -1 and MYTHOS_DEBUG_SPEW then
-    spew = 1
-  end
+-- function --DebugPrint(...)
+--   --local spew = Convars:GetInt('mythos_spew') or -1
+--   if spew == -1 and MYTHOS_DEBUG_SPEW then
+--     spew = 1
+--   end
 
-  if spew == 1 then
-    print(...)
-  end
-end
+--   if spew == 1 then
+--     print(...)
+--   end
+-- end
 
-function DebugPrintTable(...)
-  local spew = Convars:GetInt('mythos_spew') or -1
-  if spew == -1 and MYTHOS_DEBUG_SPEW then
-    spew = 1
-  end
+-- function --DebugPrintTable(...)
+--   local spew = Convars:GetInt('mythos_spew') or -1
+--   if spew == -1 and MYTHOS_DEBUG_SPEW then
+--     spew = 1
+--   end
 
-  if spew == 1 then
-    PrintTable(...)
-  end
-end
+--   if spew == 1 then
+--     PrintTable(...)
+--   end
+-- end
 
 function PrintTable(t, indent, done)
   --print ( string.format ('PrintTable type %s', type(keys)) )

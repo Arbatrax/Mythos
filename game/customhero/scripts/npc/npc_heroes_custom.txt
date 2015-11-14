@@ -224,7 +224,7 @@
         "Ability3"           "vampirism"
         "Ability4"           "kiss_of_the_serpent_queen"  
 
-         // Armor
+        // Armor
         //-------------------------------------------------------------------------------------------------------------
         "ArmorPhysical"             "2"                                     // Physical protection.
 
@@ -258,7 +258,7 @@
         "Ability3"           "vampirism"
         "Ability4"           "blood_of_the_innocent"  
 
-         // Armor
+        // Armor
         //-------------------------------------------------------------------------------------------------------------
         "ArmorPhysical"             "2"                                     // Physical protection.
 
@@ -286,6 +286,35 @@
         "Ability3"           "vampirism"
         "Ability4"           "fracture"  
         "Ability5"           "quake"
+    }
+
+    "centaur_wizard"
+    {
+        "override_hero"      "npc_dota_hero_leshrac"
+        "AbilityLayout" "4"
+        "Ability1"           "favorable_winds"
+        "Ability2"           "gunblade"
+        "Ability3"           "vampirism"
+        "Ability4"           "reckless_initiation"  
+
+        // Armor
+        //-------------------------------------------------------------------------------------------------------------
+        "ArmorPhysical"             "6"                                     // Physical protection.
+
+        // Attributes
+        //-------------------------------------------------------------------------------------------------------------
+        "AttributePrimary"              "DOTA_ATTRIBUTE_INTELLECT"
+        "AttributeBaseStrength"         "18"                                    // Base strength
+        "AttributeStrengthGain"         "2.5"                                   // Strength bonus per level.
+        "AttributeBaseIntelligence"     "20"                                    // Base intelligence
+        "AttributeIntelligenceGain"     "3.0"                                   // Intelligence bonus per level.
+        "AttributeBaseAgility"          "19"                                    // Base agility
+        "AttributeAgilityGain"          "2.0"                                   // Agility bonus per level.
+
+        // Movement
+        //-------------------------------------------------------------------------------------------------------------
+        "MovementSpeed"             "325"                                   // Speed.
+        "MovementTurnRate"          "0.8"                                   // Turning rate.
     }
 
 }

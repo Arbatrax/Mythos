@@ -51,7 +51,7 @@ function GameMode:_InitGameMode()
       SetTeamCustomHealthbarColor(team, color[1], color[2], color[3])
     end
   end
-  DebugPrint('[MYTHOS] GameRules set')
+  ----DebugPrint('[MYTHOS] GameRules set')
 
   InitLogFile( "log/mythos.txt","")
 
@@ -101,7 +101,7 @@ function GameMode:_InitGameMode()
   --ListenToGameEvent('player_team', Dynamic_Wrap(GameMode, 'OnPlayerTeam'), self)
 
   --[[This block is only used for testing events handling in the event that Valve adds more in the future
-  Convars:RegisterCommand('events_test', function()
+  -- Convars:RegisterCommand('events_test', function()
       GameMode:StartEventTest()
     end, "events test", 0)]]
 
@@ -109,7 +109,7 @@ function GameMode:_InitGameMode()
   if MYTHOS_DEBUG_SPEW then
     spew = 1
   end
-  Convars:RegisterConvar('mythos_spew', tostring(spew), 'Set to 1 to start spewing mythos debug info.  Set to 0 to disable.', 0)
+  --Convars:RegisterConvar('mythos_spew', tostring(spew), 'Set to 1 to start spewing mythos debug info.  Set to 0 to disable.', 0)
 
   -- Change random seed
   local timeTxt = string.gsub(string.gsub(GetSystemTime(), ':', ''), '0','')
@@ -118,7 +118,7 @@ function GameMode:_InitGameMode()
   -- Initialized tables for tracking state
   self.bSeenWaitForPlayers = false
 
-  DebugPrint('[MYTHOS] Done loading Mythos gamemode!\n\n')
+  ----DebugPrint('[MYTHOS] Done loading Mythos gamemode!\n\n')
 end
 
 mode = nil

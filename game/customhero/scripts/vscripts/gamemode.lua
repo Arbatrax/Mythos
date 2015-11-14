@@ -7,7 +7,7 @@ _G.nCOUNTDOWNTIMER = 1201
 MYTHOS_DEBUG_SPEW = false 
 
 if GameMode == nil then
-    DebugPrint( '[MYTHOS] creating mythos game mode' )
+    --DebugPrint( '[MYTHOS] creating mythos game mode' )
     _G.GameMode = class({})
 end
 
@@ -60,7 +60,7 @@ LinkLuaModifier( "modifier_quake_transform", "heroes/sandbro/modifier_quake_tran
   This function should generally only be used if the Precache() function in addon_game_mode.lua is not working.
 ]]
 function GameMode:PostLoadPrecache()
-  DebugPrint("[MYTHOS] Performing Post-Load precache")    
+  --DebugPrint("[MYTHOS] Performing Post-Load precache")    
   --PrecacheItemByNameAsync("item_example_item", function(...) end)
   --PrecacheItemByNameAsync("example_ability", function(...) end)
   --PrecacheUnitByNameAsync("npc_dota_hero_viper", function(...) end)
@@ -72,7 +72,7 @@ end
   It can be used to initialize state that isn't initializeable in InitGameMode() but needs to be done before everyone loads in.
 ]]
 function GameMode:OnFirstPlayerLoaded()
-  DebugPrint("[MYTHOS] First Player has loaded")
+  --DebugPrint("[MYTHOS] First Player has loaded")
 end
 
 --[[
@@ -80,7 +80,7 @@ end
   It can be used to initialize non-hero player state or adjust the hero selection (i.e. force random etc)
 ]]
 function GameMode:OnAllPlayersLoaded()
-  DebugPrint("[MYTHOS] All Players have loaded into the game")
+  --DebugPrint("[MYTHOS] All Players have loaded into the game")
 end
 
 --[[
@@ -127,7 +127,7 @@ end
 function GameMode:InitGameMode()
   GameMode = self
   if GetMapName() == "mythos" then
-    DebugPrint('[MYTHOS] Starting to load Mythos gamemode...')
+    --DebugPrint('[MYTHOS] Starting to load Mythos gamemode...')
     GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_GOODGUYS, 4 )
     GameRules:SetCustomGameTeamMaxPlayers( DOTA_TEAM_BADGUYS, 4 )
 
@@ -141,9 +141,9 @@ function GameMode:InitGameMode()
     GameRules.TreasureChest = LoadKeyValues("scripts/kv/treasure_chest.kv")
     GameRules.FactionTable = LoadKeyValues("scripts/kv/factions.kv")
     -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
-    Convars:RegisterCommand( "command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
+    --Convars:RegisterCommand( "command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
 
-    DebugPrint('[MYTHOS] Done loading Mythos gamemode!\n\n')
+    --DebugPrint('[MYTHOS] Done loading Mythos gamemode!\n\n')
     print('Mythos gamemode loaded.')
   elseif GetMapName() == 'plateau' then
     print('Mythos: Artifact gamemode loading.')
@@ -215,7 +215,7 @@ end
   is useful for starting any game logic timers/thinkers, beginning the first round, etc.
 ]]
 function GameMode:OnGameInProgress()
-  DebugPrint("[MYTHOS] The game has officially begun")
+  --DebugPrint("[MYTHOS] The game has officially begun")
   print("Game started.")
   --Notifications:TopToAll("Top Notification for 5 seconds", 5.0)
 
@@ -507,7 +507,7 @@ end
 -- This is an example console command
 function GameMode:ExampleConsoleCommand()
   print( '******* Example Console Command ***************' )
-  local cmdPlayer = Convars:GetCommandClient()
+  --local cmdPlayer = Convars:GetCommandClient()
   if cmdPlayer then
     local playerID = cmdPlayer:GetPlayerID()
     if playerID ~= nil and playerID ~= -1 then
