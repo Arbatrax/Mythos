@@ -33,7 +33,6 @@ function Explode(keys)
 	-- end
 	local nearbyUnits = FindUnitsInRadius(caster:GetTeam(), target:GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 0, false)
 	local count = table.getn(nearbyUnits)
-	local particle_name = "particles/units/heroes/centaur_wizard/stone_explosion.vpcf"
 
 	for x=1, count do
 		local damageTable = {
@@ -45,8 +44,4 @@ function Explode(keys)
 			 
 			ApplyDamage(damageTable)
 	end
-
-	local particle = ParticleManager:CreateParticle(particle_name, PATTACH_CUSTOMORIGIN, target)
-    print(particle)
-    --ParticleManager:SetParticleControl(particle, 0, Vector(radius, radius, radius))
 end
