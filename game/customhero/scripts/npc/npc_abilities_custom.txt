@@ -7640,7 +7640,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"       "ability_datadriven"
-    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELLED | DOTA_ABILITY_BEHAVIOR_AOE"
     "AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
     "AbilityTextureName"      "leshrac_pulse_nova"
 
@@ -7657,15 +7657,17 @@
     {  
       "particle"          "particles\econ\items\leshrac\leshrac_tormented_staff\leshrac_split_groundflash_lines_tormented.vpcf"
       "particle"          "particles\econ\items\leshrac\leshrac_tormented_staff\leshrac_split_projected_tormented.vpcf"
-      "particle"          "particles/units/heroes/hero_sandking/sandking_epicenter.vpcf"
-      "particle"          "particles\units\heroes\hero_nyx_assassin\nyx_assassin_burrow.vpcf"
-      "particle"          "particles\units\heroes\hero_nyx_assassin\nyx_assassin_burrow_exit.vpcf"
+      "particle"          "particles\econ\events\fall_major_2015\teleport_start_fallmjr_2015_i.vpcf"
+      "particle"          "particles\econ\events\fall_major_2015\teleport_end_fallmjr_2015_l_glow.vpcf"
       "soundfile"         "soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts"
       "model"             "models\heroes\nerubian_assassin\mound.vmdl"
     }
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityChannelTime"      "3.0 3.0 3.0"
     "AbilityCastRange"        "1500"
     "AbilityCastPoint"        "0.3"
     "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_4"
@@ -7684,22 +7686,58 @@
       "01"
       {
         "var_type"        "FIELD_INTEGER"
-        "radius"       "300"
+        "radius"       "500"
       }
       "02"
       {
         "var_type"        "FIELD_INTEGER"
-        "tp_range"   "500"
+        "tp_range"   "500 500 500"
+      }
+      "03"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "duration"   "3"
       }
     }
 
     "OnSpellStart"
     {
+      "ApplyModifier"
+      {
+        "ModifierName"  "teleport_effect"
+        "Target"     "CASTER"
+        "Duration"    "%duration"
+      }
+    }
+
+    "OnChannelInterrupted"
+    {
+      "RemoveModifier"
+      {
+        "ModifierName"  "teleport_effect"
+        "Target"     "CASTER"
+      }
+    }
+
+    "OnChannelSucceeded"
+    {
+
       "FireEffect"
       {
-        "EffectName"        "particles\econ\items\leshrac\leshrac_tormented_staff\leshrac_split_groundflash_lines_tormented.vpcf"
+        "EffectName"        "particles\econ\events\fall_major_2015\teleport_end_fallmjr_2015_l_glow.vpcf"
         "EffectAttachType"  "follow_origin"
         "Target"            "CASTER"
+      }
+
+      "FireEffect"
+      {
+        "EffectName"        "particles\econ\items\leshrac\leshrac_tormented_staff\leshrac_split_projected_tormented.vpcf"
+        "EffectAttachType"  "follow_origin"
+        "Target"            "CASTER"
+        "ControlPoints"
+        {
+            "01"            "%radius %radius %radius"
+        }
       }
 
       "FireEffect"
@@ -7719,6 +7757,134 @@
         "Function"    "Teleport"
         "Target"      "POINT"
       }
-    }   
+    }
+
+    "Modifiers"
+    {
+      "teleport_effect"
+      {
+        "Passive"      "0"
+        "IsHidden"      "0"
+        "IsDebuff"      "0"
+      
+        "EffectName"    "particles\econ\events\fall_major_2015\teleport_start_fallmjr_2015_i.vpcf"
+        "EffectAttachType"  "follow_origin"  
+        "Target"            "CASTER"
+      }
+    }
+  }
+
+  "stone_shield"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"       "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam"  "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"  "DOTA_UNIT_TARGET_HERO"
+    "AbilityTextureName"      "leshrac_pulse_nova"
+
+
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {  
+      "particle"          "particles\units\heroes\centaur_wizard\stone_shield.vpcf"
+      "particle"          "particles\units\heroes\centaur_wizard\stone_explosion.vpcf"
+      "soundfile"         "soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts"
+      "model"             "models\heroes\nerubian_assassin\mound.vmdl"
+    }
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "1500"
+    "AbilityCastAnimation"      "ACT_DOTA_CAST_ABILITY_4"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "100"
+    "AbilityCooldown"        "90 80 70"
+
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "damage_absorbed"       "150 200 250 300 350"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "damage_dealt"   "150 200 250 300 350"
+      }
+      "03"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "duration"   "2"
+      }
+      "04"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "radius"          "200"
+      }
+    }
+
+    "OnSpellStart"
+    {
+      "ApplyModifier"
+      {
+        "ModifierName"  "stone_shield"
+        "Target"     "TARGET"
+        "Duration"    "%duration"
+      }
+    }
+
+    "Modifiers"
+    {
+      "stone_shield"
+      {
+        "IsHidden"      "0"
+      
+        "EffectName"    "particles\units\heroes\centaur_wizard\stone_shield.vpcf"
+        "EffectAttachType"  "follow_chest"
+        "Target"    "TARGET"
+        "ControlPoints"
+        {
+            "01"            "0 0 100"
+        }
+        
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "heroes/centaur_wizard/stone_shield.lua"
+            "Function"    "Shield"
+            "attack_damage" "%attack_damage"
+          } 
+        }
+
+        "OnTakeDamage"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "heroes/centaur_wizard/stone_shield.lua"
+            "Function"    "Absorb"
+            "attack_damage" "%attack_damage"
+          }
+        }
+
+        "OnDestroy"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "heroes/centaur_wizard/stone_shield.lua"
+            "Function"    "Explode"
+          }
+        }
+      }
+    }
   }
 }

@@ -54,7 +54,7 @@ function QuakeDamage(keys)
 			local damageTable = {
 				victim = nearbyUnits[i],
 				attacker = caster,
-				damage = damage * caster.quake_count *multiplier,
+				damage = damage * caster.quake_count * multiplier,
 				damage_type = DAMAGE_TYPE_MAGICAL,
 			}
 			 
