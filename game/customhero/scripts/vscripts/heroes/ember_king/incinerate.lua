@@ -7,7 +7,7 @@ function Incinerate( keys )
 
 	if target:HasModifier("modifier_searing") then
 		ability:ApplyDataDrivenModifier(caster, target, "modifier_incinerate_stun", {duration=duration})
-		print("TRUEUEUEUEUE")
+		--print("TRUEUEUEUEUE")
 	end
 end
 	

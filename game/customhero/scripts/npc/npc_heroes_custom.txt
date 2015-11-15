@@ -292,7 +292,7 @@
     {
         "override_hero"      "npc_dota_hero_leshrac"
         "AbilityLayout" "4"
-        "Ability1"           "favorable_winds"
+        "Ability1"           "stone_shield"
         "Ability2"           "gunblade"
         "Ability3"           "vampirism"
         "Ability4"           "reckless_initiation"  
