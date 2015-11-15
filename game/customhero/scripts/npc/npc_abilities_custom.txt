@@ -2781,7 +2781,7 @@
       "03"
       {
         "var_type"        "FIELD_FLOAT"
-        "duration"        "6.0 8.0 10.0"
+        "duration"        "4.0 5.0 6.0"
       }
     }
 
@@ -7791,6 +7791,7 @@
     {  
       "particle"          "particles\units\heroes\centaur_wizard\stone_shield.vpcf"
       "particle"          "particles\units\heroes\centaur_wizard\stone_explosion.vpcf"
+      "particle"  "particles\econ\items\abaddon\abaddon_alliance\abaddon_death_coil_alliance.vpcf"
       "soundfile"         "soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts"
       "model"             "models\heroes\nerubian_assassin\mound.vmdl"
     }

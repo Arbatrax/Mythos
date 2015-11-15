@@ -30,6 +30,25 @@
 			"DOTA_Tooltip_ability_god_scout_Lore"									"Octopusbro can see extra far with his telescope."
 			"DOTA_Tooltip_ability_god_scout_duration"								"DURATION:"
 
+			//Ferocity_Sever
+			//--------------------
+			"DOTA_Tooltip_ability_sever"                                                      "Sever"
+			"DOTA_Tooltip_ability_sever_Description"                                          ""
+			"DOTA_Tooltip_ability_sever_duration"                                             "DURATION:"
+			"DOTA_Tooltip_ability_sever_slow"                                                 "SLOW:"
+			"DOTA_Tooltip_ability_sever_damage"                                               "DAMAGE:"
+			"DOTA_Tooltip_ability_sever_interval"                                             "INTERVAL:"
+
+			//Ferocity_Go_For_The_Throat
+			//--------------------
+			"DOTA_Tooltip_ability_go_for_the_throat"                                          "Go For The Throat"
+			"DOTA_Tooltip_ability_go_for_the_throat_Description"                              ""
+			"DOTA_Tooltip_ability_go_for_the_throat_crit_damage"                              "CRIT DAMAGE:"
+			"DOTA_Tooltip_ability_go_for_the_throat_crit_chance"                              "CRIT CHANCE:"
+			"DOTA_Tooltip_ability_go_for_the_throat_attack_speed"                             "ATTACK SPEED:"
+			"DOTA_Tooltip_ability_go_for_the_throat_duration"                                 "DURATION:"
+			"DOTA_Tooltip_ability_go_for_the_throat_radius"                                   "RADIUS:"
+
 			//Ferocity_Packrunning
 			//--------------------
 			"DOTA_Tooltip_ability_packrunning"										"Packrunning"
@@ -166,17 +185,14 @@
 			"DOTA_Tooltip_modifier_incinerate_stun"									"Incinerate"
 			"DOTA_Tooltip_modifier_incinerate_stun_Description"						"Stunned."
 
-			//Ember_King_Lava_Gyre
+			//Ember_King_Arcane_Accelerant
 			//--------------------
-			"DOTA_Tooltip_ability_lava_gyre"										"Lava Gyre"
-			"DOTA_Tooltip_ability_lava_gyre_Description"							"Ember King summons a Lava Gyre at the target location causing enemies caught in it to take additional magic damage."
-			"DOTA_Tooltip_ability_lava_gyre_Lore"									""
-			"DOTA_Tooltip_ability_lava_gyre_spell_resist_pct"						"%SPELL RESISTANCE REDUCTION:"
-			"DOTA_Tooltip_ability_lava_gyre_duration"								"DURATION:"
-			"DOTA_Tooltip_ability_lava_gyre_radius"									"RADIUS:"
-			"DOTA_Tooltip_ability_lava_gyre_range"									"RANGE:"
-			"DOTA_Tooltip_modifier_lava_gyre_datadriven"  							"Lava Gyre"
-			"DOTA_Tooltip_modifier_lava_gyre_stun_Description"						"Magic Resistance reduced."
+			"DOTA_Tooltip_ability_arcane_accelerant"                                          "Arcane Accelerant"
+			"DOTA_Tooltip_ability_arcane_accelerant_Description"                              ""
+			"DOTA_Tooltip_ability_arcane_accelerant_spell_resist_pct"                         "SPELL RESISTANCE REDUCTION:"
+			"DOTA_Tooltip_ability_arcane_accelerant_duration"                                 "DURATION:"
+			"DOTA_Tooltip_modifier_arcane_accelerant"                                         "Arcane Accelerant"
+			"DOTA_Tooltip_modifier_arcane_accelerant_Description"                             "Spell Resistance reduced."
 
 			//Ember_King_Cauterize
 			//--------------------
@@ -359,6 +375,40 @@
 			"DOTA_Tooltip_ability_shelf_snail_poison_Description"                             "Rogue applies the poison of the Shelf Snail to his dagger dealing bonus damage on each of his attacks."
 			"DOTA_Tooltip_ability_shelf_snail_poison_max_attacks"                             "MAX ATTACKS:"
 			"DOTA_Tooltip_ability_shelf_snail_poison_bonus_damage"                            "BONUS DAMAGE:"
+
+			//Christopher_Freeze_Frozen_Tomb
+			//--------------------
+			"DOTA_Tooltip_ability_frozen_tomb"                                                "Frozen Tomb"
+			"DOTA_Tooltip_ability_frozen_tomb_Description"                                    ""
+			"DOTA_Tooltip_ability_frozen_tomb_stun_duration"                                  "STUN DURATION:"
+			"DOTA_Tooltip_ability_frozen_tomb_slow_duration"                                  "SLOW DURATION:"
+			"DOTA_Tooltip_ability_frozen_tomb_max_slow"                                       "SLOW:"
+			"DOTA_Tooltip_ability_frozen_tomb_damage"                                         "DAMAGE:"
+
+			//Christopher_Freeze_Shatter
+			//--------------------
+			"DOTA_Tooltip_ability_shatter"                                                    "Shatter"
+			"DOTA_Tooltip_ability_shatter_Description"                                        ""
+			"DOTA_Tooltip_ability_shatter_damage"                                             "DAMAGE:"
+			"DOTA_Tooltip_ability_shatter_radius"                                             "RADIUS:"
+
+			//Christopher_Freeze_Crzed_Acolyte
+			//--------------------
+			"DOTA_Tooltip_ability_crazed_acolyte"                                             "Crazed Acolyte"
+			"DOTA_Tooltip_ability_crazed_acolyte_Description"                                 ""
+			"DOTA_Tooltip_ability_crazed_acolyte_damage"                                      "DAMAGE:"
+			"DOTA_Tooltip_ability_crazed_acolyte_duration"                                    "DURATION:"
+			"DOTA_Tooltip_ability_crazed_acolyte_silence_duration"                            "SILENCE DURATION:"
+			"DOTA_Tooltip_ability_crazed_acolyte_speed"                                       "SPEED:"
+
+			//Christopher_Freeze_Icy_Rune
+			//--------------------
+			"DOTA_Tooltip_ability_icy_rune"                                                   "Icy Rune"
+			"DOTA_Tooltip_ability_icy_rune_Description"                                       ""
+			"DOTA_Tooltip_ability_icy_rune_radius"                                            "RADIUS:"
+			"DOTA_Tooltip_ability_icy_rune_duration"                                          "DURATION:"
+			"DOTA_Tooltip_ability_icy_rune_mana"                                              "MANA PER SEC:"
+			"DOTA_Tooltip_ability_icy_rune_mana_aoe"                                          "MANA AOE:"
 		
 		
 		//------------------------

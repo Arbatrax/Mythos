@@ -232,6 +232,7 @@ function GameMode:OnGameInProgress()
     SpawnNeutralIsland()
     end)
 
+    --Spawns our 4 gods at their respective altars
     SpawnGods()
 
     local point = Entities:FindByName( nil, "bonus_spawn1"):GetAbsOrigin()
@@ -244,6 +245,7 @@ function GameMode:OnGameInProgress()
     point = Entities:FindByName( nil, "gate_spawner"):GetAbsOrigin()
     local unit = CreateUnitByName("gate", point, true, nil, nil, DOTA_TEAM_NEUTRALS )   
 
+    --Spawns lane creeps every 30 seconds starting at the 0 second mark
     Timers:CreateTimer( function()
       SpawnLaneCreeps()
       return 30
@@ -428,24 +430,33 @@ function SpawnCreeps()
   end
   --Spawns Top side neutral camps
   if ClearCamp("top_neutral_camp1") == true then
-    SpawnCamp("top_neutral_camp1", "neutral_forest_lord", 1)
+    SpawnCamp("bot_neutral_camp1", "neutral_dinosaur_baby", 2)
+    SpawnCamp("bot_neutral_camp1", "neutral_dinosaur", 1)
   end
   if ClearCamp("top_neutral_camp2") == true then
     SpawnCamp("top_neutral_camp2", "neutral_ghost_1", 2)
     SpawnCamp("top_neutral_camp2", "neutral_ghost_2", 2)
   end
   if ClearCamp("top_neutral_camp3") == true then
-    SpawnCamp("top_neutral_camp3", "neutral_dog", 5)
-    SpawnCamp("top_neutral_camp3", "neutral_dog_master", 1)
+    SpawnCamp("top_neutral_camp3", "neutral_bug_small", 3)
+    SpawnCamp("top_neutral_camp3", "neutral_bug_large", 1)
   end  
   if ClearCamp("top_neutral_camp4") == true then
-    SpawnCamp("top_neutral_camp4", "neutral_kobold_basic", 3)
+    SpawnCamp("top_neutral_camp4", "neutral_golem_small", 6)
   end
   if ClearCamp("top_neutral_camp5") == true then
     SpawnCamp("top_neutral_camp5", "neutral_kobold_basic", 3)
   end
   if ClearCamp("top_neutral_vision") == true then
     SpawnCamp("top_neutral_vision", "neutral_harpy_vision", 1)
+  end
+  --Spawns neutral island creeps
+  if ClearCamp("neutral_camp1") == true then
+    SpawnCamp("neutral_camp1", "neutral_kobold_basic", 3)
+  end
+  if ClearCamp("neutral_camp2") == true then
+    SpawnCamp("neutral_camp2", "neutral_dog", 5)
+    SpawnCamp("neutral_camp2", "neutral_dog_master", 1)
   end
 end
 
@@ -459,13 +470,6 @@ function SpawnNeutralIsland()
   end
   if ClearCamp("neutral_campboss") == true then
     SpawnCamp("neutral_campboss", "neutral_island_boss", 1)
-  end
-  if ClearCamp("neutral_camp1") == true then
-    SpawnCamp("neutral_camp1", "neutral_kobold_basic", 3)
-  end
-  if ClearCamp("neutral_camp2") == true then
-    SpawnCamp("neutral_camp2", "neutral_dog", 5)
-    SpawnCamp("neutral_camp2", "neutral_dog_master", 1)
   end
 end
 

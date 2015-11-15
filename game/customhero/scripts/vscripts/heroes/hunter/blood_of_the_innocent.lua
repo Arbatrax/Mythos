@@ -97,11 +97,12 @@ function Cleave (event)
 	local damage = event.damage
 	local ability = event.ability
 	local modifier = "modifier_blood_of_the_innocent_stack"
+	local cleave = ability:GetLevelSpecialValueFor( "max_stacks", ability:GetLevel() - 1 )
 	local stack_count = caster:GetModifierStackCount( modifier, ability )
-	local damage_modifier = math.abs(stack_count-60) * .01
+	local damage_modifier = math.abs(stack_count-cleave) * .01
 	local radius = ability:GetLevelSpecialValueFor( "radius", ability:GetLevel() - 1 )
 
-	if stack_count < 60 then
+	if stack_count < cleave then
 		DoCleaveAttack(caster, target, ability, damage*damage_modifier, radius, "particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf" )
 	end
 end
