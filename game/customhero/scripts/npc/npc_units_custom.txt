@@ -1459,7 +1459,7 @@
         "ProjectileModel"            "particles/units/heroes/hero_warlock/warlock_base_attack.vpcf"
         "ProjectileSpeed"            "900"
 
-        "Ability1"                   ""        
+        "Ability1"                   "patiently_waiting"        
         "Ability2"                   ""
 
         "AttackDamageMin"            "125"       // Damage range min.

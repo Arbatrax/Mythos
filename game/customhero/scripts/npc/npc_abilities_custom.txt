@@ -5960,6 +5960,34 @@
     }
   }
 
+  "patiently_waiting"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"       "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_YES"
+    "AbilityTextureName"    "life_stealer_infest"
+
+    "Modifiers"
+    {
+      "modifier_patience"
+      {
+        "Passive" "1"
+        "IsHidden" "1"
+
+        "OnDeath"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "gamemode.lua"
+            "Function"    "RespawnNeutralIsland"
+          }
+        }
+      } 
+    }
+  }
+
   "hysteria"
   {
     // General

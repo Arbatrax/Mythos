@@ -410,7 +410,7 @@
   "item_gold_sack"
   {
     "ID"              "1111"
-    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
     "BaseClass"           "item_datadriven"
     "AbilityTextureName"      "item_butterfly"
     

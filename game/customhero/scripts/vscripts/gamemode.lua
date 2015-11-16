@@ -222,28 +222,26 @@ function GameMode:OnGameInProgress()
   if GetMapName() == "mythos" then
     print("Mythos map selected.")
 
-  --Creates timers for spawning creeps every min
+    --Creates timers for spawning neutral creeps every min
     Timers:CreateTimer( function()
          SpawnCreeps()
          return 60
-      end)
+    end)
 
-    Timers:CreateTimer(5, function()
-    SpawnNeutralIsland()
+    Timers:CreateTimer(function()
+      SpawnNeutralIsland()
     end)
 
     --Spawns our 4 gods at their respective altars
     SpawnGods()
 
-    local point = Entities:FindByName( nil, "bonus_spawn1"):GetAbsOrigin()
-    local item = CreateItem("item_imp_portal", nil, nil)
-    local drop = CreateItemOnPositionSync( point, item )
-
-    point = Entities:FindByName( nil, "bonus_spawn2"):GetAbsOrigin()
-    local unit = CreateUnitByName("mountain_brawler", point, true, nil, nil, DOTA_TEAM_NEUTRALS )   
-
     point = Entities:FindByName( nil, "gate_spawner"):GetAbsOrigin()
-    local unit = CreateUnitByName("gate", point, true, nil, nil, DOTA_TEAM_NEUTRALS )   
+    local unit = CreateUnitByName("gate", point, true, nil, nil, DOTA_TEAM_NEUTRALS )  
+
+    Timers:CreateTimer(10, function()
+      SpawnBonusEvent()
+      return 10
+    end)
 
     --Spawns lane creeps every 30 seconds starting at the 0 second mark
     Timers:CreateTimer( function()
@@ -430,8 +428,8 @@ function SpawnCreeps()
   end
   --Spawns Top side neutral camps
   if ClearCamp("top_neutral_camp1") == true then
-    SpawnCamp("bot_neutral_camp1", "neutral_dinosaur_baby", 2)
-    SpawnCamp("bot_neutral_camp1", "neutral_dinosaur", 1)
+    SpawnCamp("top_neutral_camp1", "neutral_dinosaur_baby", 2)
+    SpawnCamp("top_neutral_camp1", "neutral_dinosaur", 1)
   end
   if ClearCamp("top_neutral_camp2") == true then
     SpawnCamp("top_neutral_camp2", "neutral_ghost_1", 2)
@@ -464,13 +462,28 @@ function SpawnNeutralIsland()
   --Spawns neutral island creeps
   for i=1, 2, 1 do
     local point = Entities:FindByName( nil, "neutral_tower_spawn" ..i):GetAbsOrigin()
-    local unit = CreateUnitByName("neutral_tower", point, false, nil, nil, DOTA_TEAM_NEUTRALS)
-    unit:AddNewModifier(caster, nil, "modifier_tower_truesight_aura", {})
-    unit:AddNewModifier(caster, nil, "modifier_magic_immune", {})
+    local area = FindUnitsInRadius(DOTA_TEAM_NEUTRALS, point, nil, 200, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, 0, false)
+    local alive = false
+
+    for i=1,table.getn(area) do
+      if area[i]:GetUnitName() == "neutral_tower" then
+        alive = true
+      end
+    end
+
+    if alive == false then
+      local unit = CreateUnitByName("neutral_tower", point, false, nil, nil, DOTA_TEAM_NEUTRALS)
+      unit:AddNewModifier(caster, nil, "modifier_tower_truesight_aura", {})
+      unit:AddNewModifier(caster, nil, "modifier_magic_immune", {})
+    end
   end
-  if ClearCamp("neutral_campboss") == true then
-    SpawnCamp("neutral_campboss", "neutral_island_boss", 1)
-  end
+  SpawnCamp("neutral_campboss", "neutral_island_boss", 1)
+end
+
+function RespawnNeutralIsland()
+  Timers:CreateTimer(10, function()
+    SpawnNeutralIsland()
+  end) 
 end
 
 function Leash(point, neutral)
@@ -508,6 +521,47 @@ function ClearCamp(camp)
     return true
   end
 end
+
+function SpawnBonusEvent()
+  local camp = "bonus_spawn" .. math.random(1,7)
+  local point = Entities:FindByName( nil, camp):GetAbsOrigin()
+  local bonus = math.random(1,4)
+
+  if bonus == 1 then
+    local item = CreateItem("item_imp_portal", nil, nil)
+    local drop = CreateItemOnPositionSync( point, item )
+    Timers:CreateTimer(9.9, function()
+      if IsValidEntity(item) then
+        UTIL_Remove(item)
+      end
+    end) 
+  elseif bonus == 2 then
+    local item = CreateItem("item_mercenary_flag", nil, nil)
+    local drop = CreateItemOnPositionSync( point, item )
+    Timers:CreateTimer(9.9, function()
+      if IsValidEntity(item) then
+        UTIL_Remove(item)
+      end
+    end) 
+  elseif bonus == 3 then
+    local unit = CreateUnitByName("mountain_brawler", point, true, nil, nil, DOTA_TEAM_NEUTRALS )
+    Timers:CreateTimer(9.9, function()
+      if IsValidEntity(unit) then
+        unit:RemoveSelf()
+      end
+    end)
+  elseif bonus == 4 then
+    local unit = CreateUnitByName("wanderer", point, true, nil, nil, DOTA_TEAM_NEUTRALS )
+    Timers:CreateTimer(9.9, function()
+      if IsValidEntity(unit) then
+        unit:RemoveSelf()
+      end
+    end)  
+  end 
+  print(camp)
+  print(bonus)
+end
+
 -- This is an example console command
 function GameMode:ExampleConsoleCommand()
   print( '******* Example Console Command ***************' )

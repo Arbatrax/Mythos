@@ -256,12 +256,6 @@ function GameMode:OnEntityKilled( keys )
         heroes[i]:ModifyGold( gold, false, 11) 
       end
     end
-
-    Timers:CreateTimer(10, function()
-      GameMode:SpawnNeutralIsland()
-    end)
-    
-
   end
 end
 

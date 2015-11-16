@@ -4,21 +4,23 @@ function Wander( keys )
 	local radius = ability:GetLevelSpecialValueFor("radius", 1)
 	
 	Timers:CreateTimer(function()
-		local casterLocation = caster:GetAbsOrigin()
-		local nearbyHeroes = FindUnitsInRadius(caster:GetTeam(), casterLocation, nil, radius, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO, 0, 1, false)
-		local count = table.getn(nearbyHeroes)
+		if IsValidEntity(caster) then
+			local casterLocation = caster:GetAbsOrigin()
+			local nearbyHeroes = FindUnitsInRadius(caster:GetTeam(), casterLocation, nil, radius, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_HERO, 0, 1, false)
+			local count = table.getn(nearbyHeroes)
 
-		if count > 0 then
-			local hero = nearbyHeroes[1]
-			print(hero:GetUnitName())
-			caster:RemoveModifierByName("modifier_wandering")
-			caster:SetTeam(hero:GetTeam())
-			caster:MoveToNPC(hero)
-			EmitSoundOnLocationForAllies(caster:GetAbsOrigin(), "Hero_Puck.Phase_Shift", caster)
-			--caster:AddSpeechBubble(1, "Help I'm lost!", 5.0, 0, 0)
-			Shrine(keys)
-		else
-      		return 0.03			
+			if count > 0 then
+				local hero = nearbyHeroes[1]
+				print(hero:GetUnitName())
+				caster:RemoveModifierByName("modifier_wandering")
+				caster:SetTeam(hero:GetTeam())
+				caster:MoveToNPC(hero)
+				EmitSoundOnLocationForAllies(caster:GetAbsOrigin(), "Hero_Puck.Phase_Shift", caster)
+				--caster:AddSpeechBubble(1, "Help I'm lost!", 5.0, 0, 0)
+				Shrine(keys)
+			else
+	      		return 0.03			
+			end
 		end
     end)
 end
