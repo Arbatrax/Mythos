@@ -4282,7 +4282,9 @@
 
       "modifier_gift_of_light"
       {
-      
+        "IsBuff"      "1"
+        "IsHidden"      "0"
+
         "OnCreated"
         {
           "FireEffect"
@@ -4296,12 +4298,29 @@
                 "01"    "%radius %radius %radius"
             }
           }
+
+          "RunScript"
+          {
+            "ScriptFile"  "neutrals/wanderer/altar_buffs.lua"
+            "Function"    "LetThereBeLight"
+          } 
+        }
+
+        "OnDestroy"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "neutrals/wanderer/altar_buffs.lua"
+            "Function"    "NormalVision"
+          }
         }
       }
 
       "modifier_gift_of_yerus"
       {
-      
+        "IsBuff"      "1"
+        "IsHidden"      "0"
+
         "OnCreated"
         {
           "FireEffect"
@@ -4311,11 +4330,37 @@
             "EffectAttachType"  "follow_origin"
           }
         }
+
+        "ThinkInterval"  "0.5"
+        "OnIntervalThink"
+        {
+          "RunScript"
+          {
+            "ScriptFile" "neutrals/wanderer/altar_buffs.lua"
+            "Function" "RegenerateAllies"       
+          }  
+        }
       }
 
       "modifier_gift_of_unda"
       {
-      
+        "IsBuff"      "1"
+        "IsHidden"      "0"
+
+        "modifier_fracture_dummy"
+        {
+          "Aura"            "modifier_unda_movespeed"
+          "Aura_Radius"     "500"
+          "Aura_Teams"      "DOTA_UNIT_TEAM_FRIENDLY"
+          "Aura_Types"      "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        }
+      }
+
+      "modifier_unda_movespeed"
+      {
+        "IsBuff"    "1"
+        "IsHidden"  "0"
+
         "OnCreated"
         {
           "FireEffect"
@@ -4325,11 +4370,18 @@
             "EffectAttachType"  "follow_origin"
           }
         }
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "20"
+        }
       }
 
       "modifier_gift_of_dark"
       {
-      
+        "IsBuff"      "1"
+        "IsHidden"      "0"
+
         "OnCreated"
         {
           "FireEffect"
@@ -4338,6 +4390,12 @@
             "EffectName"        "particles\units\heroes\hero_lich\lich_frost_nova.vpcf"
             "EffectAttachType"  "follow_origin"
           }
+        
+          "RunScript"
+          {
+            "ScriptFile"  "neutrals/wanderer/altar_buffs.lua"
+            "Function"    "HurtEnemies"
+          } 
         }
       }
     }
