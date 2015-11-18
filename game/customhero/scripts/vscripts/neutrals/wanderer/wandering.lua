@@ -139,7 +139,7 @@ function Empower(keys, god)
 			for i=1,count do
 
 				FactionInfo = GameRules.FactionTable[heroes[i]:GetUnitName()]
-
+				print(FactionInfo)
 				if FactionInfo and FactionInfo == "Unda" then
 				  buff:ApplyDataDrivenModifier(god, heroes[i], "modifier_gift_of_unda", {duration=10})
 				end
