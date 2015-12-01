@@ -87,7 +87,7 @@ function Empower(keys, god)
 
 				FactionInfo = GameRules.FactionTable[heroes[i]:GetUnitName()]
 
-				if FactionInfo and FactionInfo == "Light" then
+				if FactionInfo == "Light" then
 				  buff:ApplyDataDrivenModifier(god, heroes[i], "modifier_gift_of_light", {duration=10})
 				end
 			end
@@ -112,7 +112,7 @@ function Empower(keys, god)
 
 				FactionInfo = GameRules.FactionTable[heroes[i]:GetUnitName()]
 
-				if FactionInfo and FactionInfo == "Yerus" then
+				if FactionInfo == "Yerus" then
 				  buff:ApplyDataDrivenModifier(god, heroes[i], "modifier_gift_of_yerus", {duration=10})
 				end
 			end
@@ -140,7 +140,7 @@ function Empower(keys, god)
 
 				FactionInfo = GameRules.FactionTable[heroes[i]:GetUnitName()]
 				print(FactionInfo)
-				if FactionInfo and FactionInfo == "Unda" then
+				if FactionInfo == "Unda" then
 				  buff:ApplyDataDrivenModifier(god, heroes[i], "modifier_gift_of_unda", {duration=10})
 				end
 			end
@@ -165,7 +165,7 @@ function Empower(keys, god)
 
 				FactionInfo = GameRules.FactionTable[heroes[i]:GetUnitName()]
 
-				if FactionInfo and FactionInfo == "Dark" then
+				if FactionInfo == "Dark" then
 				  buff:ApplyDataDrivenModifier(unit, heroes[i], "modifier_gift_of_dark", {duration=10})
 				end
 			end
