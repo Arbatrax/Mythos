@@ -1,0 +1,637 @@
+"lang"
+{
+	"Language"		"English"
+	"Tokens"
+	{		
+		"game_mode_15"				"mythos"
+		"addon_game_name"			"Mythos"
+		
+		//"DOTA_Basics"							"ABILITIES"
+		//"DOTA_Upgrades"							"ITEMS"
+		//"DOTA_Shop_Category_Basics"				"ABILITIES"
+		//"DOTA_Shop_Category_Upgrades"			"ITEMS"
+		
+		//--------------------
+		//Abilities
+		//--------------------
+		"DOTA_Tooltip_ability_example_ability"										"Detonation"
+		"DOTA_Tooltip_ability_example_ability_Description"				"Detonator channels a charge and releases an explosion around the caster if the channel is successful, dealing damage and knocking back all enemies in range of the explosion"
+		"DOTA_Tooltip_ability_example_ability_Lore"								""
+		"DOTA_Tooltip_ability_example_ability_duration"							"DURATION:"
+	    "DOTA_Tooltip_ability_example_ability_radius"							"RADIUS:"
+	    "DOTA_Tooltip_ability_example_ability_distance"							"KNOCKBACK DISTANCE:"
+	    "DOTA_Tooltip_ability_example_ability_height"							"KNOCKBACK HEIGHT:"
+
+
+			//God_Scout
+			//--------------------
+			"DOTA_Tooltip_ability_god_scout"										"Summon Scout"
+			"DOTA_Tooltip_ability_god_scout_Description"							"Summon a flying scout at the target location. He will gain invisibility while immobile."
+			"DOTA_Tooltip_ability_god_scout_Lore"									"Octopusbro can see extra far with his telescope."
+			"DOTA_Tooltip_ability_god_scout_duration"								"DURATION:"
+
+			//Ferocity_Sever
+			//--------------------
+			"DOTA_Tooltip_ability_sever"                                                      "Sever"
+			"DOTA_Tooltip_ability_sever_Description"                                          "Rend the target causing them to bleed and slowing their movement speed."
+			"DOTA_Tooltip_ability_sever_duration"                                             "DURATION:"
+			"DOTA_Tooltip_ability_sever_slow"                                                 "SLOW:"
+			"DOTA_Tooltip_ability_sever_damage"                                               "DAMAGE:"
+			"DOTA_Tooltip_ability_sever_interval"                                             "INTERVAL:"
+
+			//Ferocity_Go_For_The_Throat
+			//--------------------
+			"DOTA_Tooltip_ability_go_for_the_throat"                                          "Go For The Throat"
+			"DOTA_Tooltip_ability_go_for_the_throat_Description"                              "The Champion of Ferocity attacks the targets vitals dealing critical damage. Critical attacks made against severed Heroes provide bonus attack speed. Critical attacks made against severed creeps spread sever to enemies near the target."
+			"DOTA_Tooltip_ability_go_for_the_throat_crit_damage"                              "CRIT DAMAGE:"
+			"DOTA_Tooltip_ability_go_for_the_throat_crit_chance"                              "CRIT CHANCE:"
+			"DOTA_Tooltip_ability_go_for_the_throat_attack_speed"                             "ATTACK SPEED:"
+			"DOTA_Tooltip_ability_go_for_the_throat_duration"                                 "DURATION:"
+			"DOTA_Tooltip_ability_go_for_the_throat_radius"                                   "RADIUS:"
+
+			//Ferocity_Packrunning
+			//--------------------
+			"DOTA_Tooltip_ability_packrunning"										"Packrunning"
+			"DOTA_Tooltip_ability_packrunning_Description"							"Grants an aura that increases the attack apeed and movement speed of yourself and nearby Heroes. Each nearby hero grants an additional stack of the aura to all Heroes in range."
+			"DOTA_Tooltip_ability_packrunning_Lore"									"Wolves hunt better in packs."
+			"DOTA_Tooltip_ability_packrunning_radius"								"RADIUS:"
+			"DOTA_Tooltip_ability_packrunning_bonus_attack_speed"					"BONUS ATTACK SPEED PER STACK:"
+			"DOTA_Tooltip_ability_packrunning_bonus_move_speed"						"%BONUS MOVE SPEED PER STACK:"
+			"DOTA_Tooltip_modifier_packrunning_buff"								"Packrunning"
+			"DOTA_Tooltip_modifier_packrunning_buff_Description"					"Increases Attack Speed and Movement Speed."
+
+			//Ferocity_Leap_to_Kill
+			//--------------------
+			"DOTA_Tooltip_ability_leap_to_kill"										"Leap to Kill"
+			"DOTA_Tooltip_ability_leap_to_kill_Description"							"Lycan can smell the blood of wounded foes. Leap towards a low health target stunning and and granting bonus crit damage for the next attack."
+			"DOTA_Tooltip_ability_leap_to_kill_Lore"								"The smell of blood allows Lycan to accomplish incredible physical feats."
+			"DOTA_Tooltip_ability_leap_to_kill_threshold"							"%THRESHOLD:"
+			"DOTA_Tooltip_ability_leap_to_kill_speed"								"SPEED:"
+			"DOTA_Tooltip_ability_leap_to_kill_tooltip_range"						"RANGE:"
+			"DOTA_Tooltip_ability_leap_to_kill_stun_duration"						"STUN DURATION:"
+			"DOTA_Tooltip_ability_leap_to_kill_crit_damage"							"CRIT BONUS:"
+			"DOTA_Tooltip_modifier_leap_to_kill_modifier_leap_to_kill_debuff"		"Leap to Kill"
+			"DOTA_Tooltip_modifier_leap_to_kill_modifier_leap_to_kill_debuff_Description"		"Leapt on."
+
+
+			//Strength_Charge
+			//--------------------
+			"DOTA_Tooltip_ability_charge"										"Charge"
+			"DOTA_Tooltip_ability_charge_Description"							"Charge towards the target location or unit stunning all units along your path."
+			"DOTA_Tooltip_ability_charge_Lore"									"The sight of a charging bear can instill fear in even the most battleworn foes."
+			"DOTA_Tooltip_ability_charge_speed"									"SPEED:"
+			"DOTA_Tooltip_ability_charge_tooltip_range"							"RANGE:"
+			"DOTA_Tooltip_ability_charge_duration"							"STUN DURATION:"
+			"DOTA_Tooltip_modifier_charge_modifier_leap_to_kill_debuff"			"Charge"
+			"DOTA_Tooltip_modifier_charge_modifier_leap_to_kill_debuff_Description"		"Stunned."
+
+			//Strength_Earthshock
+			//--------------------
+			"DOTA_Tooltip_ability_earthshock"										"Earthshock"
+			"DOTA_Tooltip_ability_earthshock_Description"							"BLANK slams the ground with his mighty paws, dealing damage and reducing the movement speed and attack speed of all affected units."
+			"DOTA_Tooltip_ability_earthshock_Lore"									""
+			"DOTA_Tooltip_ability_earthshock_movement_slow"							"%MOVEMENT SLOW:"
+			"DOTA_Tooltip_ability_earthshock_attack_slow"							"ATTACK SLOW:"
+			"DOTA_Tooltip_ability_earthshock_shock_radius"							"RADIUS:"
+			"DOTA_Tooltip_ability_earthshock_duration"								"DURATION:"
+			"DOTA_Tooltip_modifier_earthshock_modifier_leap_to_kill_debuff"			"Earthshock"
+			"DOTA_Tooltip_modifier_earthshock_modifier_leap_to_kill_debuff_Description"		"Attack and Movement Speed slowed."
+
+
+			//Gladiator_Roar_of_the_Crowd
+			//--------------------
+			"DOTA_Tooltip_ability_roar_of_the_crowd"								"Roar of the Crowd"
+			"DOTA_Tooltip_ability_roar_of_the_crowd_Description"					"Legion enjoys fighting for a crowd. All nearby Units except for her and her challenger grant her additional damage."
+			"DOTA_Tooltip_ability_roar_of_the_crowd_Lore"							"She always did like an audience."
+			"DOTA_Tooltip_ability_roar_of_the_crowd_bonus_damage"					"BONUS DAMAGE:"
+			"DOTA_Tooltip_ability_roar_of_the_crowd_radius"							"RADIUS:"
+			"DOTA_Tooltip_modifier_roar_of_the_crowd_buff"							"Roar of the Crowd"
+			"DOTA_Tooltip_modifier_roar_of_the_crowd_buff_Description"				"Increases Attack Damage per stack."
+
+			//Gladiator_Gladiator_Stance
+			//--------------------
+			"DOTA_Tooltip_ability_gladiator_stance"									"Gladiator Stance"
+			"DOTA_Tooltip_ability_gladiator_stance_Description"						"Legion enters an aggressive fighting stance dealing and taking additional damage."
+			"DOTA_Tooltip_ability_gladiator_stance_Lore"							"She will live or die a gladiator."
+			"DOTA_Tooltip_ability_gladiator_stance_gladiator_bonus_damage"			"%BONUS DAMAGE DEALT:"
+			"DOTA_Tooltip_ability_gladiator_stance_gladiator_bonus_damage_taken"	"%BONUS DAMAGE TAKEN:"
+			"DOTA_Tooltip_ability_gladiator_stance_base_attack_time"				"BASE ATTACK TIME:"
+			"DOTA_Tooltip_ability_gladiator_stance_bonus_range"						"BONUS ATTACK RANGE:"
+			"DOTA_Tooltip_modifier_gladiator_stance"								"Gladiator Stance"
+			"DOTA_Tooltip_modifier_gladiator_stance_Description"					"Increases damage done and damage taken. Improves BAT and increases attack range."
+
+			//Gladiator_Guardian_Stance
+			//--------------------
+			"DOTA_Tooltip_ability_guardian_stance"									"Guardian Stance"
+			"DOTA_Tooltip_ability_guardian_stance_Description"						"Legion enters a Defensive fighting stance reducing damage taken."
+			"DOTA_Tooltip_ability_guardian_stance_Lore"								"For when it's 'not today'."
+			"DOTA_Tooltip_ability_guardian_stance_guardian_bonus_damage_taken"		"%REDUCED DAMAGE TAKEN:"
+			"DOTA_Tooltip_modifier_guardian_stance"									"Guardian Stance"
+			"DOTA_Tooltip_modifier_guardian_stance_Description"						"Reduces damage taken."
+
+			//Gladiator_Intimidate
+			//--------------------
+			"DOTA_Tooltip_ability_intimidate"										"Intimidate"
+			"DOTA_Tooltip_ability_intimidate_Description"							"Gladiator roars at the target causing an effect based on which stance she is in. In Gladiator Stance the target is silenced and takes magical damage. In Guardian Stance the target is disarmed and slowed."
+			"DOTA_Tooltip_ability_intimidate_Lore"									""
+			"DOTA_Tooltip_ability_intimidate_slow"									"%MOVEMENT SLOW:"
+			"DOTA_Tooltip_ability_intimidate_damage"								"DAMAGE:"
+			"DOTA_Tooltip_ability_intimidate_duration"								"DURATION:"
+			"DOTA_Tooltip_ability_intimidate_range"									"RANGE:"
+			"DOTA_Tooltip_modifier_intimidate_disarm_debuff"						"Intimidate"
+			"DOTA_Tooltip_modifier_intimidate_disarm_Description"					"Disarmed."
+			"DOTA_Tooltip_modifier_intimidate_silence_debuff"						"Intimidate"
+			"DOTA_Tooltip_modifier_intimidate_silence_Description"					"Silenced."
+
+			//Gladiator_Dash
+			//--------------------
+			"DOTA_Tooltip_ability_dash"												"Dash"
+			"DOTA_Tooltip_ability_dash_Description"									"Gladiator charges towards the target unit and gains aditional movement speed for 2 seconds afterwards."
+			"DOTA_Tooltip_ability_dash_Lore"										""
+			"DOTA_Tooltip_ability_dash_speed_boost"									"%MOVEMENT SPEED:"			
+			"DOTA_Tooltip_ability_dash_duration"									"DURATION:"
+			"DOTA_Tooltip_ability_dash_range"										"RANGE:"
+			"DOTA_Tooltip_modifier_dash_speed"										"Dash"
+			"DOTA_Tooltip_modifier_dash_speed"										"Movement speed increased."
+
+			//Gladiator_Blood_Pact
+			//--------------------
+			"DOTA_Tooltip_ability_blood_pact"										"Blood Pact"
+			"DOTA_Tooltip_ability_blood_pact_Description"							"Gladiator sacrifices some of her blood to the gods to boost her armor and attack speed. Blood Pact costs some of current health."
+			"DOTA_Tooltip_ability_blood_pact_Lore"									""
+			"DOTA_Tooltip_ability_blood_pact_bonus_armor"							"BONUS ARMOR:"			
+			"DOTA_Tooltip_ability_blood_pact_bonus_attack_speed"					"ATTACK SPEED:"		
+			"DOTA_Tooltip_ability_blood_pact_duration"								"DURATION:"
+			"DOTA_Tooltip_ability_blood_pact_health_cost"							"%HEALTH COST:"
+			"DOTA_Tooltip_modifier_blood_pact"										"Blood Pact"
+			"DOTA_Tooltip_modifier_blood_pact_Description"							"Armor and Attack speed increased."
+
+			//Gladiator_Duel
+			//--------------------
+			"DOTA_Tooltip_ability_duel"												"Duel"
+			"DOTA_Tooltip_ability_duel_Description"									"Gladiator challenges all enemies in a 200 radius to a duel preventing them from leaving the dueling circle for the duration. A like this will naturally draw some spectators."
+			"DOTA_Tooltip_ability_duel_Lore"										""
+			"DOTA_Tooltip_ability_duel_radius"										"RADIUS:"			
+			"DOTA_Tooltip_ability_duel_spectators"									"SPECTATORS:"		
+			"DOTA_Tooltip_ability_duel_duration"									"DURATION:"
+
+			//Ember_King_Incinerate
+			//--------------------
+			"DOTA_Tooltip_ability_incinerate"										"Incinerate"
+			"DOTA_Tooltip_ability_incinerate_Description"							"Ember King blasts the target with fire dealing heavy damage. Additionally any unit affected by Searing Flames will also be stunned by Incinerate."
+			"DOTA_Tooltip_ability_incinerate_Lore"									"Ember King's go to spell when destroying a peasent with a bit of heat is all that's required."
+			"DOTA_Tooltip_ability_incinerate_damage"								"DAMAGE:"
+			"DOTA_Tooltip_ability_incinerate_stun_duration"							"STUN DURATION:"
+			"DOTA_Tooltip_modifier_incinerate_stun"									"Incinerate"
+			"DOTA_Tooltip_modifier_incinerate_stun_Description"						"Stunned."
+
+			//Ember_King_Arcane_Accelerant
+			//--------------------
+			"DOTA_Tooltip_ability_arcane_accelerant"                                          "Arcane Accelerant"
+			"DOTA_Tooltip_ability_arcane_accelerant_Description"                              "The Ember King and his Phoenix's attacks cause their targets to take additional magic damage."
+			"DOTA_Tooltip_ability_arcane_accelerant_spell_resist_pct"                         "SPELL RESISTANCE REDUCTION:"
+			"DOTA_Tooltip_ability_arcane_accelerant_duration"                                 "DURATION:"
+			"DOTA_Tooltip_modifier_arcane_accelerant"                                         "Arcane Accelerant"
+			"DOTA_Tooltip_modifier_arcane_accelerant_Description"                             "Spell Resistance reduced."
+
+			//Ember_King_Cauterize
+			//--------------------
+			"DOTA_Tooltip_ability_cauterize"										"Cauterize"
+			"DOTA_Tooltip_ability_cauterize_Description"							"Ember King singes the wounds of an ally, healing them and removing most negative effects."
+			"DOTA_Tooltip_ability_cauterize_Lore"									""
+			"DOTA_Tooltip_ability_cauterize_heal"									"HEAL:"
+			"DOTA_Tooltip_ability_cauterize_range"									"RANGE:"
+
+			//Ember_King_Summon_Phoenix
+			//--------------------
+			"DOTA_Tooltip_ability_summon_phoenix"										"Summon Phoenix"
+			"DOTA_Tooltip_ability_summon_phoenix_Description"							"Ember King invokes his most powerful spell and summons a Phoenix under his control. To summon the Phoenix the Ember King must bind his life force with it. Damage and healing recieved by either Ember King or the Phoenix will be partially redestributed to the other. The Phoenix has the abilities: Searing Flames, Dive Bomb."
+			"DOTA_Tooltip_ability_summon_phoenix_Note0"									"The Phoenix has the same total health as the Ember King."								
+			"DOTA_Tooltip_ability_summon_phoenix_Lore"									"The Ember King, like a phoenix, will always rise from the ashes."
+			"DOTA_Tooltip_ability_summon_phoenix_damage_redistribution"					"%REDIRECTED DAMAGE/HEALING:" 
+			"DOTA_Tooltip_modifier_health_link"											"Life Bound"
+			"DOTA_Tooltip_modifier_health_link_Description"								"Redirecting half of damage taken."
+
+			//Ember_King_Searing_Flames
+			//--------------------
+			"DOTA_Tooltip_ability_searing_flames"										"Searing Flames"
+			"DOTA_Tooltip_ability_searing_flames_Description"							"The Phoenix blasts the target area with a cone of fire setting all those in it's path ablaze."
+			"DOTA_Tooltip_ability_searing_flames_Lore"									"The breath of a phoenix should most often be avoided."
+			"DOTA_Tooltip_ability_searing_flames_searing_flames_distance"				"RANGE:"								
+			"DOTA_Tooltip_ability_searing_flames_dot_damage"							"DAMAGE PER SEC:"
+			"DOTA_Tooltip_ability_searing_flames_duration"								"DURATION:"
+			"DOTA_Tooltip_modifier_searing"												"Searing Flames"
+			"DOTA_Tooltip_modifier_searing_Description"									"Burning."
+
+
+			//Ember_King_Dive_Bomb
+			//--------------------
+			"DOTA_Tooltip_ability_dive_bomb"											"Dive Bomb"
+			"DOTA_Tooltip_ability_dive_bomb_Description"								"The Phoenix flies up into the air and dives at the targeted location dealing damage and reducing movement speed in an aoe around the impact."
+			"DOTA_Tooltip_ability_dive_bomb_Lore"										"A creature that is always reborn is rarely concerned with self preservation."
+			"DOTA_Tooltip_ability_dive_bomb_range"										"RANGE:"
+			"DOTA_Tooltip_ability_dive_bomb_radius"										"RADIUS:"								
+			"DOTA_Tooltip_ability_dive_bomb_damage"										"DAMAGE:"
+			"DOTA_Tooltip_ability_dive_bomb_duration"									"DURATION:"
+			"DOTA_Tooltip_ability_dive_bomb_slow"										"%MOVEMENT SLOW:"
+			"DOTA_Tooltip_modifier_dive_bomb_debuff"									"Dive Bomb"
+			"DOTA_Tooltip_modifier_dive_bomb_debuff_Description"						"Movement speed reduced."
+
+			//Ember_King_Meltdown
+			//--------------------
+			"DOTA_Tooltip_ability_meltdown"												"Meltdown"
+			"DOTA_Tooltip_ability_meltdown_Description"									"The Phoenix channels its most powerful spell giving some of its own life to do so. Damage dealt to both entities is based on The Phoenix's total health."
+			"DOTA_Tooltip_ability_meltdown_Lore"										""
+			"DOTA_Tooltip_ability_meltdown_range"										"RANGE:"								
+			"DOTA_Tooltip_ability_meltdown_damage"										"%DAMAGE:"
+			"DOTA_Tooltip_ability_meltdown_duration"									"DURATION:"
+			"DOTA_Tooltip_modifier_meltdown"											"Meltdown"
+			"DOTA_Tooltip_modifier_meltdown_Description"								"Taking damage every second."
+
+			//Typhoon_Storm_Swell
+			//--------------------
+			"DOTA_Tooltip_ability_storm_swell"											"Storm Swell"
+			"DOTA_Tooltip_ability_storm_swell_Description"								"Typhoon sends a wall of water towards the targeted spot dealing damage to all in its path"
+			"DOTA_Tooltip_ability_storm_swell_Lore"										"A creature that is always reborn is rarely concerned with self preservation."
+			"DOTA_Tooltip_ability_storm_swell_storm_swell_distance"						"RANGE:"															
+			"DOTA_Tooltip_ability_storm_swell_damage"									"DAMAGE:"
+
+			//Typhoon_Overcharge
+			//--------------------
+			"DOTA_Tooltip_ability_overcharge"											"Overcharge"
+			"DOTA_Tooltip_ability_overcharge_Description"								"Typhoon passively generates electricity that increases his damage done on his next attack."
+			"DOTA_Tooltip_ability_overcharge_Lore"										""								
+			"DOTA_Tooltip_ability_overcharge_damage"									"%DAMAGE:"
+			"DOTA_Tooltip_ability_overcharge_recharge"									"RECHARGE:"
+			"DOTA_Tooltip_ability_overcharge_max_stacks"								"MAX STACKS:"
+			"DOTA_Tooltip_modifier_overcharge_damage"									"Overcharge"
+			"DOTA_Tooltip_modifier_overcharge_damage_Description"						"Charged with electricity."
+
+			//Typhoon_Tempest
+			//--------------------
+			"DOTA_Tooltip_ability_tempest"												"Tempest"
+			"DOTA_Tooltip_ability_tempest_Description"									"A storm is created following Typhoon that reduces the movement speed and attack speed of nearby enemies."
+			"DOTA_Tooltip_ability_tempest_Lore"											""								
+			"DOTA_Tooltip_ability_tempest_radius"										"RADIUS:"
+			"DOTA_Tooltip_ability_tempest_duration"										"DURATION:"
+			"DOTA_Tooltip_ability_tempest_speed_bonus"									"%MOVEMENT SPEED:"
+			"DOTA_Tooltip_ability_tempest_attack_bonus"									"ATTACK SPEED:"
+			"DOTA_Tooltip_modifier_tempest_aura"										"Tempest"
+			"DOTA_Tooltip_modifier_tempest_aura_Description"							"Slowing nearby enemies."
+
+			//Typhoon_Dispersion
+			//--------------------
+			"DOTA_Tooltip_ability_dispersion"											"Dispersion"
+			"DOTA_Tooltip_ability_dispersion_Description"								"A percentage of Typhoons attacks deal physical damage to nearby units in a radius around the target."
+			"DOTA_Tooltip_ability_dispersion_Lore"										""								
+			"DOTA_Tooltip_ability_dispersion_radius"									"RADIUS:"
+			"DOTA_Tooltip_ability_dispersion_damage"									"%DAMAGE:"
+
+			//Typhoon_hurricane
+			//--------------------
+			"DOTA_Tooltip_ability_hurricane"											"Typhoon"
+			"DOTA_Tooltip_ability_hurricane_Description"								"Typhoon transforms into a storm granting invulnerability, cliffwalking, and hasted movement speed. While transformed Typhoon may continue to cast spells and attack."
+			"DOTA_Tooltip_ability_hurricane_Lore"										""								
+			"DOTA_Tooltip_ability_hurricane_duration"									"DURATION:"
+			"DOTA_Tooltip_ability_hurricane_movement_speed"								"MOVEMENT SPEED:"
+			"DOTA_Tooltip_modifier_hurricane_aura"										"Typhoon"
+			"DOTA_Tooltip_modifier_hurricane_aura_Description"							"Transformed into a storm."
+
+			//Fungus_Fungal_Spore
+			//--------------------
+			"DOTA_Tooltip_ability_fungal_spore"											"Fungal Spore"
+			"DOTA_Tooltip_ability_fungal_spore_Description"								"Apply a fungal spore to the unit target. If the target is an ally the spore will restore health. If the target is an enemy it will deal magic damage over time. At the end of fungal spores' duration it jumps to a nearby target."
+			"DOTA_Tooltip_ability_fungal_spore_Lore"									""								
+			"DOTA_Tooltip_ability_fungal_spore_damage"									"DAMAGE:"
+			"DOTA_Tooltip_ability_fungal_spore_heal"									"HEAL:"
+			"DOTA_Tooltip_ability_fungal_spore_duration"								"DURATION:"
+			"DOTA_Tooltip_ability_fungal_spore_jumps"									"JUMPS:"
+			"DOTA_Tooltip_ability_fungal_spore_range"									"JUMP RADIUS:"
+			"DOTA_Tooltip_modifier_fungal_spore_positive"								"Fungal Spore"
+			"DOTA_Tooltip_modifier_fungal_spore_positive_Description"					"Healing over time."
+			"DOTA_Tooltip_modifier_fungal_spore_negative"								"Fungal Spore"
+			"DOTA_Tooltip_modifier_fungal_spore_negative_Description"					"Damaging over time."
+
+			//Fungus_Plant_Mushroom
+			//--------------------
+			"DOTA_Tooltip_ability_plant_mushroom"                                             "Plant Mushroom"
+			"DOTA_Tooltip_ability_plant_mushroom_Description"                                 "Place a mushroom at the target location. The mushroom cannot be killed and lasts forever. You may only have 1 mushroom down at a time. The mushroom also interacts with some of your other abilities."
+			
+			//Fungus_Spore_Disemination
+			//--------------------
+			"DOTA_Tooltip_ability_spore_disemination"                                         "Spore Disemination"
+			"DOTA_Tooltip_ability_spore_disemination_Description"                             "The fungal lord releases powerful healing spores to all nearby allies every second. His mushroom also heals all nearby allies for the same amount."
+			"DOTA_Tooltip_ability_spore_disemination_radius"                                  "RADIUS:"
+			"DOTA_Tooltip_ability_spore_disemination_duration"                                "DURATION:"
+			"DOTA_Tooltip_ability_spore_disemination_heal"                                    "HEAL:"
+
+			//Fungus_Flesh_Eating_Fungus
+			//--------------------
+			"DOTA_Tooltip_ability_flesh_eating_fungus"                                        "Flesh Eating Fungus"
+			"DOTA_Tooltip_ability_flesh_eating_fungus_Description"                            "The fungal lord applies a deadly flesh eating fungus to the target enemy. It deals heavy magic damage over time until the target falls below a certain percentage of health."
+			"DOTA_Tooltip_ability_flesh_eating_fungus_damage"                                 "DAMAGE:"
+			"DOTA_Tooltip_ability_flesh_eating_fungus_threshold"                              "%THRESHOLD:"
+			"DOTA_Tooltip_modifier_flesh_eating_fungus"                                       "Flesh Eating Fungus"
+			"DOTA_Tooltip_modifier_flesh_eating_fungus_Description"                           "Dealing heavy magic damage over time."
+
+			//Fungus_Fungal_Desecration
+			//--------------------
+			"DOTA_Tooltip_ability_fungal_desecration"                                         "Fungal Desecration"
+			"DOTA_Tooltip_ability_fungal_desecration_Description"                             "The fungal lord's mushroom spreads it's curruption to a nearby area lowering enemy armor and increasing magical damage taken."
+			"DOTA_Tooltip_ability_fungal_desecration_radius"                                  "RADIUS:"
+			"DOTA_Tooltip_ability_fungal_desecration_armor_reduction"                         "ARMOR REDUCTION:"
+			"DOTA_Tooltip_ability_fungal_desecration_resistance_reduction"                    "%INCREASED MAGIC DMG:"
+			"DOTA_Tooltip_modifier_fungal_desecration_debuff"                                 "Fungal Desecration"
+			"DOTA_Tooltip_modifier_fungal_desecration_debuff_Description"                     "Reduced armor and increased magic damage taken."
+
+			//Rogue_Elude
+			//--------------------
+			"DOTA_Tooltip_ability_elude"                                                      "Elude"
+			"DOTA_Tooltip_ability_elude_Description"                                          "Rogue temporarily gains the ability to move through units, buildings, trees, and up and down cliffs to elude his enemies."
+			"DOTA_Tooltip_ability_elude_duration"                                             "DURATION:"
+
+			//Rogue_Camouflage
+			//--------------------
+			"DOTA_Tooltip_ability_camouflage"                                                 "Camouflage"
+			"DOTA_Tooltip_ability_camouflage_Description"                                     "Rogue changes the color of his chromatophores allowing him to turn invisible. His first attack from Camouflage grants bonus attack speed for a short duration afterwards."
+			"DOTA_Tooltip_ability_camouflage_duration"                                        "DURATION:"
+			"DOTA_Tooltip_ability_camouflage_fade_time"                                       "FADE TIME:"
+			"DOTA_Tooltip_ability_camouflage_bonus_attack_speed"                              "ATTACK SPEED:"
+			"DOTA_Tooltip_ability_camouflage_bonus_attack_speed_duration"                     "ATTACK SPEED DURATION:"
+
+			//Rogue_Reef_Strike
+			//--------------------
+			"DOTA_Tooltip_ability_reef_strike"                                                "Reef Strike"
+			"DOTA_Tooltip_ability_reef_strike_Description"                                    "Rogue attacks all nearby units with his reef blade knife dealing magical damage. It also slows movement speed and reduces attack damage."
+			"DOTA_Tooltip_ability_reef_strike_radius"                                         "RADIUS:"
+			"DOTA_Tooltip_ability_reef_strike_damage"                                         "DAMAGE:"
+			"DOTA_Tooltip_ability_reef_strike_damage_reduction"                               "%DAMAGE REDUCTION:"
+			"DOTA_Tooltip_ability_reef_strike_movement_reduction"                             "%MOVEMENT REDUCTION:"
+			"DOTA_Tooltip_ability_reef_strike_duration"                                       "DURATION:"
+
+			//Rogue_Shelf_Snail_Poison
+			//--------------------
+			"DOTA_Tooltip_ability_shelf_snail_poison"                                         "Shelf Snail Poison"
+			"DOTA_Tooltip_ability_shelf_snail_poison_Description"                             "Rogue applies the poison of the Shelf Snail to his dagger dealing bonus damage on each of his attacks."
+			"DOTA_Tooltip_ability_shelf_snail_poison_max_attacks"                             "MAX ATTACKS:"
+			"DOTA_Tooltip_ability_shelf_snail_poison_bonus_damage"                            "BONUS DAMAGE:"
+
+			//Christopher_Freeze_Frozen_Tomb
+			//--------------------
+			"DOTA_Tooltip_ability_frozen_tomb"                                                "Frozen Tomb"
+			"DOTA_Tooltip_ability_frozen_tomb_Description"                                    "Christopher freezes the target in a tomb, stunning the target and then slowing afterwards."
+			"DOTA_Tooltip_ability_frozen_tomb_stun_duration"                                  "STUN DURATION:"
+			"DOTA_Tooltip_ability_frozen_tomb_slow_duration"                                  "SLOW DURATION:"
+			"DOTA_Tooltip_ability_frozen_tomb_max_slow"                                       "SLOW:"
+			"DOTA_Tooltip_ability_frozen_tomb_damage"                                         "DAMAGE:"
+
+			//Christopher_Freeze_Shatter
+			//--------------------
+			"DOTA_Tooltip_ability_shatter"                                                    "Shatter"
+			"DOTA_Tooltip_ability_shatter_Description"                                        "Christopher causes an ice explosion to radiate out from a nearby allied unit."
+			"DOTA_Tooltip_ability_shatter_damage"                                             "DAMAGE:"
+			"DOTA_Tooltip_ability_shatter_radius"                                             "RADIUS:"
+
+			//Christopher_Freeze_Crazed_Acolyte
+			//--------------------
+			"DOTA_Tooltip_ability_crazed_acolyte"                                             "Crazed Acolyte"
+			"DOTA_Tooltip_ability_crazed_acolyte_Description"                                 "A crazed acolyte of Christopher rushes towards the enemy target dealing damage and silencing on arrival."
+			"DOTA_Tooltip_ability_crazed_acolyte_damage"                                      "DAMAGE:"
+			"DOTA_Tooltip_ability_crazed_acolyte_silence_duration"                            "SILENCE DURATION:"
+
+			//Christopher_Freeze_Icy_Rune
+			//--------------------
+			"DOTA_Tooltip_ability_icy_rune"                                                   "Icy Rune"
+			"DOTA_Tooltip_ability_icy_rune_Description"                                       "Christopher channels a frozen rune restoring mana to himself and less to allies nearby."
+			"DOTA_Tooltip_ability_icy_rune_radius"                                            "RADIUS:"
+			"DOTA_Tooltip_ability_icy_rune_duration"                                          "DURATION:"
+			"DOTA_Tooltip_ability_icy_rune_mana"                                              "MANA PER SEC:"
+			"DOTA_Tooltip_ability_icy_rune_mana_aoe"                                          "MANA AOE:"
+
+			//Hunter_Hysteria
+			//--------------------
+			"DOTA_Tooltip_ability_hysteria"                                                   "Hysteria"
+			"DOTA_Tooltip_ability_hysteria_Description"                                       "The Hunter hysterical by all the blood he's consumed. Hysteria causes The Hunter to move quicker, attack harder, and become magic immune. While active Hysteria drains stacks per second."
+			"DOTA_Tooltip_ability_hysteria_damage"                                            "%BASE DAMAGE:"
+			"DOTA_Tooltip_ability_hysteria_movement_speed"                                    "MOVEMENT SPEED:"
+			"DOTA_Tooltip_ability_hysteria_stacks"                                            "DRAIN PER SECOND:"
+
+			//Hunter_Blood of the Innocent
+			//--------------------
+			"DOTA_Tooltip_ability_blood_of_the_innocent"                                      "Blood Of The Innocent"
+			"DOTA_Tooltip_ability_blood_of_the_innocent_Description"                          "The Hunter feeds on the blood of it's prey. Each killed unit grants stacks. The Hunter's attacks cleave nearby more fiercely units while he has fewer stacks."
+			"DOTA_Tooltip_ability_blood_of_the_innocent_max_stacks"                           "MAX STACKS:"
+			"DOTA_Tooltip_ability_blood_of_the_innocent_max_stacks"							  "%MAX CLEAVE:"
+			"DOTA_Tooltip_ability_blood_of_the_innocent_creep_stacks"                         "CREEP STACKS:"
+			"DOTA_Tooltip_ability_blood_of_the_innocent_hero_stacks"                          "HERO STACKS:"
+			"DOTA_Tooltip_ability_blood_of_the_innocent_radius"                               "RADIUS:"
+
+			//Hunter_Vampirism
+			//--------------------
+			"DOTA_Tooltip_ability_vampirism"                                                  "Vampirism"
+			"DOTA_Tooltip_ability_vampirism_Description"                                      "Targets slain by the Hunter rise again as bloodthirsty vampires attacking anything nearby. Their attacks gather blood for The Hunter."
+			"DOTA_Tooltip_ability_vampirism_max_vampires"                                     "MAX VAMPIRES:"
+			"DOTA_Tooltip_ability_vampirism_duration"                                         "DURATION:"
+			"DOTA_Tooltip_ability_vampirism_stacks_per_hit"                                   "STACKS PER HIT:"
+
+			//Hunter_Unbreakable
+			//--------------------
+			"DOTA_Tooltip_ability_unbreakable"                                                "Unbreakable"
+			"DOTA_Tooltip_ability_unbreakable_Description"                                    "The Hunter shields himself gaining stacks of blood for each source of damage. At the end of Unbreakable all nearby targets take damage equal to the damage The Hunter took during Unbreakable."
+			"DOTA_Tooltip_ability_unbreakable_duration"                                       "DURATION:"
+			"DOTA_Tooltip_ability_unbreakable_radius"                                         "RADIUS:"
+			"DOTA_Tooltip_ability_unbreakable_stacks_per_hit"                                 "STACKS PER HIT:"
+
+			//Hunter_Blinding Swarm
+			//--------------------
+			"DOTA_Tooltip_ability_blinding_swarm"                                             "Blinding Swarm"
+			"DOTA_Tooltip_ability_blinding_swarm_Description"                                 "The Hunter summons a blinding swarm of bats at the target location damaging and blinding victims caught inside."
+			"DOTA_Tooltip_ability_blinding_swarm_damage"                                      "DAMAGE:"
+			"DOTA_Tooltip_ability_blinding_swarm_radius"                                      "RADIUS:"
+			"DOTA_Tooltip_ability_blinding_swarm_duration"                                    "BLIND DURATION:"
+
+			//Trickster_Masquerade
+			//--------------------
+			"DOTA_Tooltip_ability_masquerade"                                                 "Masquerade"
+			"DOTA_Tooltip_ability_masquerade_Description"                                     ""
+			"DOTA_Tooltip_ability_masquerade_illusions"                                       "ILLUSIONS:"
+			"DOTA_Tooltip_ability_masquerade_spell_duration"                                  "SPELL DURATION:"
+			"DOTA_Tooltip_ability_masquerade_hide_duration"                                   "HIDE DURATION:"
+			"DOTA_Tooltip_ability_masquerade_illusion_duration"                               "ILLUSION DURATION:"
+			"DOTA_Tooltip_ability_masquerade_radius"                                          "RADIUS:"
+			"DOTA_Tooltip_ability_masquerade_damage"                                          "DAMAGE:"
+
+			"DOTA_Tooltip_ability_touch_of_darkness"                                          "Touch Of Darkness"
+			"DOTA_Tooltip_ability_touch_of_darkness_Description"                              ""
+			"DOTA_Tooltip_ability_touch_of_darkness_damage"                                   "DAMAGE:"
+			"DOTA_Tooltip_ability_touch_of_darkness_radius"                                   "RADIUS:"
+			"DOTA_Tooltip_ability_touch_of_darkness_stun_duration"                            "STUN DURATION:"
+			"DOTA_Tooltip_ability_touch_of_darkness_duration"                                 "DURATION:"
+
+			"DOTA_Tooltip_ability_dominate_mind"                                              "Dominate Mind"
+			"DOTA_Tooltip_ability_dominate_mind_Description"                                  ""
+
+			"DOTA_Tooltip_ability_final_gift"                                                 "Final Gift"
+			"DOTA_Tooltip_ability_final_gift_Description"                                     ""
+			"DOTA_Tooltip_ability_final_gift_damage"                                          "DAMAGE:"
+			"DOTA_Tooltip_ability_final_gift_radius"                                          "RADIUS:"
+			"DOTA_Tooltip_ability_final_gift_slow"                                            "SLOW:"
+			"DOTA_Tooltip_ability_final_gift_duration"                                        "DURATION:"
+
+			"DOTA_Tooltip_ability_dimensional_lightning"                                      "Dimensional Lightning"
+			"DOTA_Tooltip_ability_dimensional_lightning_Description"                          ""
+			"DOTA_Tooltip_ability_dimensional_lightning_damage"                               "DAMAGE:"
+			"DOTA_Tooltip_ability_dimensional_lightning_duration"                             "DURATION:"
+			"DOTA_Tooltip_ability_dimensional_lightning_radius"                               "RADIUS:"
+			"DOTA_Tooltip_ability_dimensional_lightning_movement_speed"                       "MOVEMENT SPEED:"
+			"DOTA_Tooltip_ability_dimensional_lightning_movement_speed"                       "MOVEMENT SPEED:"
+		
+		
+		//------------------------
+		// Items
+		//------------------------
+		"DOTA_Tooltip_ability_item_example_item"										"Shield Blaster"
+		"DOTA_Tooltip_ability_item_example_item_Description"							"Gives the caster a 50% damage reduction for 4 seconds while firing a projectile that deals damage 125 PURE damage to any enemy it hits."
+		"DOTA_Tooltip_ability_item_example_item_Lore"								""
+		"DOTA_Tooltip_ability_item_example_item_duration"							"DURATION:"
+	    "DOTA_Tooltip_ability_item_example_item_damage_reduction"							"DAMAGE REDUCTION:"
+	    "DOTA_Tooltip_ability_item_example_item_radius"							"PROJECTILE RADIUS:"
+	    "DOTA_Tooltip_ability_item_example_item_speed"							"PROJECTILE SPEED:"
+	    "DOTA_Tooltip_ability_item_example_item_distance"							"DISTANCE:"
+	    "DOTA_Tooltip_ability_item_example_item_damage"							"DAMAGE:"
+
+	    "DOTA_Tooltip_ability_item_blue_orb"										"Cobalt Orb"
+		"DOTA_Tooltip_ability_item_blue_orb_Description"							"The item glows with a mesmerizing aura. It's not a weapon...but perhaps it could become one."
+		"DOTA_Tooltip_ability_item_blue_orb_Lore"									"Ancient blue orb of a mystical nature. "
+
+		"DOTA_Tooltip_ability_item_green_orb"										"Myrtle Orb"
+		"DOTA_Tooltip_ability_item_green_orb_Description"							"The item glows with a mesmerizing aura. It's not a weapon...but perhaps it could become one."
+		"DOTA_Tooltip_ability_item_green_orb_Lore"									"Ancient green orb of a mystical nature. "
+
+		"DOTA_Tooltip_ability_item_purple_orb"										"Violet Orb"
+		"DOTA_Tooltip_ability_item_purple_orb_Description"							"The item glows with a mesmerizing aura. It's not a weapon...but perhaps it could become one."
+		"DOTA_Tooltip_ability_item_purple_orb_Lore"									"Ancient purple orb of a mystical nature. "
+
+		"DOTA_Tooltip_ability_item_golden_orb"										"Golden Orb"
+		"DOTA_Tooltip_ability_item_golden_orb_Description"							"The item glows with a mesmerizing aura. It's not a weapon...but perhaps it could become one."
+		"DOTA_Tooltip_ability_item_golden_orb_Lore"									"Ancient golden orb of a mystical nature. "
+
+		"DOTA_Tooltip_ability_item_empty_bottle"									"Empty Bottle"
+		"DOTA_Tooltip_ability_item_empty_bottle_Description"							"Just an ordinary empty glass bottle. Perhaps infusion with a bit of magic might spice it up a bit."
+		"DOTA_Tooltip_ability_item_empty_bottle_Lore"									"Not even a particularly special bottle."
+
+
+	    //Hero Names
+		"npc_dota_hero_queenofpain"			"Queen of Pain"
+		"npc_dota_hero_antimage"			"Anti-Mage"
+		"npc_dota_hero_kunkka"				"Kunkka"
+		"npc_dota_hero_lina"				"Lina"
+		"npc_dota_hero_mirana"				"Mirana"
+		"npc_dota_hero_slardar"				"Slardar"
+		"npc_dota_hero_lion"				"Lion"
+		"npc_dota_hero_phantom_assassin"	"Phantom Assassin"
+		"npc_dota_hero_tidehunter"			"Tidehunter"
+		"npc_dota_hero_witch_doctor"		"Witch Doctor"
+		"npc_dota_hero_vengefulspirit"		"Vengeful Spirit"
+		"npc_dota_hero_juggernaut"			"Juggernaut"
+		"npc_dota_hero_earthshaker"			"Earthshaker"
+		"npc_dota_hero_pudge"				"Pudge"
+		"npc_dota_hero_bane"				"Bane"
+		"npc_dota_hero_crystal_maiden"		"Crystal Maiden"
+		"npc_dota_hero_sven"				"Sven"
+		"npc_dota_hero_skeleton_king"		"Wraith King"
+		"npc_dota_hero_storm_spirit"		"Typhoon"
+		"npc_dota_hero_sand_king"			"Sand King"
+		"npc_dota_hero_nevermore"			"Shadow Fiend"
+		"npc_dota_hero_drow_ranger"			"Drow Ranger"
+		"npc_dota_hero_axe"					"Axe"
+		"npc_dota_hero_bloodseeker"			"Bloodseeker"
+		"npc_dota_hero_phantom_lancer"		"Phantom Lancer"
+		"npc_dota_hero_razor"				"Razor"
+		"npc_dota_hero_morphling"			"Morphling"
+		"npc_dota_hero_zuus"				"Zeus"
+		"npc_dota_hero_tiny"				"Tiny"
+		"npc_dota_hero_puck"				"Puck"
+		"npc_dota_hero_windrunner"			"Windranger"
+		"npc_dota_hero_lich"				"Christopher Freeze"
+		"npc_dota_hero_shadow_shaman"		"Shadow Shaman"
+		"npc_dota_hero_riki"				"Riki"
+		"npc_dota_hero_enigma"				"Enigma"
+		"npc_dota_hero_tinker"				"Tinker"
+		"npc_dota_hero_sniper"				"Sniper"
+		"npc_dota_hero_necrolyte"			"Necrophos"
+		"npc_dota_hero_warlock"				"Warlock"
+		"npc_dota_hero_beastmaster"			"Beastmaster"
+		"npc_dota_hero_venomancer"			"Venomancer"
+		"npc_dota_hero_faceless_void"		"Faceless Void"
+		"npc_dota_hero_death_prophet"		"Death Prophet"
+		"npc_dota_hero_pugna"				"Pugna"
+		"npc_dota_hero_templar_assassin"	"Templar Assassin"
+		"npc_dota_hero_viper"				"Viper"
+		"npc_dota_hero_luna"				"Luna"
+		"npc_dota_hero_dragon_knight"		"Dragon Knight"
+		"npc_dota_hero_dazzle"				"Dazzle"
+		"npc_dota_hero_rattletrap"			"Clockwerk"
+		"npc_dota_hero_leshrac"				"Leshrac"
+		"npc_dota_hero_furion"				"Nature's Prophet"
+		"npc_dota_hero_life_stealer"		"Lifestealer"
+		"npc_dota_hero_dark_seer"			"Dark Seer"
+		"npc_dota_hero_clinkz"				"Clinkz"
+		"npc_dota_hero_omniknight"			"Omniknight"
+		"npc_dota_hero_enchantress"			"Enchantress"
+		"npc_dota_hero_huskar"				"Huskar"
+		"npc_dota_hero_night_stalker"		"Night Stalker"
+		"npc_dota_hero_broodmother"			"Champion of Cunning"
+		"npc_dota_hero_bounty_hunter"		"Bounty Hunter"
+		"npc_dota_hero_weaver"				"Weaver"
+		"npc_dota_hero_jakiro"				"Jakiro"
+		"npc_dota_hero_batrider"			"Batrider"
+		"npc_dota_hero_chen"				"Chen"
+		"npc_dota_hero_spectre"				"Spectre"
+		"npc_dota_hero_doom_bringer"		"Doom"
+		"npc_dota_hero_ancient_apparition"	"Ancient Apparition"
+		"npc_dota_hero_ursa"				"Champion of Strength"
+		"npc_dota_hero_spirit_breaker"		"Spirit Breaker"
+		"npc_dota_hero_gyrocopter"			"Gyrocopter"
+		"npc_dota_hero_alchemist"			"Alchemist"
+		"npc_dota_hero_invoker"				"Ember King"
+		"npc_dota_hero_silencer"			"Silencer"
+		"npc_dota_hero_obsidian_destroyer"	"Outworld Devourer"
+		"npc_dota_hero_lycan"				"Champion of Ferocity"
+		"npc_dota_hero_brewmaster"			"Brewmaster"
+		"npc_dota_hero_shadow_demon"		"Trickster"
+		"npc_dota_hero_lone_druid"			"Yerus"
+		"npc_dota_hero_chaos_knight"		"Chaos Knight"
+		"npc_dota_hero_treant"				"Treant Protector"
+		"npc_dota_hero_meepo"				"Meepo"
+		"npc_dota_hero_ogre_magi"			"Ogre Magi"
+		"npc_dota_hero_undying"				"Undying"
+		"npc_dota_hero_rubick"				"Rubick"
+		"npc_dota_hero_disruptor"			"Disruptor"
+		"npc_dota_hero_nyx_assassin"		"Nyx Assassin"
+		"npc_dota_hero_naga_siren"			"Naga Siren"
+		"npc_dota_hero_keeper_of_the_light"	"Keeper of the Light"
+		"npc_dota_hero_visage"				"Visage"
+		"npc_dota_hero_wisp"				"Io"
+		"npc_dota_hero_slark"				"Rogue"
+		"npc_dota_hero_medusa"				"Medusa"
+		"npc_dota_hero_troll_warlord"		"Troll Warlord"
+		"npc_dota_hero_centaur"				"Centaur Warrunner"
+		"npc_dota_hero_magnataur"			"Magnus"
+		"npc_dota_hero_shredder"			"Timbersaw"
+		"npc_dota_hero_bristleback"			"Bristleback"
+		"npc_dota_hero_tusk"				"Tusk"
+		"npc_dota_hero_skywrath_mage"		"Skywrath Mage"
+		"npc_dota_hero_abaddon"				"Abaddon"
+		"npc_dota_hero_elder_titan"			"Elder Titan"
+		"npc_dota_hero_legion_commander"	"Gladiator"
+		"npc_dota_hero_ember_spirit"		"Ember Spirit"
+		"npc_dota_hero_earth_spirit"		"Earth Spirit"
+		"npc_dota_hero_abyssal_underlord"	"Abyssal Underlord"
+		"npc_dota_hero_phoenix"				"Phoenix"
+		"npc_dota_hero_terrorblade"			"Terrorblade"
+		"npc_dota_hero_oracle"				"Oracle"
+		"npc_dota_hero_techies"				"Techies"
+		"npc_dota_hero_winter_wyvern"		"Winter Wyvern"
+	}
+}

@@ -1,10 +1,7 @@
 function Drop(keys)
 	local caster = keys.caster
 	local ability = keys.ability
+	local location = caster:GetAbsOrigin()
 
-	print("hello")
-
-	
-
-	caster:DropItemAtPosition(caster:GetAbsOrigin(), ability)
+	caster:DropItemAtPositionImmediate(ability, location)
 end

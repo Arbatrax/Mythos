@@ -971,6 +971,7 @@
     }
   }
 
+
   "item_artifact_final"
   {
     // General
@@ -1017,5 +1018,301 @@
         }
       }
     }
+  }
+
+  "item_artifact_1"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"           "item_datadriven"
+    "ID"              "1119"  //Valve's version of this item uses the ID "17".
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "Model"             "models/props_gameplay/red_box.vmdl"  
+    "Effect"            "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"      "item_reaver"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"            "0"
+    "ItemQuality"         "legendary"
+    "ItemPurchasable"     "0"
+    "ItemKillable"        "0"
+
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "m_slow"    "-5"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "a_slow"    "-15"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_artifact_1"
+      {
+        "Passive"      "1"
+        "IsDebuff" "1"
+
+        "ThinkInterval"  "0.2"
+        "OnIntervalThink"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "items/artifact/vision.lua"
+            "Function"    "Vision"
+          }
+        }
+    
+        "OnDeath"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "items/artifact/drop.lua"
+            "Function"    "Drop"
+          }
+        }
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%a_slow"
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%m_slow" 
+        }
+      }
+    }
+  }
+
+  "item_artifact_2"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"           "item_datadriven"
+    "ID"              "1120"  //Valve's version of this item uses the ID "17".
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "Model"             "models/props_gameplay/red_box.vmdl"  
+    "Effect"            "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"      "item_mystic_staff"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"            "0"
+    "ItemQuality"         "legendary"
+    "ItemPurchasable"     "0"
+    "ItemKillable"        "0"
+
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "armor"    "-5"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "resist"    "-25"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_artifact_2"
+      {
+        "Passive"      "1"
+        "IsDebuff" "1"
+
+        "ThinkInterval"  "0.2"
+        "OnIntervalThink"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "items/artifact/vision.lua"
+            "Function"    "Vision"
+          }
+        }
+    
+        "OnDeath"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "items/artifact/drop.lua"
+            "Function"    "Drop"
+          }
+        }
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" "%resist"
+          "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor" 
+        }
+      }
+    }
+  }
+
+  "item_artifact_3"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"           "item_datadriven"
+    "ID"              "1121"  //Valve's version of this item uses the ID "17".
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "Model"             "models/props_gameplay/red_box.vmdl"  
+    "Effect"            "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"      "item_soul_booster"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"            "0"
+    "ItemQuality"         "legendary"
+    "ItemPurchasable"     "0"
+    "ItemKillable"        "0"
+
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "dmg"    "-25"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_artifact_3"
+      {
+        "Passive"      "1"
+        "IsDebuff" "1"
+
+        "ThinkInterval"  "0.2"
+        "OnIntervalThink"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "items/artifact/vision.lua"
+            "Function"    "Vision"
+          }
+        }
+    
+        "OnDeath"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "items/artifact/drop.lua"
+            "Function"    "Drop"
+          }
+        }
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_BASEDAMAGEOUTGOING_PERCENTAGE" "%dmg"
+        }
+      }
+    }
+  }
+
+  "item_artifact_4"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"           "item_datadriven"
+    "ID"              "1122"  //Valve's version of this item uses the ID "17".
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "Model"             "models/props_gameplay/red_box.vmdl"  
+    "Effect"            "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"      "item_butterfly"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemCost"            "0"
+    "ItemQuality"         "legendary"
+    "ItemPurchasable"     "0"
+    "ItemKillable"        "0"
+
+    "precache"
+    {
+      "soundfile"             "soundevents/game_sounds_heroes/game_sounds_stormspirit.vsndevts"
+      "particle"              "particles\units\heroes\hero_nyx_assassin\nyx_assassin_mana_burn.vpcf"
+    }
+
+
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "damage_percent"    "0.03"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_artifact_4"
+      {
+        "Passive"      "1"
+        "IsDebuff" "1"
+
+        "ThinkInterval"  "0.2"
+        "OnIntervalThink"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "items/artifact/vision.lua"
+            "Function"    "Vision"
+          }
+        }
+
+        "OnAbilityExecuted"
+        {
+          "FireEffect"
+          {
+            "EffectName"        "particles\units\heroes\hero_nyx_assassin\nyx_assassin_mana_burn.vpcf"
+            "EffectAttachType"  "follow_origin"
+            "Target"            "CASTER"
+          }
+
+          "RunScript"
+          {
+            "ScriptFile"  "items/artifact/backlash.lua"
+            "Function"    "Backlash"
+          }
+        }
+    
+        "OnDeath"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "items/artifact/drop.lua"
+            "Function"    "Drop"
+          }
+        }
+      }
+    }
+  }
+
+  "item_recipe_artifact" 
+  {
+      "ID" "1123"
+      "BaseClass"           "item_recipe_arcane_boots"
+      "Model" "models/props_gameplay/recipe.mdl"
+      "ItemRecipe"          "1" //destroyed after combine
+      "ItemCost"            "0" //if its 0, it will combine without needing a recipe.
+      "ItemResult"          "item_artifact_final" //the result of combining the ItemRequirements
+      "ItemRequirements"
+      {
+          "01" "item_artifact_1;item_artifact_2;item_artifact_3;item_artifact_4"
+      }
   }
 }

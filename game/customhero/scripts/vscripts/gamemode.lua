@@ -187,7 +187,7 @@ function GameMode:OnHeroInGame(hero)
   elseif GetMapName() == "mythos" then 
     CustomGameEventManager:Send_ServerToAllClients( "hide_timer", {} )
     CustomGameEventManager:Send_ServerToAllClients( "hide_board", {} )
-    item = CreateItem("item_gate_jumper", hero, hero)
+    item = CreateItem("item_artifact_1", hero, hero)
     hero:AddItem(item)
     item = CreateItem("item_purple_orb", hero, hero)
     hero:AddItem(item)
