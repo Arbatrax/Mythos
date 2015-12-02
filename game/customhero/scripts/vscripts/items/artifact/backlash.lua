@@ -3,8 +3,6 @@ function Backlash(keys)
 	local ability = keys.ability
 	local damage_percent = ability:GetLevelSpecialValueFor( "damage_percent", ability:GetLevel() - 1 )
 	local hp = target:GetMaxHealth()
-
-	print("hello")
 	
 	local damageTable = {
 		victim = target,

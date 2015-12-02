@@ -7144,140 +7144,27 @@
     }
   }
 
-  "gunblade"
-  {
-    // General
-    //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"       "ability_datadriven"
-    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-    "AbilityUnitTargetTeam"  "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    "AbilityUnitTargetType"  "DOTA_UNIT_TARGET_ALL"
-    "AbilityTextureName"      "sniper_assassinate"
-
-    // Precache
-    //-------------------------------------------------------------------------------------------------------------
-    "precache"
-    {
-      "soundfile"   "soundevents/game_sounds_heroes/game_sounds_kunkka.vsndevts"
-      "soundfile"   "soundevents/game_sounds_heroes/game_sounds_sniper.vsndevts"
-      "particle"  "particles\units\heroes\hero_sniper\sniper_assassinate.vpcf"
-    }
-
-    // Casting
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"        "1200"
-    "AbilityCastPoint"        "0.0"
-
-    // Cost
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "65"
-    "AbilityCooldown"        "12"
-
-    // Special
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
-    {
-      "01"
-      {
-        "var_type"        "FIELD_INTEGER"
-        "damage"       "500 60 70 80"
-      }
-      "02"
-      {
-        "var_type"        "FIELD_FLOAT"
-        "mini_stun"   "0.01"
-      }
-      "03"
-      {
-        "var_type"        "FIELD_INTEGER"
-        "damage_multiplier"   "1"
-      }
-    }
-
-    "OnSpellStart"
-    {
-      "RunScript"
-      {
-        "ScriptFile"  "heroes/sailor/fire.lua"
-        "Function"    "Fire"
-      }
-
-      "DelayedAction"
-      {
-        "Delay"     "0.4"
-        "Action"    
-        {
-          "TrackingProjectile"
-          {
-            "Target"             "TARGET"
-            "EffectName"    "particles\units\heroes\hero_sniper\sniper_assassinate.vpcf"
-            "Dodgeable"      "1"
-            "ProvidesVision"  "0"
-            "VisionRadius"    "0"
-            "MoveSpeed"          "1200"
-            "SourceAttachment"  "DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"
-          }
-
-          "FireSound"
-          {
-            "EffectName"  "Hero_Kunkka.InverseBayonet"
-            "Target"     "CASTER"
-          }
-        }
-      }
-    }
-    
-    "OnProjectileHitUnit"
-    {
-      "FireSound"
-      {
-        "EffectName"  "Hero_Sniper.AssassinateDamage"
-        "Target"     "TARGET"
-      }
-
-      "Damage"
-      {
-        "Target"    "TARGET"
-        "Type"      "DAMAGE_TYPE_MAGICAL"
-        "Damage"    "%damage"
-      }
-
-      "Stun"
-      {
-        "Duration"   "%mini_stun"
-        "Target"    "TARGET"
-      }
-
-      "RunScript"
-      {
-        "ScriptFile"  "heroes/sailor/fire.lua"
-        "Function"    "Damage"
-      }
-    }
-  }
-
-  
-
   "fire!"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
-    "AbilityTextureName"      "tidehunter_kraken_shell"
+    "AbilityTextureName"      "sniper_assassinate"
 
     // Precache
     //-------------------------------------------------------------------------------------------------------------
     "precache"
     {  
-      "particle" "particles\hw_fx\hw_rosh_fireball.vpcf"
-      "model" "models\heroes\tidehunter\tidehunter.vmdl"
+      "particle" "particles\units\heroes\hero_techies\techies_land_mine_explode.vpcf"
+      "soundfile" "soundevents/game_sounds_heroes/game_sounds_techies.vsndevts"
     }
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"        "800 1000 1200 1400"
     "AbilityCastPoint"        "0.4"
+    "AbilityCastAnimation"    "ACT_DOTA_CAST_GHOST_SHIP"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -7291,7 +7178,7 @@
       "01"
       {
         "var_type"        "FIELD_FLOAT"
-        "damage"       "300 450 600"
+        "damage"       "100 125 150 175"
       }
       "02"
       {
@@ -7308,47 +7195,25 @@
         "var_type"        "FIELD_FLOAT"
         "delay"   "0.3"
       }
+      "04"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "distance"   "250"
+      }
     }
 
     "OnSpellStart"
     {
       "RunScript"
       {
-        "ScriptFile"  "heroes/sailor/fire!.lua"
-        "Function"    "Fire!"
+        "ScriptFile"  "heroes/sailor/fire.lua"
+        "Function"    "Fire"
         "Target"      "POINT"
       }
     }
     
     "Modifiers"
     {
-      "modifier_kiss_passive"
-      {
-        "Passive"      "1"
-        "IsHidden"      "1"
-
-
-        "OnTakeDamage"
-        // "%attack_damage" is set to the damage value after mitigation
-        {
-          "RunScript"
-          {
-            "ScriptFile"  "heroes/sailor/kiss.lua"
-            "Function"    "TakeDamage"
-            "attack_damage" "%attack_damage"
-          }
-        }
-      }
-
-      "modifier_kiss_buff"
-      {      
-        "IsHidden" "1"
-
-        "Properties"
-        {
-          "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
-        }
-      }
     }
   }
 

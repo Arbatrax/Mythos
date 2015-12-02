@@ -220,7 +220,7 @@
         "override_hero"      "npc_dota_hero_kunkka"
         "AbilityLayout" "4"
         "Ability1"           "favorable_winds"
-        "Ability2"           "gunblade"
+        "Ability2"           "fire!"
         "Ability3"           "vampirism"
         "Ability4"           "kiss_of_the_serpent_queen"  
 
