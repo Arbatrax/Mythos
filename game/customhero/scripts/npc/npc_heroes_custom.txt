@@ -65,6 +65,18 @@
         "Ability6"           "guardian_stance"
         "Ability7"           "duel"
 
+        "ArmorPhysical"             "2"                                        // Physical protection.
+
+        // Attributes
+        //-------------------------------------------------------------------------------------------------------------
+        "AttributePrimary"          "DOTA_ATTRIBUTE_AGILITY"
+        "AttributeBaseStrength"     "22"                                    // Base strength
+        "AttributeStrengthGain"     "2.1"                                   // Strength bonus per level.
+        "AttributeBaseIntelligence" "17"                                    // Base intelligence
+        "AttributeIntelligenceGain" "1.7"                                   // Intelligence bonus per level.
+        "AttributeBaseAgility"      "23"                                    // Base agility
+        "AttributeAgilityGain"      "2.7"                                   // Agility bonus per level.
+
     }
     "ember_king"
     {
@@ -170,9 +182,9 @@
         // Attributes
         //-------------------------------------------------------------------------------------------------------------
         "AttributePrimary"              "DOTA_ATTRIBUTE_INTELLECT"
-        "AttributeBaseStrength"         "23"                                    // Base strength
-        "AttributeStrengthGain"         "2.7"                                   // Strength bonus per level.
-        "AttributeBaseIntelligence"     "18"                                    // Base intelligence
+        "AttributeBaseStrength"         "18"                                    // Base strength
+        "AttributeStrengthGain"         "2.4"                                   // Strength bonus per level.
+        "AttributeBaseIntelligence"     "21"                                    // Base intelligence
         "AttributeIntelligenceGain"     "2.6"                                   // Intelligence bonus per level.
         "AttributeBaseAgility"          "14"                                    // Base agility
         "AttributeAgilityGain"          "1.2"                                   // Agility bonus per level.
