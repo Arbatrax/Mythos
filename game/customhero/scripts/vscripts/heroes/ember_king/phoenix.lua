@@ -6,6 +6,8 @@ function PhoenixSpawn( event )
 	local level = ability:GetLevel()
 	local origin = caster:GetAbsOrigin() + RandomVector(100)
 	local arcane = caster:GetAbilityByIndex(1)
+	local caster_total = caster:GetMaxHealth()
+	local caster_current = caster:GetHealth()
 
 	-- Set the unit name, concatenated with the level number
 	local unit_name = event.unit_name
@@ -16,15 +18,15 @@ function PhoenixSpawn( event )
 	if caster.phoenix and IsValidEntity(caster.phoenix) and caster.phoenix:IsAlive() then
 		FindClearSpaceForUnit(caster.phoenix, origin, true)
 		
-		caster.phoenix:SetHealth(caster:GetMaxHealth())
+		caster.phoenix:SetHealth(caster_current)
 
 	else
 		-- Create the unit and make it controllable
-		local caster_total = caster:GetMaxHealth()
+		
 		caster.phoenix = CreateUnitByName(unit_name, origin, true, caster, caster, caster:GetTeamNumber())
 		caster.phoenix:SetControllableByPlayer(player, true)
 		caster.phoenix:SetMaxHealth(caster_total)
-		caster.phoenix:SetHealth(caster_total)
+		caster.phoenix:SetHealth(caster_current)
 		LearnPhoenixAbilities( caster.phoenix, level )
 		ability:ApplyDataDrivenModifier(caster, caster.phoenix, "modifier_health_link", {})
 		if arcane:GetLevel() > 0 then
@@ -37,16 +39,13 @@ function PhoenixSpawn( event )
 		local caster_total = caster:GetMaxHealth()
 		local phoenix_total = caster.phoenix:GetMaxHealth()
 		if caster_total ~= phoenix_total then
-			if caster_total > phoenix_total then
-				caster.phoenix:SetMaxHealth(caster_total)
-			elseif caster_total < phoenix_total then
-				caster.phoenix:SetMaxHealth(caster_total)
-			end
+			caster.phoenix:SetMaxHealth(caster_total)
 		end
       	return 3
     end
   	)	
 end
+
 
 function Health(keys)
 	local caster = keys.caster
@@ -54,6 +53,8 @@ function Health(keys)
 	local phoenix_health = caster.phoenix:GetHealth()
 	local total_health = ember_health + phoenix_health
 
+
+--Called anytime either the Phoenix or Ember King is damaged
 	function HealthChange(event)
 		local ember_health_current = caster:GetHealth()
 		local phoenix_health_current = caster.phoenix:GetHealth()
@@ -89,6 +90,7 @@ function Health(keys)
 	end
 end
 
+--Called when the Summon Phoenix ability is leveled up
 function PhoenixLevel( event )
 	local caster = event.caster
 	local player = caster:GetPlayerID()
@@ -96,17 +98,23 @@ function PhoenixLevel( event )
 	local level = ability:GetLevel()
 	local unit_name = "phoenix"..level
 	local arcane = caster:GetAbilityByIndex(1)
+	local caster_total = caster:GetMaxHealth()
 
 
 
 	if caster.phoenix and caster.phoenix:IsAlive() then 
 		-- Remove the old phoenix in its position
 		local origin = caster.phoenix:GetAbsOrigin()
+		local current_phoenix_health = caster.phoenix:GetHealth()
 		caster.phoenix:RemoveSelf()
 
 		-- Create the unit and make it controllable
 		caster.phoenix = CreateUnitByName(unit_name, origin, true, caster, caster, caster:GetTeamNumber())
 		caster.phoenix:SetControllableByPlayer(player, true)
+		caster.phoenix:SetMaxHealth(caster_total)
+		caster.phoenix:SetHealth(current_phoenix_health)
+		ability:ApplyDataDrivenModifier(caster, caster.phoenix, "modifier_health_link", {})
+
 		if arcane:GetLevel() > 0 then
 			arcane:ApplyDataDrivenModifier(caster, caster.phoenix, "modifier_arcane_accelerant_caster", {})
 		end

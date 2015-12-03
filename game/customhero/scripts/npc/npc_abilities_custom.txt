@@ -1057,7 +1057,6 @@
         "Properties"
         {
             "MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE" "%gladiator_bonus_damage_taken"
-            "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT" "100"
         }
       }
     }
@@ -1641,10 +1640,10 @@
     "OnUpgrade"
     {
       "RunScript"
-        {
-            "ScriptFile"    "heroes/ember_king/phoenix.lua"
-            "Function"      "PhoenixLevel"
-        }
+      {
+          "ScriptFile"    "heroes/ember_king/phoenix.lua"
+          "Function"      "PhoenixLevel"
+      }
     }
 
     "OnSpellStart"
