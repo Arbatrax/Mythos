@@ -7149,7 +7149,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
-    "AbilityTextureName"      "sniper_assassinate"
+    "AbilityTextureName"      "gyrocopter_skyhigh_rocket_barrage"
 
     // Precache
     //-------------------------------------------------------------------------------------------------------------
@@ -7210,10 +7210,6 @@
         "Target"      "POINT"
       }
     }
-    
-    "Modifiers"
-    {
-    }
   }
 
   "kiss_of_the_serpent_queen"
@@ -7222,7 +7218,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
-    "AbilityTextureName"      "tidehunter_kraken_shell"
+    "AbilityTextureName"      "kunkka_divine_anchor_ghostship"
 
     //Ability Leveling
     //-------------------------------------------------------------------------------------------------------------
@@ -7236,6 +7232,7 @@
     "precache"
     {  
       "particle" "particles\units\heroes\hero_tidehunter\tidehunter_krakenshell_purge.vpcf"
+      "particle"  "particles\units\heroes\hero_sailor\mistsmoke.vpcf"
       "model" "models\heroes\tidehunter\tidehunter.vmdl"
     }
 
@@ -7264,6 +7261,16 @@
       {
         "var_type"        "FIELD_FLOAT"
         "threshold"   "20"
+      }
+      "05"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "radius"   "400"
+      }
+      "06"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "evasion"   "10 15 20"
       }
     }
     
@@ -7294,6 +7301,31 @@
         "Properties"
         {
           "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+        }
+      }
+
+      "modifier_kiss_mist"
+      {
+        "Aura"            "modifier_kiss_mist_aura"
+        "Aura_Radius"     "%radius"
+        "Aura_Teams"      "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+        "Aura_Types"      "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+
+        "States"
+        {
+          "MODIFIER_STATE_INVULNERABLE"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_STUNNED"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NO_HEALTH_BAR"    "MODIFIER_STATE_VALUE_ENABLED"   
+          "MODIFIER_STATE_NO_UNIT_COLLISION"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_FLYING"    "MODIFIER_STATE_VALUE_ENABLED"   
+        }
+      }
+
+      "modifier_kiss_mist_aura"
+      {
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_EVASION_CONSTANT" "%evasion" 
         }
       }
     }
