@@ -233,7 +233,7 @@
         "AbilityLayout" "4"
         "Ability1"           "favorable_winds"
         "Ability2"           "fire!"
-        "Ability3"           "reposte"
+        "Ability3"           "riposte"
         "Ability4"           "kiss_of_the_serpent_queen"  
 
         // Armor
