@@ -7216,7 +7216,7 @@
     }
   }
 
-  "reposte"
+  "riposte"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
@@ -7289,7 +7289,7 @@
     {
       "RunScript"
       {
-        "ScriptFile"  "heroes/sailor/reposte.lua"
+        "ScriptFile"  "heroes/sailor/riposte.lua"
         "Function"    "Deactivate"
       }
     }
@@ -7298,8 +7298,8 @@
     {
       "RunScript"
       {
-        "ScriptFile"  "heroes/sailor/reposte.lua"
-        "Function"    "Reposte"
+        "ScriptFile"  "heroes/sailor/riposte.lua"
+        "Function"    "Riposte"
       }
 
       "FireSound"
@@ -7318,7 +7318,7 @@
 
     "Modifiers"
     {
-      "modifier_reposte_passive"
+      "modifier_riposte_passive"
       {
         "Passive"      "1"
         "IsHidden"      "1"
@@ -7328,20 +7328,20 @@
         {
           "RunScript"
           {
-            "ScriptFile"  "heroes/sailor/reposte.lua"
+            "ScriptFile"  "heroes/sailor/riposte.lua"
             "Function"    "Activate"
           }
         }
       }
 
-      "modifier_reposte_activate"
+      "modifier_riposte_activate"
       {
       
         "OnDestroy"
         {
           "RunScript"
           {
-            "ScriptFile"  "heroes/sailor/reposte.lua"
+            "ScriptFile"  "heroes/sailor/riposte.lua"
             "Function"    "Deactivate"
           }
         }

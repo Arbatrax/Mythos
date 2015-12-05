@@ -6,7 +6,7 @@ function Activate(keys)
 
 	if attacker:IsHero() then 
 		ability:SetActivated(true)
-		ability:ApplyDataDrivenModifier(caster, caster, "modifier_reposte_activate", {duration=duration})
+		ability:ApplyDataDrivenModifier(caster, caster, "modifier_riposte_activate", {duration=duration})
 	end
 end
 
@@ -17,7 +17,7 @@ function Deactivate(keys)
 	ability:SetActivated(false)
 end
 
-function Reposte( keys )
+function Riposte( keys )
 	local caster = keys.caster
 	local target = keys.target
 	local ability = keys.ability
