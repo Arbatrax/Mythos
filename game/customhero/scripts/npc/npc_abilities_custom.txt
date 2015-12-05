@@ -7149,6 +7149,10 @@
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
     "AbilityTextureName"      "gyrocopter_skyhigh_rocket_barrage"
 
     // Precache
@@ -7208,6 +7212,139 @@
         "ScriptFile"  "heroes/sailor/fire.lua"
         "Function"    "Fire"
         "Target"      "POINT"
+      }
+    }
+  }
+
+  "reposte"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"       "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT | DOTA_ABILITY_BEHAVIOR_AOE"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_PHYSICAL"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
+
+    "AbilityTextureName"      "kunkka_divine_anchor_tidebringer"
+
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {  
+      "particle" "particles\units\heroes\hero_skeletonking\skeleton_king_weapon_blur_critical.vpcf"
+      "soundfile" "soundevents/game_sounds_heroes/game_sounds_legion_commander.vsndevts"
+    }
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "200"
+    "AoERadius"           "%radius"
+    "AbilityCastPoint"        "0.3"
+    "AbilityCastAnimation"    "ACT_DOTA_ATTACK"
+
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "75"
+    "AbilityCooldown"        "4"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "damage"       "20 40 60 80"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_FLOAT"
+        "radius"   "225"
+      }
+      "03"
+      {
+          "var_type"          "FIELD_FLOAT"
+          "knockback_distance_max"    "300"
+      }
+      "04"
+      {
+          "var_type"          "FIELD_FLOAT"
+          "knockback_duration"        "0.5"
+      }
+      "05"
+      {
+          "var_type"          "FIELD_INTEGER"
+          "knockback_height"      "50"
+      }
+      "06"
+      {
+          "var_type"          "FIELD_INTEGER"
+          "duration"      "2"
+      }
+    }
+
+    "OnUpgrade"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "heroes/sailor/reposte.lua"
+        "Function"    "Deactivate"
+      }
+    }
+
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "heroes/sailor/reposte.lua"
+        "Function"    "Reposte"
+      }
+
+      "FireSound"
+      {
+        "EffectName"  "Hero_LegionCommander.Courage"
+        "Target"     "CASTER"
+      }
+
+      "FireEffect"
+      {
+        "EffectName"        "particles\units\heroes\hero_skeletonking\skeleton_king_weapon_blur_critical.vpcf"
+        "EffectAttachType"  "attach_origin"
+        "Target"            "CASTER"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_reposte_passive"
+      {
+        "Passive"      "1"
+        "IsHidden"      "1"
+    
+        "OnTakeDamage"
+        // "%attack_damage" is set to the damage value after mitigation
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "heroes/sailor/reposte.lua"
+            "Function"    "Activate"
+          }
+        }
+      }
+
+      "modifier_reposte_activate"
+      {
+      
+        "OnDestroy"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "heroes/sailor/reposte.lua"
+            "Function"    "Deactivate"
+          }
+        }
       }
     }
   }
