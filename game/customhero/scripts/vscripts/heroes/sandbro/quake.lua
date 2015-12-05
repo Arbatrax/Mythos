@@ -8,6 +8,8 @@ function Quake(keys)
 	local fracture = FindUnitsInRadius(caster:GetTeam(), casterLocation, nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, 0, false)
 	local count = table.getn(nearbyUnits)
 
+	StartSoundEventFromPosition("Hero_EarthShaker.Fissure", casterLocation)
+
 	--caster:AddNoDraw()
 	caster:AddNewModifier(caster, ability, "modifier_quake_transform", {duration=duration-.1})
 
