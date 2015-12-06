@@ -523,36 +523,35 @@ function ClearCamp(camp)
 end
 
 function SpawnBonusEvent()
-  local camp = "bonus_spawn" .. math.random(1,7)
+  local camp = "bonus_spawn" .. math.random(1,1)
   local point = Entities:FindByName( nil, camp):GetAbsOrigin()
-  local bonus = math.random(1,4)
+  local bonus = math.random(1,2)
+  local spawn_life = 9.9
 
   if bonus == 1 then
-    local item = CreateItem("item_imp_portal", nil, nil)
-    local drop = CreateItemOnPositionSync( point, item )
-    Timers:CreateTimer(9.9, function()
-      if IsValidEntity(item) then
-        UTIL_Remove(item)
+    local unit = CreateUnitByName("imp_master", point, true, nil, nil, DOTA_TEAM_NEUTRALS )
+    Timers:CreateTimer(spawn_life, function()
+      if IsValidEntity(unit) then
+        unit:RemoveSelf()
       end
-    end) 
+    end)
   elseif bonus == 2 then
-    local item = CreateItem("item_mercenary_flag", nil, nil)
-    local drop = CreateItemOnPositionSync( point, item )
-    Timers:CreateTimer(9.9, function()
-      if IsValidEntity(item) then
-        UTIL_Remove(item)
+    local unit = CreateUnitByName("mercenary", point, true, nil, nil, DOTA_TEAM_NEUTRALS )
+    Timers:CreateTimer(spawn_life, function()
+      if IsValidEntity(unit) then
+        unit:RemoveSelf()
       end
-    end) 
+    end)
   elseif bonus == 3 then
     local unit = CreateUnitByName("mountain_brawler", point, true, nil, nil, DOTA_TEAM_NEUTRALS )
-    Timers:CreateTimer(9.9, function()
+    Timers:CreateTimer(spawn_life, function()
       if IsValidEntity(unit) then
         unit:RemoveSelf()
       end
     end)
   elseif bonus == 4 then
     local unit = CreateUnitByName("wanderer", point, true, nil, nil, DOTA_TEAM_NEUTRALS )
-    Timers:CreateTimer(9.9, function()
+    Timers:CreateTimer(spawn_life, function()
       if IsValidEntity(unit) then
         unit:RemoveSelf()
       end

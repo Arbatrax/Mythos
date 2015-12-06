@@ -2488,6 +2488,142 @@
         }
     }
 
+    "mercenary"
+    {
+        // General
+        //----------------------------------------------------------------
+        "BaseClass"                 "npc_dota_creature" // Class of entity of link to.
+        "Level"                     "1"
+        "Model"                     "models\heroes\bounty_hunter\bounty_hunter.vmdl" // Model.
+        "ModelScale"                "0.75"
+        "AttackCapabilities"       "DOTA_UNIT_CAP_NO_ATTACK"
+        "AttackAcquisitionRange"     "100"
+        "AttackRange"               "100"
+
+        // Precache
+        //----------------------------------------------------------------
+         "precache"
+        {
+
+        }
+
+        "Ability1"                   "idling"        
+        "Ability2"                   ""
+
+        "AttackDamageMin"            "0"       // Damage range min.
+        "AttackDamageMax"            "0"       // Damage range max.
+        "AttackRate"                 "1.8"     // Speed of attack.
+        "AttackAnimationPoint"       "0.35"    // Normalized time in animation cycle to attack
+
+        // Armor
+        //----------------------------------------------------------------
+        "ArmorPhysical"             "2"         // Physical protection.
+        "MagicalResistance"         "0"
+
+        // Bounds
+        //----------------------------------------------------------------
+        "BoundsHullName"            "DOTA_HULL_SIZE_REGULAR"            // Hull type used for navigation/locomotion.
+
+        // Movement
+        //----------------------------------------------------------------
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_NONE"            // Type of locomotion - ground, air
+        
+        // Bounty
+        //----------------------------------------------------------------
+        "BountyXP"                  "150"        // Experience earn.
+        "BountyGoldMin"             "120"       // Gold earned min.
+        "BountyGoldMax"             "130"       // Gold earned max.
+
+        // Status
+        //----------------------------------------------------------------
+        "StatusHealth"              "500"       // Base health.
+        "StatusHealthRegen"         "0"     // Health regeneration rate.
+        "StatusMana"                "0"         // Base mana.
+        "StatusManaRegen"           "0"         // Mana regeneration rate.
+
+        // Team
+        //----------------------------------------------------------------
+        "TeamName"                  "DOTA_TEAM_NEUTRALS"            // Team name.
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_WEAK"
+            
+        // Vision
+        //----------------------------------------------------------------
+        "VisionDaytimeRange"        "800"      // Range of vision during day light.
+        "VisionNighttimeRange"      "800"      // Range of vision at night time.
+
+        //Inventory
+        "HasInventory"              "0"   
+    }
+
+    "imp_master"
+    {
+        // General
+        //----------------------------------------------------------------
+        "BaseClass"                 "npc_dota_creature" // Class of entity of link to.
+        "Level"                     "1"
+        "Model"                     "models\heroes\bane\bane.vmdl" // Model.
+        "ModelScale"                "0.75"
+        "AttackCapabilities"       "DOTA_UNIT_CAP_NO_ATTACK"
+        "AttackAcquisitionRange"     "100"
+        "AttackRange"               "100"
+
+        // Precache
+        //----------------------------------------------------------------
+         "precache"
+        {
+
+        }
+
+        "Ability1"                   "idling"        
+        "Ability2"                   ""
+
+        "AttackDamageMin"            "0"       // Damage range min.
+        "AttackDamageMax"            "0"       // Damage range max.
+        "AttackRate"                 "1.8"     // Speed of attack.
+        "AttackAnimationPoint"       "0.35"    // Normalized time in animation cycle to attack
+
+        // Armor
+        //----------------------------------------------------------------
+        "ArmorPhysical"             "2"         // Physical protection.
+        "MagicalResistance"         "0"
+
+        // Bounds
+        //----------------------------------------------------------------
+        "BoundsHullName"            "DOTA_HULL_SIZE_REGULAR"            // Hull type used for navigation/locomotion.
+
+        // Movement
+        //----------------------------------------------------------------
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_NONE"            // Type of locomotion - ground, air
+        
+        // Bounty
+        //----------------------------------------------------------------
+        "BountyXP"                  "150"        // Experience earn.
+        "BountyGoldMin"             "120"       // Gold earned min.
+        "BountyGoldMax"             "130"       // Gold earned max.
+
+        // Status
+        //----------------------------------------------------------------
+        "StatusHealth"              "500"       // Base health.
+        "StatusHealthRegen"         "0"     // Health regeneration rate.
+        "StatusMana"                "0"         // Base mana.
+        "StatusManaRegen"           "0"         // Mana regeneration rate.
+
+        // Team
+        //----------------------------------------------------------------
+        "TeamName"                  "DOTA_TEAM_NEUTRALS"            // Team name.
+        "CombatClassAttack"         "DOTA_COMBAT_CLASS_ATTACK_BASIC"
+        "CombatClassDefend"         "DOTA_COMBAT_CLASS_DEFEND_WEAK"
+            
+        // Vision
+        //----------------------------------------------------------------
+        "VisionDaytimeRange"        "800"      // Range of vision during day light.
+        "VisionNighttimeRange"      "800"      // Range of vision at night time.
+
+        //Inventory
+        "HasInventory"              "0"   
+    }
+
     "vampire"
     {
         // General

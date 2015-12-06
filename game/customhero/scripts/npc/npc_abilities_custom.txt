@@ -5964,14 +5964,8 @@
     //-------------------------------------------------------------------------------------------------------------
     "precache"
     {
-      
-     
-     
-     
       "soundfile"     "soundevents/game_sounds_heroes/game_sounds_puck.vsndevts"
       "soundfile"     "soundevents/game_sounds_heroes/game_sounds_terrorblade.vsndevts"
-     
-     
     }
 
     // Casting
@@ -6001,6 +5995,63 @@
     "Modifiers"
     {
       "modifier_wandering"
+      {
+        "Passive" "1"
+
+        "States"
+        {
+          "MODIFIER_STATE_DISARMED"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_NO_HEALTH_BAR"     "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_INVULNERABLE"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_UNSELECTABLE"    "MODIFIER_STATE_VALUE_ENABLED"
+        }  
+      } 
+    }
+  }
+
+  "idling"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"       "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_YES"
+    "AbilityTextureName"    "enchantress_natures_attendants"
+
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {
+      "particle"  "particles/units/heroes/hero_bounty_hunter/bounty_hunter_windwalk_flat.vpcf"
+    }
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0 0.0 0.0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "radius"     "200"
+      }
+    }
+
+    "OnUpgrade"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "neutrals/idling.lua"
+        "Function"    "Idling"
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_idling"
       {
         "Passive" "1"
 
