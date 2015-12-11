@@ -1719,7 +1719,6 @@
     "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
     "AbilityTextureName"      "invoker_exort"
-    "MaxLevel" "4"
 
     // Precache
     //-------------------------------------------------------------------------------------------------------------
@@ -1757,7 +1756,7 @@
       "02"
       {
         "var_type"        "FIELD_FLOAT"
-        "stun_duration"    "1.8 2.0 2.2 2.4"
+        "stun_duration"    "1.65 1.90 2.15 2.4"
       }
     }
 
@@ -1832,7 +1831,7 @@
       "01"
       {
         "var_type"        "FIELD_INTEGER"
-        "spell_resist_pct"    "-20 -25 -30 -35"
+        "spell_resist_pct"    "-15 -21 -27 -33"
       }
       "02"
       {
@@ -2776,7 +2775,7 @@
       "03"
       {
         "var_type"        "FIELD_FLOAT"
-        "duration"        "4.0 5.0 6.0"
+        "duration"        "4.0 4.5 5.0"
       }
     }
 
@@ -2872,7 +2871,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "80 90 100 110"
+    "AbilityManaCost"       "80 85 90 95"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -2955,7 +2954,7 @@
       "01"
       {
         "var_type"            "FIELD_INTEGER"
-        "damage"          "20"
+        "damage"          "12"
       }
       "02"
       {
@@ -3049,7 +3048,7 @@
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"        "400"
-    "AbilityCooldown"        "35 32 39 25"
+    "AbilityCooldown"        "35 32 29 25"
     "AbilityManaCost"        "85"
     
     // Special
@@ -3265,7 +3264,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "85 100 115 130"
+    "AbilityManaCost"       "100 115 130 145"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -3463,7 +3462,7 @@
       "02"
       {
         "var_type"      "FIELD_INTEGER"
-        "threshold"      "60 50 40"
+        "threshold"      "50 45 40"
       }
     }
     
@@ -4486,33 +4485,46 @@
 
     "OnProjectileHitUnit"
     {
-
-      "FireSound"
-      {
-        "EffectName"    "Hero_Winter_Wyvern.WintersCurse.Target"
-        "Target"      "TARGET"
-      }
-
       "Damage"
       {
         "Target"  "TARGET"
         "Damage"  "%damage"
         "Type"    "DAMAGE_TYPE_MAGICAL"
       }
-      
-      "ApplyModifier"
-      {
-        "ModifierName"  "modifier_frozen_tomb_stun"
-        "Target"     "TARGET"
-        "Duration"    "%stun_duration"
-      }
-      "ApplyModifier"
-      {
 
-        "ModifierName"  "modifier_faceless_void_chronosphere_freeze"
-        "Target"     "TARGET"
-        "Duration"    "%stun_duration"
-      }    
+      "ActOnTargets"
+      {
+        "Target"
+        {
+          "Center"    "TARGET"
+          "Flags" "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+        }
+      
+        "Action"    
+        {
+          "FireSound"
+          {
+            "EffectName"    "Hero_Winter_Wyvern.WintersCurse.Target"
+            "Target"      "TARGET"
+          }
+
+          
+          "ApplyModifier"
+          {
+            "ModifierName"  "modifier_frozen_tomb_stun"
+            "Target"     "TARGET"
+            "Duration"    "%stun_duration"
+          }
+          "ApplyModifier"
+          {
+
+            "ModifierName"  "modifier_faceless_void_chronosphere_freeze"
+            "Target"     "TARGET"
+            "Duration"    "%stun_duration"
+          }  
+        }
+      }
+
     }
     
     "Modifiers"
@@ -6414,8 +6426,6 @@
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-    "AbilityUnitTargetTeam"  "DOTA_UNIT_TARGET_TEAM_BOTH"
-    "AbilityUnitTargetType"  "DOTA_UNIT_TARGET_ALL"
     "AbilityTextureName"      "bane_nightmare"
 
 
@@ -6436,7 +6446,7 @@
     // Cost
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"       "75"
-    "AbilityCooldown"        "39 30 28 19"
+    "AbilityCooldown"        "39 32 25 18"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
