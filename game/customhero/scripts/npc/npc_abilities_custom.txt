@@ -872,7 +872,7 @@
     
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"        "0.2 0.2 0.2 0.2"
+    "AbilityCastPoint"        "0.0"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -989,7 +989,7 @@
     
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"        "0.2 0.2 0.2 0.2"
+    "AbilityCastPoint"        "0.0"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -1092,7 +1092,7 @@
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "17 15 13 11"
+    "AbilityCooldown"       "17 16 15 14"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -1110,8 +1110,8 @@
     {
       "01"
       {
-        "var_type"        "FIELD_INTEGER"
-        "duration"       "4 5 6 7"
+        "var_type"        "FIELD_FLOAT"
+        "duration"       "4.0 4.5 5.0 5.5"
       }
       "02"
       {
@@ -1196,6 +1196,7 @@
     "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_6"
     "AbilityTextureName"      "centaur_stampede"
 
     // Precache
@@ -1219,11 +1220,6 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"       "65"
 
-    // Stats
-    //-------------------------------------------------------------------------------------------------------------
-
-    "AbilityCastAnimation" "ACT_DOTA_CAST_ABILITY_2"
-
     // Special
     //-------------------------------------------------------------------------------------------------------------
     "AbilitySpecial"
@@ -1246,7 +1242,7 @@
       "03"
       {
         "var_type"        "FIELD_INTEGER"
-        "speed_boost"           "20 25 30 35"
+        "speed_boost"           "20 22 24 26"
       }
     }
 
@@ -1300,7 +1296,7 @@
 
         "States"
         {
-          //"MODIFIER_STATE_INVULNERABLE"   "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_DISARMED"   "MODIFIER_STATE_VALUE_ENABLED"
           "MODIFIER_STATE_NO_UNIT_COLLISION" "MODIFIER_STATE_VALUE_ENABLED" 
         }
       }
@@ -1349,7 +1345,7 @@
       "01"
       {
         "var_type"        "FIELD_INTEGER"
-        "bonus_armor"     "6 8 10 12"
+        "bonus_armor"     "6 7 8 9"
       }
       "02"
       {
@@ -1597,7 +1593,7 @@
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "180.0 160.0 140.0 120.0"
+    "AbilityCooldown"       "110"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -3680,6 +3676,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_ALL"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
 
@@ -3696,11 +3693,6 @@
       {
         "var_type"        "FIELD_INTEGER"
         "armor_reduction"  "-2 -3 -4 -5"
-      }
-      "03"
-      {
-        "var_type"        "FIELD_INTEGER"
-        "resistance_reduction"  "-10 -15 -20 -25"
       }
     }
 
@@ -3731,7 +3723,6 @@
         "Properties"
         {
           "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_reduction"
-          "MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS" "%resistance_reduction"
         }
       }
     }
@@ -3741,7 +3732,6 @@
   {
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE" 
-    //"AbilityCastAnimation" "ACT_DOTA_RUN"
     "AbilityTextureName"      "slark_pounce"
     
     
@@ -3782,7 +3772,7 @@
       "FireSound"
       {
         "Target"    "CASTER"
-        "EffectName"  "Hero_Slark.ShadowDance"
+        "EffectName"  "Hero_Slark.Pounce.Cast"
       }
     }
 
@@ -5800,7 +5790,10 @@
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
-    "AbilityUnitDamageType"   "DAMAGE_TYPE_MAGICAL"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
     "AbilityTextureName"      "bane_enfeeble"
 
     // Precache
@@ -6152,6 +6145,16 @@
         "var_type"        "FIELD_INTEGER"
         "radius"  "2000"
       }
+      "05"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "drain_per_second"  "10"
+      }
+      "06"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "max_stacks"  "80 90 100"
+      }
     }
 
     "OnToggleOn"
@@ -6302,7 +6305,7 @@
       "modifier_blood_of_the_innocent_stack"
       {
         "IsBuff" "1"
-        "TextureName" "night_stalker_darkness"
+        "TextureName" "warlock_shadow_word"
         "Attributes"    "MODIFIER_ATTRIBUTE_PERMANENT"
       }
 
@@ -6807,6 +6810,7 @@
     "AbilityUnitTargetTeam"  "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "AbilityUnitTargetType"  "DOTA_UNIT_TARGET_HERO"
     "AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
     "AbilityTextureName"      "terrorblade_reflection"
 
     
@@ -6864,11 +6868,6 @@
         "radius"       "300"
       }
       "04"
-      {
-        "var_type"        "FIELD_INTEGER"
-        "movement_speed"       "100"
-      }
-      "05"
       {
         "var_type"        "FIELD_INTEGER"
         "movement_speed"       "100"
@@ -7024,8 +7023,9 @@
     //-------------------------------------------------------------------------------------------------------------
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT"
-    "AbilityUnitTargetTeam"  "DOTA_UNIT_TARGET_TEAM_BOTH"
-    "AbilityUnitTargetType"  "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_BOTH"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
     "AbilityTextureName"      "brewmaster_storm_cyclone"
 
 
@@ -7058,42 +7058,42 @@
       "01"
       {
         "var_type"        "FIELD_INTEGER"
-        "slow_duration"       "1"
+        "distance"       "1100 1200 1300 1400"
       }
       "02"
       {
-        "var_type"        "FIELD_FLOAT"
-        "root_duration"   "1.0 1.5 2.0 2.5"
+        "var_type"        "FIELD_INTEGER"
+        "radius"       "200"
       }
       "03"
       {
         "var_type"        "FIELD_INTEGER"
-        "duration"       "3 4 5 6"
+        "slow_duration"       "1"
       }
       "04"
       {
-        "var_type"        "FIELD_INTEGER"
-        "behind"       "400"
+        "var_type"        "FIELD_FLOAT"
+        "root_duration"   "1.0 1.5 2.0 2.5"
       }
       "05"
       {
         "var_type"        "FIELD_INTEGER"
-        "distance"       "1100 1200 1300 1400"
+        "speed_increase"  "25"
       }
       "06"
       {
         "var_type"        "FIELD_INTEGER"
-        "speed"       "1200"
+        "duration"       "3 4 5 6"
       }
       "07"
       {
         "var_type"        "FIELD_INTEGER"
-        "speed_increase"  "25"
+        "behind"       "400"
       }
       "08"
       {
         "var_type"        "FIELD_INTEGER"
-        "radius"       "200"
+        "speed"       "1200"
       }
       "09"
       {
