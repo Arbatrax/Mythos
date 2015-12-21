@@ -33,14 +33,6 @@ function Riposte( keys )
 	local units = FindUnitsInRadius(caster:GetTeam(), point, nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO+DOTA_UNIT_TARGET_CREEP, 0, 0, false)
 
 	for i=1,table.getn(units) do
-		local damageTable = {
-			victim = units[i],
-			attacker = caster,
-			damage = atkdmg + damage,
-			damage_type = DAMAGE_TYPE_PHYSICAL,
-		}
-		 
-		ApplyDamage(damageTable)
 
 		local knockbackModifierTable =
 	    {
@@ -53,6 +45,14 @@ function Riposte( keys )
 	        center_y = caster:GetAbsOrigin().y,
 	        center_z = caster:GetAbsOrigin().z
 	    }
+		local damageTable = {
+			victim = units[i],
+			attacker = caster,
+			damage = atkdmg + damage,
+			damage_type = DAMAGE_TYPE_PHYSICAL,
+		}
+		 
+		ApplyDamage(damageTable)
 	    units[i]:AddNewModifier( caster, nil, "modifier_knockback", knockbackModifierTable )
 	end
 end

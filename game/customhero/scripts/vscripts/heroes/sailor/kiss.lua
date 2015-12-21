@@ -5,7 +5,7 @@ function TakeDamage( keys )
 	local duration = ability:GetLevelSpecialValueFor("duration", (ability:GetLevel() - 1))
 	local threshold = ability:GetLevelSpecialValueFor("threshold", (ability:GetLevel() - 1))
 	local cooldown = ability:GetLevelSpecialValueFor("cooldown", (ability:GetLevel() - 1))
-	local heal = ability:GetLevelSpecialValueFor("bonus_health", (ability:GetLevel() - 1))
+	local heal = ability:GetLevelSpecialValueFor("bonus_strength", (ability:GetLevel() - 1))
 	local radius = ability:GetLevelSpecialValueFor("radius", (ability:GetLevel() - 1))
 	local hp = caster:GetMaxHealth()
 	local current = caster:GetHealth()
@@ -15,8 +15,14 @@ function TakeDamage( keys )
 
 	if damage >= absorb and current > 0 then
 		ability:StartCooldown(cooldown)
+		EmitSoundOn("Hero_Kunkaa.Tidebringer", caster)
 		ability:ApplyDataDrivenModifier(caster, caster, "modifier_kiss_buff", {duration=duration})
 		caster:AddNewModifier(caster, ability, "modifier_kiss_transform", {duration=duration})
+		caster:Heal(heal*19, caster)
+		caster:SetPrimaryAttribute(0)
+		local modelsize = caster:GetModelScale()
+		caster:SetModelScale(1.0)
+
 		local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_tidehunter/tidehunter_krakenshell_purge.vpcf", PATTACH_ABSORIGIN, caster)
 
 		caster:Heal(heal, caster)
@@ -32,6 +38,8 @@ function TakeDamage( keys )
 
  		Timers:CreateTimer(duration, function()
 	        ParticleManager:DestroyParticle(particle, true)
+	        caster:SetPrimaryAttribute(1)
+	        caster:SetModelScale(modelsize)
 	    end)
 
 		caster:RemoveModifierByName(modifierName) 

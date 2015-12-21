@@ -3232,8 +3232,7 @@
         {
           "MODIFIER_STATE_NO_UNIT_COLLISION"    "MODIFIER_STATE_VALUE_ENABLED"
           "MODIFIER_STATE_ROOTED"               "MODIFIER_STATE_VALUE_ENABLED"
-          "MODIFIER_STATE_ATTACK_IMMUNE"         "MODIFIER_STATE_VALUE_ENABLED"
-          "MODIFIER_STATE_MAGIC_IMMUNE"         "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_INVULNERABLE"         "MODIFIER_STATE_VALUE_ENABLED"
           "MODIFIER_STATE_UNSELECTABLE"         "MODIFIER_STATE_VALUE_ENABLED"
           "MODIFIER_STATE_NO_HEALTH_BAR"        "MODIFIER_STATE_VALUE_ENABLED"
         }
@@ -3273,7 +3272,7 @@
       "01"
       {
         "var_type"      "FIELD_INTEGER"
-        "radius"      "600 600 600 600"
+        "radius"      "500 500 500 500"
       }
       "02"
       {
@@ -3424,7 +3423,7 @@
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
     "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL" 
     "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
     "AbilityTextureName"      "necrolyte_death_pulse"
@@ -3571,7 +3570,7 @@
       "02"
       {
         "var_type"      "FIELD_INTEGER"
-        "heal"      "25 35 45 55"
+        "heal"      "20 30 40 50"
       }
       "03"
       {
@@ -3598,6 +3597,7 @@
       "particle"      "particles\units\heroes\hero_skeletonking\skeletonking_hellfireblast_debuff.vpcf"
       "particle"      "particles\units\heroes\hero_undying\undying_decay_strength_buff.vpcf"
       "particle"      "particles/units/heroes/hero_viper/viper_poison_attack.vpcf"
+      "particle"  "particles\units\heroes\hero_undying\undying_decay_strength_xfer.vpcf"
     }
 
     "OnSpellStart"
@@ -3615,6 +3615,8 @@
       {
         "EffectName"    "particles\units\heroes\hero_skeletonking\skeletonking_hellfireblast_debuff.vpcf"
         "EffectAttachType"  "follow_origin"
+
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"
         
         "ThinkInterval" "0.5"
         "OnIntervalThink"
@@ -3639,6 +3641,7 @@
       "modifier_fungal_spore_negative"
       {
         "IsDebuff" "1"
+        "Attributes"    "MODIFIER_ATTRIBUTE_MULTIPLE"
 
         "EffectName"    "particles\units\heroes\hero_undying\undying_decay_strength_buff.vpcf"
         "EffectAttachType"  "follow_origin"
@@ -3678,6 +3681,7 @@
     "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_ALL"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
+    "AbilityCastRange"        "%radius"
 
     "AbilityTextureName" "undying_decay"
     // Casting
@@ -3686,7 +3690,7 @@
       "01"
       {
         "var_type"        "FIELD_INTEGER"
-        "radius"        "600"
+        "radius"        "900"
       }
       "02"
       {
@@ -7443,7 +7447,7 @@
       "01"
       {
         "var_type"        "FIELD_FLOAT"
-        "bonus_health"       "300 450 600"
+        "bonus_strength"       "15 22 30"
       }
       "02"
       {
@@ -7498,7 +7502,7 @@
 
         "Properties"
         {
-          "MODIFIER_PROPERTY_HEALTH_BONUS" "%bonus_health"
+          "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "%bonus_strength"
         }
       }
 

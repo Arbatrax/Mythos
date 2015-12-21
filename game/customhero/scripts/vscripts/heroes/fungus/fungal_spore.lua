@@ -17,22 +17,24 @@ function FungalSpore( keys )
 
 	function FungalSporePos (keys)
 		if jumps > 0 then
-  			nearbyUnits = FindUnitsInRadius(caster:GetTeam(), target_location, nil, range, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_ALL, 0, 1, false)
-  			if nearbyUnits[2] == caster.mushroom then
+  			nearbyUnits = FindUnitsInRadius(caster:GetTeam(), target_location, nil, range, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, 1, false)
+  			if nearbyUnits[2] ~= nil then
 				ability:ApplyDataDrivenModifier(caster, nearbyUnits[2], "modifier_fungal_spore_positive", {duration = duration})
-				jumps = ability:GetLevelSpecialValueFor("jumps", (ability:GetLevel() - 1))
-				target_location = nearbyUnits[2]:GetAbsOrigin()
-  			elseif nearbyUnits[2] ~= nil then
-				ability:ApplyDataDrivenModifier(caster, nearbyUnits[2], "modifier_fungal_spore_positive", {duration = duration})
+
+				local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_undying/undying_decay_strength_xfer.vpcf", PATTACH_ABSORIGIN_FOLLOW, target)
+			    ParticleManager:SetParticleControlEnt(particle, 0, target, PATTACH_ABSORIGIN_FOLLOW, "attach_origin", target_location, true)
+    			ParticleManager:SetParticleControlEnt(particle, 1, nearbyUnits[2], PATTACH_ABSORIGIN_FOLLOW, "attach_origin", nearbyUnits[2]:GetAbsOrigin(), true)
+				
 				jumps = jumps - 1
 				target_location = nearbyUnits[2]:GetAbsOrigin()
+				target = nearbyUnits[2]
   			end
   		end
   	end
 	
 	function FungalSporeNeg(keys)
 		if jumps > 0 then
-  			nearbyUnits = FindUnitsInRadius(caster:GetTeam(), target_location, nil, range, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_ALL, 0, 1, false)
+  			nearbyUnits = FindUnitsInRadius(caster:GetTeam(), target_location, nil, range, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, 1, false)
   			if nearbyUnits[2] ~= nil then
   				ability:ApplyDataDrivenModifier(caster, nearbyUnits[2], "modifier_fungal_spore_negative", {duration = duration})
   				jumps = jumps - 1
