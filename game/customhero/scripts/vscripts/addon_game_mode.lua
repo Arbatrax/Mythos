@@ -58,6 +58,7 @@ function Precache( context )
   PrecacheUnitByNameSync("light", context)
   PrecacheUnitByNameSync("dark", context)
 
+  PrecacheUnitByNameSync("fountain", context)
   PrecacheUnitByNameSync("lane_creep_melee_mercenary", context)
   PrecacheUnitByNameSync("lane_creep_ranged_mercenary", context)
   PrecacheUnitByNameSync("lane_creep_melee_light", context)
@@ -82,6 +83,7 @@ function Precache( context )
   PrecacheUnitByNameSync("neutral_bug_large", context)
   PrecacheUnitByNameSync("neutral_bug_small", context)
   PrecacheUnitByNameSync("neutral_golem_small", context)
+
   
 
 

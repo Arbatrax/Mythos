@@ -238,9 +238,10 @@ function GameMode:OnGameInProgress()
     point = Entities:FindByName( nil, "gate_spawner"):GetAbsOrigin()
     local unit = CreateUnitByName("gate", point, true, nil, nil, DOTA_TEAM_NEUTRALS )  
 
+    --Spawns a random spawn unit every 3 minutes
     Timers:CreateTimer(10, function()
       SpawnBonusEvent()
-      return 10
+      return 180
     end)
 
     --Spawns lane creeps every 30 seconds starting at the 0 second mark
@@ -401,6 +402,12 @@ function SpawnGods()
   unit = CreateUnitByName("yerus", point, false, nil, nil, DOTA_TEAM_NEUTRALS)
   unit:SetForwardVector(Vector(0,-1,0))
   AddFOWViewer(2, point, 500, 18000, false)
+
+  point = Entities:FindByName( nil, "bottom_fountain"):GetAbsOrigin()
+  unit = CreateUnitByName("fountain", point, false, nil, nil, DOTA_TEAM_GOODGUYS)
+
+  point = Entities:FindByName( nil, "top_fountain"):GetAbsOrigin()
+  unit = CreateUnitByName("fountain", point, false, nil, nil, DOTA_TEAM_BADGUYS)
 end
 
 function SpawnCreeps()
@@ -523,10 +530,10 @@ function ClearCamp(camp)
 end
 
 function SpawnBonusEvent()
-  local camp = "bonus_spawn" .. math.random(1,1)
+  local camp = "bonus_spawn" .. math.random(1,7)
   local point = Entities:FindByName( nil, camp):GetAbsOrigin()
-  local bonus = math.random(1,2)
-  local spawn_life = 9.9
+  local bonus = math.random(1,4)
+  local spawn_life = 179
 
   if bonus == 1 then
     local unit = CreateUnitByName("imp_master", point, true, nil, nil, DOTA_TEAM_NEUTRALS )

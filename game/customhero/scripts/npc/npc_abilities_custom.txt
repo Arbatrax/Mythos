@@ -2478,7 +2478,7 @@
     }
   }
 
-  "truesight"
+  "detection"
   {
     // General
     //-------------------------------------------------------------------------------------------------------------
@@ -2497,62 +2497,27 @@
       }
     }
 
-    "OnUpgrade"
-    {
-      "ApplyModifier"
-      {
-        "ModifierName"  "modifier_truesight_datadriven"
-        "Target"     "CASTER"
-
-      }
-    }
-
     "Modifiers"
     {
-      "modifier_truesight_datadriven"
+      "modifier_detect_aura"
       {
-        "Passive"     "1"
-        "IsHidden"      "0"
-    
-        "ThinkInterval"  "0.03"
-        "OnIntervalThink"
-        {
-          "ActOnTargets"
-          {
-            "Target"
-            {
-              "Center"    "CASTER"
-              "Radius"  "%radius"
-              "Teams"   "DOTA_UNIT_TARGET_TEAM_ENEMY"
-              "Types"   "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-            }
-          
-            "Action"    
-            {
-              "RemoveModifier"
-              {
-                "ModifierName"  "modifier_truesight_reveal"
-                "Target"    "TARGET"
-              }
-  
-              "ApplyModifier"
-              {
-                "ModifierName"  "modifier_truesight_reveal"
-                "Target"    "TARGET"
-              }
-            }
-          }     
-        }   
+        "Passive"      "1"
+      
+        "Aura"            "modifier_detect"
+        "Aura_Radius"     "%radius"
+        "Aura_Teams"      "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "Aura_Types"      "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "Aura_Flags"      "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+        "Aura_ApplyToCaster" "0"
       }
-  
-      "modifier_truesight_reveal"
+
+      "modifier_detect"
       {
-        "IsHidden"      "0"
-        "IsDebuff"      "1"
-        "Duration"      "0.5" //The True Sight effect lingers for 0.5 seconds.
+        "IsHidden" "1"
+
         "States"
         {
-          "MODIFIER_STATE_INVISIBLE"  "MODIFIER_STATE_VALUE_DISABLED"
+          "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_DISABLED"
         }
       }
     }
@@ -2565,17 +2530,6 @@
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
     "MaxLevel" "1"
     "AbilityTextureName" "antimage_spell_shield"
-    // Casting
-
-    "OnUpgrade"
-    {
-      "ApplyModifier"
-      {
-        "ModifierName"  "modifier_spellimmune"
-        "Target"     "CASTER"
-
-      }
-    }
 
     "Modifiers"
     {
@@ -2584,10 +2538,10 @@
         "Passive"     "1"
         "IsHidden"      "0"
   
-         "States"
-          {
-            "MODIFIER_STATE_MAGIC_IMMUNE"    "MODIFIER_STATE_VALUE_ENABLED"
-          }       
+       "States"
+        {
+          "MODIFIER_STATE_MAGIC_IMMUNE"    "MODIFIER_STATE_VALUE_ENABLED"
+        }       
       }   
     }
   }
@@ -3594,6 +3548,7 @@
     "precache"
     {
       "soundfile"     "soundevents/game_sounds_heroes/game_sounds_pudge.vsndevts"
+      "soundfile"     "soundevents/game_sounds_heroes/game_sounds_treant.vsndevts"
       "particle"      "particles\units\heroes\hero_skeletonking\skeletonking_hellfireblast_debuff.vpcf"
       "particle"      "particles\units\heroes\hero_undying\undying_decay_strength_buff.vpcf"
       "particle"      "particles/units/heroes/hero_viper/viper_poison_attack.vpcf"
@@ -3606,6 +3561,12 @@
       {
         "ScriptFile" "heroes/fungus/fungal_spore.lua"
         "Function" "FungalSpore"       
+      }
+
+      "FireSound"
+      {
+        "EffectName"  "Hero_Treant.Eyes.Cast"
+        "Target"     "TARGET"
       }
     }
 
@@ -7426,7 +7387,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityType"             "DOTA_ABILITY_TYPE_ULTIMATE"
     "MaxLevel"              "3"
-    "RequiredLevel"        "1"
+    "RequiredLevel"        "5"
     "LevelsBetweenUpgrades" "5"
 
     // Precache
@@ -7472,7 +7433,7 @@
       "06"
       {
         "var_type"        "FIELD_FLOAT"
-        "evasion"   "10 15 20"
+        "evasion"   "20 25 30"
       }
     }
     
@@ -8066,6 +8027,104 @@
             "ScriptFile"  "heroes/centaur_wizard/stone_shield.lua"
             "Function"    "Explode"
           }
+        }
+      }
+    }
+  }
+
+  "fountain_healing"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"       "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_AURA"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC" 
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_YES"
+    "AbilityTextureName"      "kunkka_torrent"
+    "AbilityCastRange"        "%radius"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastPoint"        "0.0"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "radius"    "500"
+      }
+      "02"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "heal"      "5"
+      }
+      "03"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "speed"      "400"
+      }
+    }
+
+    "Modifiers"
+    {
+
+      "modifier_regeneration_aura"
+      {
+        "Passive"      "1"
+      
+        "Aura"            "modifier_fountain_healing"
+        "Aura_Radius"     "%radius"
+        "Aura_Teams"      "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+        "Aura_Types"      "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "Aura_ApplyToCaster" "0"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT" "%speed"
+        }
+
+        "States"
+        {
+          "MODIFIER_STATE_NO_HEALTH_BAR"    "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_INVULNERABLE"    "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+
+      "modifier_fountain_healing"
+      {
+        "ThinkInterval"  "0.1"
+        "OnIntervalThink"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "neutrals/fountain/fountain_healing.lua"
+            "Function"    "Heal"
+          }
+        }
+      }
+
+      "modifier_detection_aura"
+      {
+        "Passive"      "1"
+      
+        "Aura"            "modifier_detection"
+        "Aura_Radius"     "%radius+300"
+        "Aura_Teams"      "DOTA_UNIT_TARGET_TEAM_ENEMY"
+        "Aura_Types"      "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+        "Aura_Flags"      "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+      }
+
+      "modifier_detection"
+      {
+        "IsHidden" "1"
+
+        "States"
+        {
+          "MODIFIER_STATE_INVISIBLE"    "MODIFIER_STATE_VALUE_DISABLED"
         }
       }
     }

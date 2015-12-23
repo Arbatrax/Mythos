@@ -189,7 +189,7 @@
 			//--------------------
 			"DOTA_Tooltip_ability_arcane_accelerant"                                          "Arcane Accelerant"
 			"DOTA_Tooltip_ability_arcane_accelerant_Description"                              "The Ember King and his Phoenix's attacks cause their targets to take additional magic damage."
-			"DOTA_Tooltip_ability_arcane_accelerant_spell_resist_pct"                         "SPELL RESISTANCE REDUCTION:"
+			"DOTA_Tooltip_ability_arcane_accelerant_spell_resist_pct"                         "%SPELL RESISTANCE REDUCTION:"
 			"DOTA_Tooltip_ability_arcane_accelerant_duration"                                 "DURATION:"
 			"DOTA_Tooltip_modifier_arcane_accelerant"                                         "Arcane Accelerant"
 			"DOTA_Tooltip_modifier_arcane_accelerant_Description"                             "Spell Resistance reduced."
@@ -199,8 +199,7 @@
 			"DOTA_Tooltip_ability_cauterize"										"Cauterize"
 			"DOTA_Tooltip_ability_cauterize_Description"							"Ember King singes the wounds of an ally, healing them and removing most negative effects."
 			"DOTA_Tooltip_ability_cauterize_Lore"									""
-			"DOTA_Tooltip_ability_cauterize_heal"									"HEAL:"
-			"DOTA_Tooltip_ability_cauterize_range"									"RANGE:"
+			"DOTA_Tooltip_ability_cauterize_heal"									"HEAL:""
 
 			//Ember_King_Summon_Phoenix
 			//--------------------
@@ -382,7 +381,7 @@
 			"DOTA_Tooltip_ability_frozen_tomb_Description"                                    "Christopher freezes the target in a tomb, stunning the target and then slowing afterwards."
 			"DOTA_Tooltip_ability_frozen_tomb_stun_duration"                                  "STUN DURATION:"
 			"DOTA_Tooltip_ability_frozen_tomb_slow_duration"                                  "SLOW DURATION:"
-			"DOTA_Tooltip_ability_frozen_tomb_max_slow"                                       "SLOW:"
+			"DOTA_Tooltip_ability_frozen_tomb_max_slow"                                       "%SLOW:"
 			"DOTA_Tooltip_ability_frozen_tomb_damage"                                         "DAMAGE:"
 
 			//Christopher_Freeze_Shatter
@@ -411,15 +410,16 @@
 			//Hunter_Hysteria
 			//--------------------
 			"DOTA_Tooltip_ability_hysteria"                                                   "Hysteria"
-			"DOTA_Tooltip_ability_hysteria_Description"                                       "The Hunter hysterical by all the blood he's consumed. Hysteria causes The Hunter to move quicker, attack harder, and become magic immune. While active Hysteria drains stacks per second."
+			"DOTA_Tooltip_ability_hysteria_Description"                                       "The Hunter hysterical by all the blood he's consumed. Hysteria causes The Hunter to move quicker, attack harder, and become magic immune. While active Hysteria drains stacks of blood per second."
 			"DOTA_Tooltip_ability_hysteria_damage"                                            "%BASE DAMAGE:"
 			"DOTA_Tooltip_ability_hysteria_movement_speed"                                    "MOVEMENT SPEED:"
-			"DOTA_Tooltip_ability_hysteria_stacks"                                            "DRAIN PER SECOND:"
+			"DOTA_Tooltip_ability_hysteria_max_stacks"                                        "MAX STACKS:"
+			"DOTA_Tooltip_ability_hysteria_drain_per_second"								  "DRAIN PER SECOND:"
 
 			//Hunter_Blood of the Innocent
 			//--------------------
 			"DOTA_Tooltip_ability_blood_of_the_innocent"                                      "Blood Of The Innocent"
-			"DOTA_Tooltip_ability_blood_of_the_innocent_Description"                          "The Hunter feeds on the blood of it's prey. Each killed unit grants stacks. The Hunter's attacks cleave nearby more fiercely units while he has fewer stacks."
+			"DOTA_Tooltip_ability_blood_of_the_innocent_Description"                          "The Hunter feeds on the blood of it's prey. Each killed unit grants stacks of blood. The Hunter's attacks cleave nearby enemies more fiercely while he has fewer stacks."
 			"DOTA_Tooltip_ability_blood_of_the_innocent_max_stacks"                           "MAX STACKS:"
 			"DOTA_Tooltip_ability_blood_of_the_innocent_max_stacks"							  "%MAX CLEAVE:"
 			"DOTA_Tooltip_ability_blood_of_the_innocent_creep_stacks"                         "CREEP STACKS:"
@@ -453,7 +453,7 @@
 			//Trickster_Masquerade
 			//--------------------
 			"DOTA_Tooltip_ability_masquerade"                                                 "Masquerade"
-			"DOTA_Tooltip_ability_masquerade_Description"                                     ""
+			"DOTA_Tooltip_ability_masquerade_Description"                                     "Temporarily hide an allied Hero and then cause them to reappear along with many illusions of them. At the end of the illusion duration they will explode, damaging nearby enemies."
 			"DOTA_Tooltip_ability_masquerade_illusions"                                       "ILLUSIONS:"
 			"DOTA_Tooltip_ability_masquerade_spell_duration"                                  "SPELL DURATION:"
 			"DOTA_Tooltip_ability_masquerade_hide_duration"                                   "HIDE DURATION:"
@@ -462,29 +462,65 @@
 			"DOTA_Tooltip_ability_masquerade_damage"                                          "DAMAGE:"
 
 			"DOTA_Tooltip_ability_touch_of_darkness"                                          "Touch Of Darkness"
-			"DOTA_Tooltip_ability_touch_of_darkness_Description"                              ""
+			"DOTA_Tooltip_ability_touch_of_darkness_Description"                              "Apply a touch of darkness to a friendly target causing the next unit to attack them to be stunned and take damage along with nearby foes."
 			"DOTA_Tooltip_ability_touch_of_darkness_damage"                                   "DAMAGE:"
 			"DOTA_Tooltip_ability_touch_of_darkness_radius"                                   "RADIUS:"
 			"DOTA_Tooltip_ability_touch_of_darkness_stun_duration"                            "STUN DURATION:"
 			"DOTA_Tooltip_ability_touch_of_darkness_duration"                                 "DURATION:"
 
 			"DOTA_Tooltip_ability_dominate_mind"                                              "Dominate Mind"
-			"DOTA_Tooltip_ability_dominate_mind_Description"                                  ""
+			"DOTA_Tooltip_ability_dominate_mind_Description"                                  "The Trickster dominates the mind of a less powerful creature granting you permenat control of it."
 
 			"DOTA_Tooltip_ability_final_gift"                                                 "Final Gift"
-			"DOTA_Tooltip_ability_final_gift_Description"                                     ""
+			"DOTA_Tooltip_ability_final_gift_Description"                                     "Your dominated creature will perform one last gift for you. It explodes, damaging and slowing all enemies nearby."
 			"DOTA_Tooltip_ability_final_gift_damage"                                          "DAMAGE:"
 			"DOTA_Tooltip_ability_final_gift_radius"                                          "RADIUS:"
-			"DOTA_Tooltip_ability_final_gift_slow"                                            "SLOW:"
-			"DOTA_Tooltip_ability_final_gift_duration"                                        "DURATION:"
+			"DOTA_Tooltip_ability_final_gift_slow"                                            "%SLOW:"
+			"DOTA_Tooltip_ability_final_gift_duration"                                        "SLOW DURATION:"
 
 			"DOTA_Tooltip_ability_dimensional_lightning"                                      "Dimensional Lightning"
-			"DOTA_Tooltip_ability_dimensional_lightning_Description"                          ""
-			"DOTA_Tooltip_ability_dimensional_lightning_damage"                               "DAMAGE:"
+			"DOTA_Tooltip_ability_dimensional_lightning_Description"                          "Trickster channels powerful lightning at the target area. Anyone caught in the intial cast will be zapped with lightning and transformed into a creature from another dimension each second while the Trickster remains channeling."
+			"DOTA_Tooltip_ability_dimensional_lightning_damage"                               "DAMAGE PER SECOND:"
 			"DOTA_Tooltip_ability_dimensional_lightning_duration"                             "DURATION:"
 			"DOTA_Tooltip_ability_dimensional_lightning_radius"                               "RADIUS:"
-			"DOTA_Tooltip_ability_dimensional_lightning_movement_speed"                       "MOVEMENT SPEED:"
-			"DOTA_Tooltip_ability_dimensional_lightning_movement_speed"                       "MOVEMENT SPEED:"
+
+			//Sailor_Favorable_Winds
+			//--------------------
+			"DOTA_Tooltip_ability_favorable_winds"                                            "Favorable Winds"
+			"DOTA_Tooltip_ability_favorable_winds_Description"                                "Sailor sends out two gusts of wind in a line infront of him. Any ally caught by a gust will gain increased movement speed. Any enemy caught between the gusts will be slowed and then rooted."
+			"DOTA_Tooltip_ability_favorable_winds_slow_duration"                              "SLOW DURATION:"
+			"DOTA_Tooltip_ability_favorable_winds_root_duration"                              "ROOT DURATION:"
+			"DOTA_Tooltip_ability_favorable_winds_duration"                                   "SPEED DURATION:"
+			"DOTA_Tooltip_ability_favorable_winds_distance"                                   "DISTANCE:"
+			"DOTA_Tooltip_ability_favorable_winds_speed_increase"                             "%MOVEMENT SPEED INCREASE:"
+			"DOTA_Tooltip_ability_favorable_winds_radius"                                     "RADIUS:"
+
+			//Sailor_Fire!
+			//--------------------
+			"DOTA_Tooltip_ability_fire!"                                                      "Fire!"
+			"DOTA_Tooltip_ability_fire!_Description"                                          "The Sailor orders all cannons to fire in a line infront of him."
+			"DOTA_Tooltip_ability_fire!_damage"                                               "DAMAGE:"
+			"DOTA_Tooltip_ability_fire!_radius"                                               "RADIUS:"
+			"DOTA_Tooltip_ability_fire!_shots"                                                "SHOTS:"
+			"DOTA_Tooltip_ability_fire!_delay"                                                "DELAY:"
+
+			//Sailor_Riposte
+			//--------------------
+			"DOTA_Tooltip_ability_riposte"                                                    "Riposte"
+			"DOTA_Tooltip_ability_riposte_Description"                                        "After taking damage from a hero the Sailor may counter attack with Riposte. The target and any nearby enemies take attack damage and some additional damage as well as being knockbackdc back."
+			"DOTA_Tooltip_ability_riposte_damage"                                             "BONUS DAMAGE:"
+			"DOTA_Tooltip_ability_riposte_radius"                                             "RADIUS:"
+			"DOTA_Tooltip_ability_riposte_knockback_distance_max"                             "KNOCKBACK DISTANCE:"
+
+			//Sailor_Kiss_Of_The_Serpent_Queen
+			//--------------------
+			"DOTA_Tooltip_ability_kiss_of_the_serpent_queen"                                  "Kiss Of The Serpent Queen"
+			"DOTA_Tooltip_ability_kiss_of_the_serpent_queen_Description"                      "The Sailor has been kissed by the Queen herself cursing him to become one of her sea monsters. After taking a certain amount of damage in a single instance the Sailor is transformed into a beast from the depths changing his primary attribute to strength and granting additional strength for the duration. Also anytime the Sailor transforms he brings with him the mystical fog of the sea which grants all Allies who stand in it evasion."
+			"DOTA_Tooltip_ability_kiss_of_the_serpent_queen_bonus_strength"                   "BONUS STRENGTH:"
+			"DOTA_Tooltip_ability_kiss_of_the_serpent_queen_duration"                         "DURATION:"
+			"DOTA_Tooltip_ability_kiss_of_the_serpent_queen_threshold"                        "%HEALTH THRESHOLD:"
+			"DOTA_Tooltip_ability_kiss_of_the_serpent_queen_radius"                           "FOG RADIUS:"
+			"DOTA_Tooltip_ability_kiss_of_the_serpent_queen_evasion"                          "%EVASION:"
 		
 		
 		//------------------------

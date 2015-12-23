@@ -28,6 +28,8 @@ function FungalSpore( keys )
 				jumps = jumps - 1
 				target_location = nearbyUnits[2]:GetAbsOrigin()
 				target = nearbyUnits[2]
+
+				EmitSoundOn("Hero_Treant.Eyes.Cast", target)
   			end
   		end
   	end
@@ -39,6 +41,8 @@ function FungalSpore( keys )
   				ability:ApplyDataDrivenModifier(caster, nearbyUnits[2], "modifier_fungal_spore_negative", {duration = duration})
   				jumps = jumps - 1
   				target_location = nearbyUnits[2]:GetAbsOrigin()
+
+  				EmitSoundOn("Hero_Treant.Eyes.Cast", target)
   			end
   		end  
 	end
