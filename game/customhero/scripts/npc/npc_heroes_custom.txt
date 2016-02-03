@@ -265,7 +265,7 @@
     {
         "override_hero"      "npc_dota_hero_puck"
         "AbilityLayout" "4"
-        "Ability1"           "favorable_winds"
+        "Ability1"           "iris"
         "Ability2"           "gunblade"
         "Ability3"           "vampirism"
         "Ability4"           "blood_of_the_innocent"  
@@ -328,5 +328,4 @@
         "MovementSpeed"             "325"                                   // Speed.
         "MovementTurnRate"          "0.8"                                   // Turning rate.
     }
-
 }

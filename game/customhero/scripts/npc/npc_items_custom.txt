@@ -276,19 +276,18 @@
       }
   }
 
-  "item_ability_tome"
+  "item_stat_tome"
   {
     "ID"              "1106"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"           "item_datadriven"
     "Model"             "models\props_debris\merchant_debris_book001.vmdl" 
     "Effect"            "particles/generic_gameplay/dropped_item.vpcf"
-    "AbilityTextureName"      "item_example_item"
+    "AbilityTextureName"      "item_necronomicon"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"        "0.0"
-    "AbilityCooldown"       "2.0"
+    "AbilityCooldown"       "1.0"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
@@ -308,27 +307,43 @@
     {
       "RunScript"
       {
-        "ScriptFile"  "scripts/vscripts/items/ability_tome.lua"
-        "Function"    "Ability"
+        "ScriptFile"  "scripts/vscripts/items/stat_tome.lua"
+        "Function"    "Stat"
       }
     "SpendCharge"
     {}
     }
+
+    "Modifiers"
+    {
+      "modifier_stat_tome_boost"
+      {
+        "Attributes"    "MODIFIER_ATTRIBUTE_PERMANENT"
+        "IsPurgable"    "0"
+
+        "TextureName" "item_necronomicon"
+    
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_STATS_STRENGTH_BONUS" "2"
+          "MODIFIER_PROPERTY_STATS_AGILITY_BONUS" "2"
+        }
+      }
+    }
   }
 
-  "item_test_faction"
+  "item_speed_fruit"
   {
     "ID"              "1107"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
     "BaseClass"           "item_datadriven"
-    "Model"             "models\props_debris\merchant_debris_book001.vmdl" 
+    "Model"             "models\props_gameplay\mango.vmdl" 
     "Effect"            "particles/generic_gameplay/dropped_item.vpcf"
-    "AbilityTextureName"      "item_example_item"
+    "AbilityTextureName"      "item_enchanted_mango"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastPoint"        "0.0"
-    "AbilityCooldown"       "2.0"
+    "AbilityCooldown"       "1.0"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
@@ -348,11 +363,27 @@
     {
       "RunScript"
       {
-        "ScriptFile"  "scripts/vscripts/items/test_faction.lua"
-        "Function"    "FactionBuff"
+        "ScriptFile"  "scripts/vscripts/items/speed_fruit.lua"
+        "Function"    "Speed"
       }
     "SpendCharge"
     {}
+    }
+
+    "Modifiers"
+    {
+      "modifier_speed_fruit_boost"
+      {
+        "Attributes"    "MODIFIER_ATTRIBUTE_PERMANENT"
+        "IsPurgable"    "0"
+
+        "TextureName" "item_enchanted_mango"
+    
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT" "3"
+        }
+      }
     }
   }
 
@@ -1314,5 +1345,61 @@
       {
           "01" "item_artifact_1;item_artifact_2;item_artifact_3;item_artifact_4"
       }
+  }
+
+  "item_mysterious_tea"
+  {
+    "ID"              "1124"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "BaseClass"           "item_datadriven"
+    "Model"             "models\props_gameplay\smoke.vmdl" 
+    "Effect"            "particles/generic_gameplay/dropped_item.vpcf"
+    "AbilityTextureName"      "item_smoke_of_deceit"
+
+    // Stats
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"       "1.0"
+
+    // Item Info
+    //-------------------------------------------------------------------------------------------------------------
+    "ItemShopTags"          "consumable"
+    "ItemQuality"         "consumable"
+    "ItemStackable"         "1"
+    "ItemPermanent"         "0"
+    "ItemInitialCharges"      "1"
+
+    "precache"
+    {
+      "particle"  "particles\generic_hero_status\hero_levelup.vpcf"
+      "soundfile" "soundevents/game_sounds_heroes/game_sounds_HERO.vsndevts"
+    }
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "scripts/vscripts/items/mysterious_tea.lua"
+        "Function"    "Mana"
+      }
+    "SpendCharge"
+    {}
+    }
+
+    "Modifiers"
+    {
+      "modifier_mysterious_tea_boost"
+      {
+        "Attributes"    "MODIFIER_ATTRIBUTE_PERMANENT"
+        "IsPurgable"    "0"
+
+        "TextureName" "item_smoke_of_deceit"
+    
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_STATS_INTELLECT_BONUS" "3"
+          "MODIFIER_PROPERTY_MANA_REGEN_CONSTANT" "1"
+        }
+      }
+    }
   }
 }
