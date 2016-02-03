@@ -1,6 +1,6 @@
 -- This is the primary mythos gamemode script and should be used to assist in initializing your game mode
 
-_G.nCOUNTDOWNTIMER = 1201
+_G.nCOUNTDOWNTIMER = 12
 
 -- Set this to true if you want to see a complete debug output of all events/processes done by mythos
 -- You can also change the cvar 'mythos_spew' at any time to 1 or 0 for output/no output
@@ -187,15 +187,17 @@ function GameMode:OnHeroInGame(hero)
   elseif GetMapName() == "mythos" then 
     CustomGameEventManager:Send_ServerToAllClients( "hide_timer", {} )
     CustomGameEventManager:Send_ServerToAllClients( "hide_board", {} )
-    item = CreateItem("item_dagon_5", hero, hero)
-    hero:AddItem(item)
-    item = CreateItem("item_stat_tome", hero, hero)
-    hero:AddItem(item)
-    item = CreateItem("item_speed_fruit", hero, hero)
-    hero:AddItem(item)
+    
   else
     print('Hero in unknown map')
   end
+
+  item = CreateItem("item_dagon_5", hero, hero)
+  hero:AddItem(item)
+  item = CreateItem("item_stat_tome", hero, hero)
+  hero:AddItem(item)
+  item = CreateItem("item_speed_fruit", hero, hero)
+  hero:AddItem(item)
 
   -- This line for example will set the starting gold of every hero to 500 unreliable gold
   hero:SetGold(500, false)
