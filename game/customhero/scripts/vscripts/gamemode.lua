@@ -1,6 +1,6 @@
 -- This is the primary mythos gamemode script and should be used to assist in initializing your game mode
 
-_G.nCOUNTDOWNTIMER = 12
+_G.nCOUNTDOWNTIMER = 2000
 
 -- Set this to true if you want to see a complete debug output of all events/processes done by mythos
 -- You can also change the cvar 'mythos_spew' at any time to 1 or 0 for output/no output
@@ -119,7 +119,7 @@ function GameMode:OnPlayerPickHero(keys)
     ability:UpgradeAbility(true)
   end
 
-  player.faith = 10
+  player.points = 0
 end
 
 -- This function initializes the game mode and is called before anyone loads into the game
@@ -170,7 +170,7 @@ function GameMode:OnHeroInGame(hero)
   	self.m_TeamColors[DOTA_TEAM_GOODGUYS] = { 61, 210, 150 }	--		Teal
   	self.m_TeamColors[DOTA_TEAM_BADGUYS]  = { 243, 201, 9 }		--		Yellow
   	self.m_TeamColors[DOTA_TEAM_CUSTOM_1] = { 197, 77, 168 }	--      Pink
-  	self.m_TeamColors[DOTA_TEAM_CUSTOM_2] = { 255, 108, 0 }		--		Orange
+  	self.m_TeamColors[DOTA_TEAM_CUSTOM_2] = { 255, 108, 0 }		--		Orange6
   	self.m_TeamColors[DOTA_TEAM_CUSTOM_3] = { 52, 85, 255 }		--		Blue
   	self.m_TeamColors[DOTA_TEAM_CUSTOM_4] = { 101, 212, 19 }	--		Green
   	self.m_TeamColors[DOTA_TEAM_CUSTOM_5] = { 129, 83, 54 }		--		Brown
@@ -211,6 +211,8 @@ function GameMode:OnHeroInGame(hero)
   hero:RemoveAbility(abil:GetAbilityName())
   hero:AddAbility("example_ability")]]
 end
+
+
 --[[
   This function is called once and only once when the game completely begins (about 0:00 on the clock).  At this point,
   gold will begin to go up in ticks if configured, creeps will spawn, towers will become damageable etc.  This function
@@ -265,7 +267,7 @@ function GameMode:OnGameInProgress()
     Timers:CreateTimer( function()
          GameMode:OnThink()
          return 1
-      end)
+    end)
   else
     print("Not loaded into any known map.")
   end
@@ -641,9 +643,20 @@ function GameMode:ColorForTeam( teamID )
 end
 --UpdatesScoreboard
 function GameMode:UpdateScoreboard()
+
+  --Calculates each teams points
   local sortedTeams = {}
   for _, team in pairs( self.m_GatheredShuffledTeams ) do
-    table.insert( sortedTeams, { teamID = team, teamScore = GetTeamHeroKills( team ) } )
+    local points = 0
+    local heroes = HeroList:GetAllHeroes()
+    for i=1, table.getn(heroes) do
+      if heroes[i]:GetTeam() == team then
+        local player = PlayerResource:GetPlayer(heroes[i]:GetPlayerID())
+        points = player.points + points
+        print(player.points)
+      end
+    end
+    table.insert( sortedTeams, { teamID = team, teamScore = points } )
   end
 
   -- reverse-sort by score
