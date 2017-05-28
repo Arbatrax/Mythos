@@ -1,3 +1,14 @@
+function Initialize(event)
+	local caster = event.caster
+	local ability = event.ability
+	local modifier = "modifier_blood_of_the_innocent_stack"
+
+	local current_stack = caster:GetModifierStackCount( modifier, ability )
+	if current_stack < 1 then
+		ability:SetActivated(false)
+	end
+end
+
 function HysteriaAnimation(event)
 	local caster = event.caster
 	local ability = event.ability
@@ -17,6 +28,13 @@ end
 
 function HysteriaAnimationEnd(event)
 	local caster = event.caster
+	local ability = event.ability
+	local modifier = "modifier_blood_of_the_innocent_stack"
+
+	local current_stack = caster:GetModifierStackCount( modifier, ability )
+	if current_stack < 1 then
+		ability:SetActivated(false)
+	end
 
 	caster:RemoveModifierByName("modifier_hysteria_buff")
 	RemoveAnimationTranslate(caster)

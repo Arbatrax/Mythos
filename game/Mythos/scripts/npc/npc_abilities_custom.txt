@@ -883,11 +883,6 @@
         "var_type"        "FIELD_INTEGER"
         "gladiator_bonus_damage"      "10"
       }
-      "02"
-      {
-        "var_type"        "FIELD_INTEGER"
-        "gladiator_bonus_damage_taken"    "10"
-      }
       "03"
       { 
         "var_type"        "FIELD_INTEGER"
@@ -963,7 +958,6 @@
             "MODIFIER_PROPERTY_ATTACK_RANGE_BONUS"      "%bonus_range"
             "MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT" "%base_attack_time"
             "MODIFIER_PROPERTY_DAMAGEOUTGOING_PERCENTAGE" "%gladiator_bonus_damage"
-            "MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE" "%gladiator_bonus_damage_taken"
         }
       }
     }
@@ -1088,7 +1082,7 @@
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"        "500"
-    "AbilityCastPoint"        "0.4"
+    "AbilityCastPoint"        "0.3"
 
     // Time   
     //-------------------------------------------------------------------------------------------------------------
@@ -1096,7 +1090,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "115"
+    "AbilityManaCost"       "95"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
@@ -1111,7 +1105,7 @@
       "01"
       {
         "var_type"        "FIELD_FLOAT"
-        "duration"       "4.0 4.5 5.0 5.5"
+        "duration"       "3.0 3.5 4.0 4.5"
       }
       "02"
       {
@@ -1345,7 +1339,7 @@
       "01"
       {
         "var_type"        "FIELD_INTEGER"
-        "bonus_armor"     "6 7 8 9"
+        "bonus_armor"     "5 6 7 8"
       }
       "02"
       {
@@ -1355,12 +1349,12 @@
       "03"
       {
         "var_type"        "FIELD_INTEGER"
-        "duration"        "6"
+        "duration"        "7"
       }
       "04"
       {
         "var_type"        "FIELD_INTEGER"
-        "health_cost"     "10"
+        "health_cost"     "15"
       }
     }
 
@@ -2330,7 +2324,7 @@
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitTargetFlags"    "DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
     "SpellImmunityType"       "SPELL_IMMUNITY_ALLIES_NO"
     "AbilityCastAnimation" "ACT_DOTA_CAST_EMP"
@@ -3057,7 +3051,7 @@
         "Aura"        "modifier_tempest_aura_effect"
         "Aura_Radius"     "%radius"
         "Aura_Teams"    "DOTA_UNIT_TARGET_TEAM_ENEMY"
-        "Aura_Types"    "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+        "Aura_Types"    "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
       }
 
       "modifier_tempest_aura_effect"
@@ -3238,6 +3232,11 @@
         "var_type"      "FIELD_INTEGER"
         "heal"      "10 20 30 40"
       }
+      "04"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "actual_heal"      "5 10 15 20"
+      }
     }
     
     // Data driven
@@ -3306,7 +3305,7 @@
           "Center"  "TARGET"
           "Teams"   "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
         }
-        "HealAmount"  "%heal / 2"
+        "HealAmount"  "%actual_heal"
       }
     }
     
@@ -3417,6 +3416,11 @@
         "var_type"      "FIELD_INTEGER"
         "threshold"      "50 45 40"
       }
+      "03"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "actual_damage"      "8 11 14"
+      }
     }
     
     // Data driven
@@ -3479,7 +3483,7 @@
           {
             "Target"    "TARGET"
             "Type"      "DAMAGE_TYPE_MAGICAL"
-            "Damage"    "%damage / 10"
+            "Damage"    "%actual_damage"
           }
         }
       }
@@ -3747,7 +3751,7 @@
         
         "States"
         {
-          "MODIFIER_STATE_FLYING" "MODIFIER_STATE_VALUE_ENABLED"
+          "MODIFIER_STATE_FLYING_FOR_PATHING_PURPOSES_ONLY" "MODIFIER_STATE_VALUE_ENABLED"
         }
 
         "OnDestroy"
@@ -4674,7 +4678,7 @@
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitTargetFlags"    "DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
     "SpellImmunityType"       "SPELL_IMMUNITY_ALLIES_NO"
     "AbilityTextureName"      "wisp_relocate"
@@ -5183,7 +5187,7 @@
       "04"
       {
         "var_type"      "FIELD_INTEGER"
-        "interval"      "3"
+        "interval"      "1"
       }
     }
     
@@ -5227,7 +5231,7 @@
           "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"  "%slow"
         }
 
-        "ThinkInterval" "3.0"
+        "ThinkInterval" "1.0"
         "OnIntervalThink"
         { 
           "Damage"
@@ -5372,7 +5376,7 @@
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitTargetFlags"    "DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
     "SpellImmunityType"       "SPELL_IMMUNITY_ALLIES_NO"
     "AbilityTextureName"      "dark_seer_wall_of_replica"
@@ -5534,7 +5538,7 @@
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_MECHANICAL"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitTargetFlags"    "DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
     "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
     "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL" 
@@ -6091,7 +6095,7 @@
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastPoint"        "0.0 0.0 0.0"
-    "AbilityCooldown"        "10.0"
+    "AbilityCooldown"        "20.0"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -6131,6 +6135,15 @@
       {
         "var_type"        "FIELD_INTEGER"
         "max_stacks"  "80 90 100"
+      }
+    }
+
+    "OnUpgrade"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "heroes/hunter/hysteria.lua"
+        "Function"    "Initialize"
       }
     }
 
@@ -6268,6 +6281,11 @@
         "IsHidden" "1"
         "Passive" "1"
         "Attributes"    "MODIFIER_ATTRIBUTE_PERMANENT"
+
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "0.1" 
+        }
 
         "OnKill"   
         {
@@ -7009,7 +7027,7 @@
     "precache"
     {
       "soundfile"   "soundevents/game_sounds_heroes/game_sounds_invoker.vsndevts"
-      "particle"       "particles\units\heroes\hero_invoker\invoker_tornado.vpcf"
+      "particle"   "particles\units\heroes\hero_invoker\invoker_tornado.vpcf"
       "particle"  "particles\units\heroes\hero_sailor\favorable_winds.vpcf"
       "particle"  "particles\units\heroes\hero_sailor\favorable_winds_rootpnt.vpcf"
       "particle"  "particles\units\heroes\hero_windrunner\windrunner_windrun.vpcf"
@@ -7408,7 +7426,7 @@
       "01"
       {
         "var_type"        "FIELD_FLOAT"
-        "bonus_strength"       "15 22 40"
+        "bonus_strength"       "11 22 33"
       }
       "02"
       {

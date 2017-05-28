@@ -23,6 +23,7 @@ function Precache( context )
   PrecacheResource("particle", "particles/neutral_fx/ghost_base_attack.vpcf", context)
   PrecacheResource("particle", "particles/units/heroes/hero_furion/furion_base_attack.vpcf", context)
   PrecacheResource("particle", "particles/units/heroes/hero_lycan/lycan_claw_blur_b.vpcf", context)
+  PrecacheResource("particle", "particles/units/heroes/hero_undying/undying_tnt_wlk_golem.vpcf", context)
  
   PrecacheResource("particle_folder", "particles/test_particle", context)
 

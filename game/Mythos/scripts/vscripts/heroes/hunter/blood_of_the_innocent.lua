@@ -29,6 +29,7 @@ function StackIncrement( event )
 		else
 			caster:SetModifierStackCount( modifier, stack_ability, max_stacks )
 		end
+		ult:SetActivated(true)
 	elseif ability == caster:GetAbilityByIndex(2) then
 		local stacks_gained = ability:GetLevelSpecialValueFor( "stacks_per_hit", 0)
 
@@ -45,6 +46,7 @@ function StackIncrement( event )
 		else
 			caster:SetModifierStackCount( modifier, stack_ability, max_stacks )
 		end
+		ult:SetActivated(true)
 	elseif ability == stack_ability then
 		-- Check how many stacks can be granted
 		local stacks_gained = creep_stacks
@@ -65,6 +67,7 @@ function StackIncrement( event )
 		else
 			caster:SetModifierStackCount( modifier, stack_ability, max_stacks )
 		end
+		ult:SetActivated(true)
 	end
 end
 
@@ -103,6 +106,6 @@ function Cleave (event)
 	local radius = ability:GetLevelSpecialValueFor( "radius", ability:GetLevel() - 1 )
 
 	if stack_count < cleave then
-		DoCleaveAttack(caster, target, ability, damage*damage_modifier, radius, "particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf" )
+		DoCleaveAttack(caster, target, ability, damage*damage_modifier, radius, 150, radius, "particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf" )
 	end
 end

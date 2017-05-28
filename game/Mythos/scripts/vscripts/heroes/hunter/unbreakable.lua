@@ -12,7 +12,9 @@ function Unbreakable( event )
 	local ult = caster:GetAbilityByIndex(4)
 	local modifier = "modifier_blood_of_the_innocent_stack"
 	local damage = event.attack_damage
-	
+	if damage < 25 then
+		return
+	end
 
 	local creep_stacks = stack_ability:GetLevelSpecialValueFor( "creep_stacks", stack_ability:GetLevel() - 1 )
 	local hero_stacks = stack_ability:GetLevelSpecialValueFor( "hero_stacks", stack_ability:GetLevel() - 1 )
@@ -24,6 +26,9 @@ function Unbreakable( event )
 	caster.unbreakable_damage = caster.unbreakable_damage + damage
 
 	local stacks_gained = ability:GetLevelSpecialValueFor( "stacks_per_hit", 0)
+	if damage < 25 then
+		return
+	end
 
 	-- Check if the hero already has the modifier
 	local current_stack = caster:GetModifierStackCount( modifier, stack_ability )

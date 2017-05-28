@@ -713,6 +713,7 @@ function GameMode:UpdateScoreboard()
   end
 end
 
+--[[
 function GameMode:OnThink()
  --  print("1")
   self:UpdateScoreboard()
@@ -744,3 +745,4 @@ function GameMode:OnThink()
   end
   -- print('3')
 end
+]]--
