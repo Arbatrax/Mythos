@@ -118,8 +118,6 @@ function GameMode:OnPlayerPickHero(keys)
     local ability = hero:FindAbilityByName("blood_of_the_innocent") 
     ability:UpgradeAbility(true)
   end
-
-  player.points = 0
 end
 
 -- This function initializes the game mode and is called before anyone loads into the game

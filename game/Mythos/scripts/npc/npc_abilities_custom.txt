@@ -1750,7 +1750,7 @@
       "02"
       {
         "var_type"        "FIELD_FLOAT"
-        "stun_duration"    "1.65 1.90 2.15 2.4"
+        "stun_duration"    "1.40 1.60 1.80 2.00"
       }
     }
 
@@ -5702,7 +5702,7 @@
     // Time   
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"        "900 900 900 900"
-    "AbilityCooldown"       "30.0"
+    "AbilityCooldown"       "70 60 50 40"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -6820,6 +6820,7 @@
     {
       "soundfile"     "soundevents/game_sounds_heroes/game_sounds_shadowshaman.vsndevts"
       "particle"      "particles\units\heroes\hero_shadowshaman\shadowshaman_ether_shock.vpcf"
+      "particle"  "particles\units\heroes\hero_lion\lion_spell_voodoo.vpcf"
       "model" "models\courier\drodo\drodo.vmdl"
       "model" "models\courier\frog\frog.vmdl"
       "model" "models\courier\mighty_boar\mighty_boar.vmdl"
@@ -6865,6 +6866,11 @@
         "var_type"        "FIELD_INTEGER"
         "movement_speed"       "100"
       }
+      "05"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "tick_interval"       "1"
+      }
     }
 
     "OnSpellStart"
@@ -6876,13 +6882,6 @@
         "Target"    "POINT"
       }
 
-      "ApplyModifier"
-      {
-        "ModifierName"  "modifier_dimensional_lightning_buff"
-        "Target"     "CASTER"
-        "Duration"    "%duration"
-      }
-
        "ApplyModifier"
       {
         "Target"      "CASTER"
@@ -6892,10 +6891,10 @@
 
     "OnChannelFinish"
     {
-      "RemoveModifier"
+      "RunScript"
       {
-        "ModifierName"  "modifier_dimensional_lightning_buff"
-        "Target"     "CASTER"
+        "ScriptFile"  "heroes/trickster/dimensional_lightning.lua"
+        "Function"    "ChannelFinish"
       }
 
       "RemoveModifier"
@@ -6907,42 +6906,18 @@
 
     "Modifiers"
     {
-      "modifier_dimensional_lightning_buff"
-      {
-
-      }
-
       "modifier_dimensional_lightning"
       {
 
         "IsDebuff" "1"
 
-        "ThinkInterval"  "0.03"
+        "ThinkInterval"  "%tick_interval"
         "OnIntervalThink"
         {
           "RunScript"
           {
             "ScriptFile"  "heroes/trickster/dimensional_lightning.lua"
-            "Function"    "CheckForBuff"
-          }
-        }
-
-        "OnCreated"
-        {
-          "Damage"
-          {
-            "Target"    "TARGET"
-            "Type"      "DAMAGE_TYPE_MAGICAL"
-            "Damage"    "%damage"
-          }
-        }
-
-        "OnDestroy"
-        {
-          "RemoveModifier"
-          {
-            "ModifierName"  "modifier_dimensional_lightning_transform"
-            "Target"     "TARGET"
+            "Function"    "LightningTick"
           }
         }
 

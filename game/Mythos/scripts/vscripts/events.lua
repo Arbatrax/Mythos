@@ -144,11 +144,6 @@ function GameMode:OnLastHit(keys)
   local player = PlayerResource:GetPlayer(keys.PlayerID)
   local killedEnt = EntIndexToHScript(keys.EntKilled)
 
-  if killedEnt:IsHero() then
-    player.points = player.points + 5
-    print(player.points)
-  end
-
 end
 
 -- A tree was cut down by tango, quelling blade, etc

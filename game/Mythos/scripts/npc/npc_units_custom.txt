@@ -138,7 +138,7 @@
         //----------------------------------------------------------------
         "BaseClass"                 "npc_dota_lone_druid_bear" // Class of entity of link to.
         "DisplayAdditionalHeroes" "1"
-        "Model"                     "models\heroes\phoenix\phoenix_bird.vmdl"  // Model.
+        "Model"                     "models/heroes/phoenix/phoenix_bird.vmdl"  // Model.
         "Level"                     "1"
         "ModelScale"                "0.75"
         "AttackCapabilities"       "DOTA_UNIT_CAP_RANGED_ATTACK"
@@ -149,7 +149,9 @@
         //----------------------------------------------------------------
          "precache"
         {
-            "model"             "models\heroes\phoenix\phoenix_bird.vmdl"
+            "model"             "models/heroes/phoenix/phoenix_bird.vmdl"
+            "model"             "models/heroes/phoenix/phoenix_bird_head.vmdl"
+            "model"             "models/heroes/phoenix/phoenix_wings.vmdl"
             "soundfile"         "soundevents/game_sounds_heroes/game_sounds_phoenix.vsndevts"
             "particle"          "particles/units/heroes/hero_phoenix/phoenix_base_attack.vpcf"
 
@@ -210,15 +212,15 @@
         "VisionNighttimeRange"      "800"      // Range of vision at night time.
 
         //Inventory
-        "HasInventory"              "0"
-
-            
+        "HasInventory"              "0"   
             
         "Creature"
         {
             "AttachWearables"
             {
                 "Wearable1" { "ItemDef" "535" }
+                "Wearable2" { "ItemDef" "592" }
+                "Wearable3" { "ItemDef" "626" }
             }
         }
     }
@@ -758,7 +760,7 @@
             {
                 "Wearable1" { "ItemDef" "29" }
                 "Wearable2" { "ItemDef" "30" }
-                "Wearable2" { "ItemDef" "31" }
+                "Wearable3" { "ItemDef" "31" }
                 "Wearable4" { "ItemDef" "32" }
                 "Wearable5" { "ItemDef" "33" }
                 "Wearable6" { "ItemDef" "34" }

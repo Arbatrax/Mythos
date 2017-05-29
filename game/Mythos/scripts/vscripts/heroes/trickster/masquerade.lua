@@ -76,7 +76,7 @@ function Masquerade(keys)
 		-- Set the unit as an illusion
 		-- modifier_illusion controls many illusion properties like +Green damage not adding to the unit damage, not being able to cast spells and the team-only blue particle
 		illusion:AddNewModifier(caster, ability, "modifier_illusion", { duration = illusion_duration, outgoing_damage = 0, incoming_damage = 300 })
-		
+		illusion:AddNewModifier(caster, ability, "modifier_phased", {duration = illusion_duration})
 		ability:ApplyDataDrivenModifier(caster, illusion, "modifier_masquerade_illusion", {})
 		ability:ApplyDataDrivenModifier(caster, illusion, "modifier_masquerade_explosion", {duration = illusion_duration-0.1})
 		ability:ApplyDataDrivenModifier(caster, illusion, "modifier_masquerade_target", {})

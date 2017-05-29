@@ -23,13 +23,14 @@ function DominateMind( keys )
 	local ability = keys.ability
 	local ability_level = ability:GetLevel() - 1
 
-	local final_gift = caster:GetAbilityByIndex(3)
-	final_gift:SetActivated( true )
-
 	-- If there is already a dominated unit then kill the old one
 	if caster.dominate_mind then
 		caster.dominate_mind:ForceKill(true) 
 	end
+	
+	local final_gift = caster:GetAbilityByIndex(3)
+	final_gift:SetActivated( true )
+
 
 	-- Initialize the tracking data
 	caster.dominate_mind = target
