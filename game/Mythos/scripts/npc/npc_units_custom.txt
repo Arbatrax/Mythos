@@ -1535,6 +1535,115 @@
         
     }
 
+    "neutral_ice_dragon_boss"
+    {
+        // General
+        //----------------------------------------------------------------
+        "BaseClass"                 "npc_dota_creature" // Class of entity of link to.
+        "Level"                     "1"
+        "Model"                     "models\heroes\winterwyvern\winterwyvern.vmdl" // Model.
+        "ModelScale"                "1.6"
+        "AttackCapabilities"       "DOTA_UNIT_CAP_MELEE_ATTACK"
+        "AttackAcquisitionRange"     "400"
+        "AttackRange"               "180"
+        "Level"                     "1"
+        "IsAncient"                 "1"
+
+        //Sound 
+        "SoundSet"                     "Hero_Winter_Wyvern"
+        "GameSoundsFile"               "soundevents/game_sounds_heroes/game_sounds_winter_wyvern.vsndevts"
+
+        // Precache
+        //----------------------------------------------------------------
+         "precache"
+        {
+            "particle"    "particles\units\heroes\hero_winter_wyvern\winter_wyvern_base_attack.vpcf"
+        }
+
+        "ProjectileModel"            "particles\units\heroes\hero_winter_wyvern\winter_wyvern_base_attack.vpcf"
+        "ProjectileSpeed"            "900"
+
+        "Ability1"                   "ice_dragon_passive"        
+        "Ability2"                   "glacial_tomb"
+
+        "AttackDamageMin"            "125"       // Damage range min.
+        "AttackDamageMax"            "135"       // Damage range max.
+        "AttackRate"                 "1.8"     // Speed of attack.
+        "AttackAnimationPoint"       "0.35"    // Normalized time in animation cycle to attack
+
+        // Armor
+        //----------------------------------------------------------------
+        "ArmorPhysical"             "9"         // Physical protection.
+        "MagicalResistance"         "0"
+
+        // Bounds
+        //----------------------------------------------------------------
+        "BoundsHullName"            "DOTA_HULL_SIZE_REGULAR"            // Hull type used for navigation/locomotion.
+        "HealthBarOffset"           "320"
+
+        // Movement
+        //----------------------------------------------------------------
+        "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"            // Type of locomotion - ground, air
+        
+        // Bounty
+        //----------------------------------------------------------------
+        "BountyXP"                  "1115"        // Experience earn.
+        "BountyGoldMin"             "128"       // Gold earned min.
+        "BountyGoldMax"             "158"       // Gold earned max.
+
+        // Status
+        //----------------------------------------------------------------
+        "StatusHealth"              "1000"       // Base health.
+        "StatusHealthRegen"         "0"     // Health regeneration rate.
+        "StatusMana"                "1000"         // Base mana.
+        "StatusManaRegen"           "0"         // Mana regeneration rate.
+        "ConsideredHero"            "1"
+
+        // Team
+        //----------------------------------------------------------------
+        "TeamName"                  "DOTA_TEAM_NEUTRALS"            // Team name.
+         
+            
+        // Vision
+        //----------------------------------------------------------------
+        "VisionDaytimeRange"        "800"      // Range of vision during day light.
+        "VisionNighttimeRange"      "800"      // Range of vision at night time.
+
+        //Inventory
+        "HasInventory"              "0"
+        "Creature"
+        {
+            "AttachWearables"
+            {
+                "Wearable1" { "ItemDef" "551" }
+                "Wearable2" { "ItemDef" "552" }
+                "Wearable3" { "ItemDef" "553" }
+            }
+
+            "DefaultState"       "Invade"
+            "States"
+            {
+                "Invade"
+                {
+                    "Name"          "Invade"
+                    "Aggression"    "100.0"
+                    "Avoidance"     "0.0"
+                    "Support"       "0.0"
+                    "RoamDistance"  "0.0"
+                }
+            }
+
+            "OffensiveAbilities"
+            {
+                "Ability1"                
+                {
+                    
+                }
+            }
+        }
+        
+    }
+
     "neutral_harpy_vision"
     {
         // General

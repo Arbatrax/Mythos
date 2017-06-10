@@ -18,6 +18,8 @@ function TakeDamage( keys )
 		EmitSoundOn("Hero_Kunkaa.Tidebringer", caster)
 		ability:ApplyDataDrivenModifier(caster, caster, "modifier_kiss_buff", {duration=duration})
 		caster:AddNewModifier(caster, ability, "modifier_kiss_transform", {duration=duration})
+		--CosmeticLib:EquipHeroSet(caster, 20219)
+		--CosmeticLib:EquipHeroSet( hero, set_id )
 		caster:Heal(heal*19, caster)
 		caster:SetPrimaryAttribute(0)
 		local modelsize = caster:GetModelScale()
@@ -65,4 +67,19 @@ function TakeDamage( keys )
 	        ability:ApplyDataDrivenModifier(caster, caster, modifierName, {})
 	    end)
 	end
+end
+
+function HideWearables( event )
+	local hero = event.caster
+	local ability = event.ability
+
+	hero.hiddenWearables = {} -- Keep every wearable handle in a table to show them later
+    local model = hero:FirstMoveChild()
+    while model ~= nil do
+        if model:GetClassname() == "dota_item_wearable" then
+            model:AddEffects(EF_NODRAW) -- Set model hidden
+            table.insert(hero.hiddenWearables, model)
+        end
+        model = model:NextMovePeer()
+    end
 end

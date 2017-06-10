@@ -4366,7 +4366,7 @@
     "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
     "AbilityUnitTargetFlags"    "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
     "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_YES"
-    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL" 
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_PURE" 
     "AbilityTextureName"      "winter_wyvern_cold_embrace"
     "AbilityCastAnimation"     "ACT_DOTA_CAST_ABILITY_4"
 
@@ -4383,7 +4383,7 @@
     
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "105 95 85"
+    "AbilityCooldown"       "90 75 60"
     "AbilityCastRange"      "900"
 
     // Cost
@@ -4440,16 +4440,14 @@
         "Target"      "CASTER"
       }
 
-      "TrackingProjectile"
+      "RunScript"
       {
-        "Target"           "TARGET"
-        "EffectName"    "particles\units\heroes\hero_winter_wyvern\wyvern_splinter_blast.vpcf"
-        "Dodgeable"        "0"
-        "ProvidesVision"   "1"
-        "VisionRadius"     "0"
-        "MoveSpeed"        "900"
-        "SourceAttachment"  "DOTA_PROJECTILE_ATTACHMENT_HITLOCATION"
+        "ScriptFile"  "heroes/christopher_freeze/frozen_tomb.lua"
+        "Function"    "FrozenTomb"
+        "target"      "TARGET"
       }
+
+
     }
 
     "OnProjectileHitUnit"
@@ -4461,39 +4459,17 @@
         "Type"    "DAMAGE_TYPE_MAGICAL"
       }
 
-      "ActOnTargets"
+      "FireSound"
       {
-        "Target"
-        {
-          "Center"    "TARGET"
-          "Flags" "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
-        }
-      
-        "Action"    
-        {
-          "FireSound"
-          {
-            "EffectName"    "Hero_Winter_Wyvern.WintersCurse.Target"
-            "Target"      "TARGET"
-          }
-
-          
-          "ApplyModifier"
-          {
-            "ModifierName"  "modifier_frozen_tomb_stun"
-            "Target"     "TARGET"
-            "Duration"    "%stun_duration"
-          }
-          "ApplyModifier"
-          {
-
-            "ModifierName"  "modifier_faceless_void_chronosphere_freeze"
-            "Target"     "TARGET"
-            "Duration"    "%stun_duration"
-          }  
-        }
+        "EffectName"    "Hero_Winter_Wyvern.WintersCurse.Target"
+        "Target"      "TARGET"
       }
-
+      
+      "RunScript"
+      {
+        "ScriptFile"  "heroes/christopher_freeze/frozen_tomb.lua"
+        "Function"    "Collide"
+      }
     }
     
     "Modifiers"
@@ -4501,7 +4477,6 @@
       "modifier_frozen_tomb_stun"
       {
         "IsDebuff" "1"
-        "IsHidden" "1"
 
         "EffectName"        "particles\units\heroes\hero_winter_wyvern\wyvern_cold_embrace_buff.vpcf"
         "EffectAttachType"  "follow_origin"
@@ -4513,11 +4488,10 @@
 
         "OnDestroy"
         {
-          "ApplyModifier"
+          "RunScript"
           {
-            "ModifierName"  "modifier_frozen_tomb_slow"
-            "Target"     "TARGET"
-            "Duration"    "%slow_duration"
+            "ScriptFile"  "heroes/christopher_freeze/frozen_tomb.lua"
+            "Function"    "Slow"
           }
         }
       }
@@ -4671,7 +4645,94 @@
     }
   }
 
-  "shatter"
+  "crazed_acolyte"
+  {
+      // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"       "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
+    "AbilityUnitTargetFlags"    "DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
+    "SpellImmunityType"       "SPELL_IMMUNITY_ALLIES_NO"
+    "AbilityTextureName"      "invoker_ghost_walk"
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "700"
+    "AbilityCastPoint"        "0.3"
+    
+    // Time   
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"       "13"
+    
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "100 110 120 130"
+    
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "damage"          "60 120 180 240"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "duration"        "6.5"
+      }
+       "03"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "silence_duration"        "2 3 4 5"
+      }
+      "04"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "speed"        "350 400 450 500"
+      }
+    }
+
+    "precache"
+    {
+      "soundfile" "soundevents/game_sounds_heroes/game_sounds_death_prophet.vsndevts"
+      "soundfile" "soundevents/game_sounds_heroes/game_sounds_ancient_apparition.vsndevts"
+      "particle"  "particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf"    
+    }
+
+    "OnSpellStart"
+    {
+      "FireSound"
+      {
+        "EffectName"    "Hero_DeathProphet.CarrionSwarm"
+        "Target"      "CASTER"
+      }
+
+      "RunScript"
+      {
+        "ScriptFile" "heroes/christopher_freeze/crazed_acolyte.lua"
+        "Function" "CrazedAcolyte"       
+      }
+    }
+
+    "Modifiers"
+    {
+      "modifier_crazed_acolyte"
+      {
+        "IsHidden"      "1"
+
+        "States"
+        {
+          "MODIFIER_STATE_STUNNED"  "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }   
+  }
+
+  "frozen_shatter"
   {
       // General
     //-------------------------------------------------------------------------------------------------------------
@@ -4690,11 +4751,11 @@
     
     // Time   
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "7"
+    "AbilityCooldown"       "7.0 7.0 7.0 7.0"
     
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "80 100 120 140"
+    "AbilityManaCost"       "100 130 160 190"
     
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -4760,92 +4821,6 @@
     }
   }
 
-  "crazed_acolyte"
-  {
-      // General
-    //-------------------------------------------------------------------------------------------------------------
-    "BaseClass"       "ability_datadriven"
-    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
-    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
-    "AbilityUnitTargetFlags"    "DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
-    "SpellImmunityType"       "SPELL_IMMUNITY_ALLIES_NO"
-    "AbilityTextureName"      "invoker_ghost_walk"
-
-    // Casting
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"        "700"
-    "AbilityCastPoint"        "0.3"
-    
-    // Time   
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"       "13"
-    
-    // Cost
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"       "80 90 100 110"
-    
-    // Special
-    //-------------------------------------------------------------------------------------------------------------
-    "AbilitySpecial"
-    {
-      "01"
-      {
-        "var_type"        "FIELD_INTEGER"
-        "damage"          "60 120 180 240"
-      }
-      "02"
-      {
-        "var_type"        "FIELD_INTEGER"
-        "duration"        "5"
-      }
-       "03"
-      {
-        "var_type"        "FIELD_INTEGER"
-        "silence_duration"        "2 3 4 5"
-      }
-      "04"
-      {
-        "var_type"        "FIELD_INTEGER"
-        "speed"        "350 400 450 500"
-      }
-    }
-
-    "precache"
-    {
-      "soundfile" "soundevents/game_sounds_heroes/game_sounds_death_prophet.vsndevts"
-      "soundfile" "soundevents/game_sounds_heroes/game_sounds_ancient_apparition.vsndevts"
-      "particle"  "particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf"    
-    }
-
-    "OnSpellStart"
-    {
-      "FireSound"
-      {
-        "EffectName"    "Hero_DeathProphet.CarrionSwarm"
-        "Target"      "CASTER"
-      }
-
-      "RunScript"
-      {
-        "ScriptFile" "heroes/christopher_freeze/crazed_acolyte.lua"
-        "Function" "CrazedAcolyte"       
-      }
-    }
-
-    "Modifiers"
-    {
-      "modifier_crazed_acolyte"
-      {
-        "IsHidden"      "1"
-
-        "States"
-        {
-          "MODIFIER_STATE_STUNNED"  "MODIFIER_STATE_VALUE_ENABLED"
-        }
-      }
-    }   
-  }
 
   "icy_rune"
   {
@@ -5376,7 +5351,7 @@
     "BaseClass"       "ability_datadriven"
     "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
     "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"
     "AbilityUnitTargetFlags"    "DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
     "SpellImmunityType"       "SPELL_IMMUNITY_ALLIES_NO"
     "AbilityTextureName"      "dark_seer_wall_of_replica"
@@ -5417,7 +5392,7 @@
       "04"
       {
         "var_type"        "FIELD_FLOAT"
-        "illusion_duration"  "5.0 4.5 4.0 3.5"
+        "illusion_duration"  "5.0 5.0 5.0 5.0"
       }
       "05"
       {
@@ -5617,6 +5592,8 @@
     {
       "modifier_touch_of_darkness"
       {
+        "Attributes"       "MODIFIER_ATTRIBUTE_MULTIPLE"
+
         "OnTakeDamage"
         // "%attack_damage" is set to the damage value after mitigation
         {
@@ -5702,7 +5679,7 @@
     // Time   
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"        "900 900 900 900"
-    "AbilityCooldown"       "70 60 50 40"
+    "AbilityCooldown"       "60 50 40 30"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -6824,10 +6801,16 @@
       "model" "models\courier\drodo\drodo.vmdl"
       "model" "models\courier\frog\frog.vmdl"
       "model" "models\courier\mighty_boar\mighty_boar.vmdl"
-      "model" "models\courier\snowleopard\snowleopard_courier.vmdl"
+      "model" "models\courier\baby_rosh\babyroshan.vmdl"
       "model" "models\items\courier\alphid_of_lecaciida\alphid_of_lecaciida.vmdl"
       "model" "models\items\courier\blotto_and_stick\blotto.vmdl"
+      "model" "models\courier\f2p_courier\f2p_courier.vmdl"
+      "model" "models\courier\frull\frull_courier.vmdl"
+      "model" "models\courier\greevil\gold_greevil.vmdl"
+      "model" "models\courier\ram\ram.vmdl"
+      "model" "models\courier\badger\courier_badger.vmdl"
     }
+
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
@@ -7380,7 +7363,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "AbilityType"             "DOTA_ABILITY_TYPE_ULTIMATE"
     "MaxLevel"              "3"
-    "RequiredLevel"        "5"
+    "RequiredLevel"        "-5"
     "LevelsBetweenUpgrades" "5"
 
     // Precache
@@ -8228,6 +8211,384 @@
           "MODIFIER_STATE_UNSELECTABLE" "MODIFIER_STATE_VALUE_ENABLED"
           "MODIFIER_STATE_NO_HEALTH_BAR"       "MODIFIER_STATE_VALUE_ENABLED"
           "MODIFIER_STATE_NO_UNIT_COLLISION"  "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+    }
+  }
+
+  "ice_dragon_passive"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"       "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityTextureName"      "winter_wyvern_arctic_burn"
+
+    // Special
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"      "FIELD_INTEGER"
+        "attack_range_bonus"      "420"
+      }
+    }
+    
+    // Data driven
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {
+
+    }
+    
+    "Modifiers"
+    {
+      "modifier_ice_dragon_passive"
+      {
+        "Passive" "1"
+      
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "neutrals/ice_dragon/ice_dragon_passive.lua"
+            "Function"    "OnSpawn"
+          }
+        }
+
+        "OnTakeDamage"
+        // "%attack_damage" is set to the damage value after mitigation
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "neutrals/ice_dragon/ice_dragon_passive.lua"
+            "Function"    "PhaseChange"
+          }
+        }
+      }
+
+      "modifier_ice_dragon_phase_two"
+      {
+      
+        "Properties"
+        {
+          "MODIFIER_PROPERTY_ATTACK_RANGE_BONUS" "%attack_range_bonus"
+        }
+
+        "States"
+        {
+          "MODIFIER_STATE_FLYING"    "MODIFIER_STATE_VALUE_ENABLED"
+        }
+        
+      }
+    }
+  }
+
+  "ice_breath"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"       "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_DIRECTIONAL | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"          
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"     
+    "AbilityUnitTargetFlags"    "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL" 
+    "FightRecapLevel"       "1"
+    "AbilityTextureName"      "jakiro_dual_breath"
+
+    
+
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {
+      "soundfile"   "soundevents/game_sounds_heroes/game_sounds_jakiro.vsndevts"
+      "particle"    "particles\units\heroes\hero_jakiro\jakiro_dual_breath_ice.vpcf"
+      "particle"  "particles\units\heroes\hero_winter_wyvern\wyvern_arctic_burn_start.vpcf"
+    }
+
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "1500"
+    "AbilityCastPoint"        "0"
+    "AbilityCastAnimation"      "ACT_DOTA_CAST_EMP"
+
+    // Time   
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"       "15"
+    
+    // Damage.
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityDamage"         "500"
+    
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "100 110 120 130"
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "start_radius"      "215"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "end_radius"      "215"
+      }
+      "03"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "range"         "1500 1500 1500 1500"
+      }
+      "04"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "speed"         "950"
+      }
+      "05"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "ai_radius"         "1350"
+      }
+      "06"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "cooldown"         "15"
+      }
+    }
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "neutrals/ice_dragon/ice_breath.lua"
+        "Function"    "Delay"
+      }
+
+      "FireSound"
+      {
+        "EffectName"  "hero_Crystal.frostbite"
+        "Target"     "CASTER"
+      }
+
+      "FireEffect"
+      {
+        "EffectName"        "particles\units\heroes\hero_winter_wyvern\wyvern_arctic_burn_start.vpcf"
+        "EffectAttachType"  "follow_origin"
+        "Target"            "CASTER"
+      }
+
+      "DelayedAction"
+      {
+        "Delay"     "1.0"
+        "Action"    
+        {
+
+          "LinearProjectile"
+          {
+            "Target" "POINT"
+            "EffectName" "particles\units\heroes\hero_jakiro\jakiro_dual_breath_ice.vpcf"
+            "MoveSpeed" "%speed"
+            "StartRadius" "%start_radius"
+            "StartPosition" "attach_origin"
+            "EndRadius" "%end_radius"
+            "FixedDistance" "%range"
+            "TargetTeams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+            "TargetTypes" "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO | DOTA_UNITY_TARGET_MECHANICAL"
+            "TargetFlags" "DOTA_UNIT_TARGET_FLAG_NONE"
+            "HasFrontalCone" "1"
+            "ProvidesVision" "0"
+          }
+
+          "FireSound"
+          {
+            "EffectName"  "Hero_Jakiro.DualBreath"
+            "Target"     "CASTER"
+          }
+        }
+      }
+    }
+    
+    "OnProjectileHitUnit"
+    {
+      "DeleteOnHit" "0"
+
+      "Damage"
+      {
+        "Target" "TARGET"
+        "Type" "DAMAGE_TYPE_MAGICAL"
+        "Damage" "%AbilityDamage"
+      }
+    }
+    "Modifiers"
+    {
+      "modifier_ice_breath_ai"
+      {
+        "Passive"      "1"
+        "IsHidden"      "0"
+    
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "neutrals/ice_dragon/ice_breath.lua"
+            "Function"    "BreathAI"
+          }
+        }
+      }
+    }
+  }
+
+  "glacial_tomb"
+  {
+    // General
+    //-------------------------------------------------------------------------------------------------------------
+    "BaseClass"       "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"          
+    "AbilityUnitTargetTeam"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+    "AbilityUnitTargetType"     "DOTA_UNIT_TARGET_HERO"     
+    "AbilityUnitTargetFlags"    "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+    "SpellImmunityType"       "SPELL_IMMUNITY_ENEMIES_NO"
+    "AbilityUnitDamageType"     "DAMAGE_TYPE_MAGICAL"
+    "FightRecapLevel"       "1"
+    "AbilityTextureName"      "winter_wyvern_cold_embrace"
+
+    
+
+    // Precache
+    //-------------------------------------------------------------------------------------------------------------
+    "precache"
+    {
+      "soundfile"   "soundevents/game_sounds_heroes/game_sounds_jakiro.vsndevts"
+      "soundfile"   "soundevents/game_sounds_heroes/game_sounds_winter_wyvern.vsndevts"
+      "particle"    "particles\units\heroes\hero_winter_wyvern\wyvern_cold_embrace_buff.vpcf"
+    }
+
+
+    // Casting
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCastRange"        "1500"
+    "AbilityCastPoint"        "0"
+    "AbilityCastAnimation"      "ACT_DOTA_CAST_EMP"
+
+    // Time   
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityCooldown"       "30"
+    
+    // Damage.
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityDamage"         "5"
+    
+    // Cost
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilityManaCost"       "100"
+    
+    // Special  
+    //-------------------------------------------------------------------------------------------------------------
+    "AbilitySpecial"
+    {
+      "01"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "stack_count"      "100"
+      }
+      "02"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "stacks_per_sec"      "20"
+      }
+      "03"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "radius"         "1500 1500 1500 1500"
+      }
+      "04"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "debuff_count"     "2"
+      }
+      "05"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "debuff_radius"     "200"
+      }
+      "06"
+      {
+        "var_type"        "FIELD_INTEGER"
+        "cooldown"     "30"
+      }
+    }
+    
+    "OnSpellStart"
+    {
+      "RunScript"
+      {
+        "ScriptFile"  "neutrals/ice_dragon/glacial_tomb.lua"
+        "Function"    "GlacialTomb"
+      }
+    }
+    
+    "Modifiers"
+    {
+      "modifier_glacial_tomb_debuff"
+      {
+        "IsDebuff"      "1"
+
+        "OnCreated"
+        {
+          "FireSound"
+          {
+            "EffectName"  "Hero_Winter_Wyvern.ColdEmbrace"
+            "Target"     "TARGET"
+          }
+        }
+
+        "EffectName"        "particles\units\heroes\hero_winter_wyvern\wyvern_cold_embrace_buff.vpcf"
+        "EffectAttachType"  "follow_origin"
+    
+        "ThinkInterval"  "0.1"
+        "OnIntervalThink"
+        {
+          "Damage"
+          {
+            "Target"    "TARGET"
+            "Type"      "DAMAGE_TYPE_MAGICAL"
+            "Damage"    "%AbilityDamage"
+          }
+
+          "RunScript"
+          {
+            "ScriptFile"  "neutrals/ice_dragon/glacial_tomb.lua"
+            "Function"        "TombProximity"
+          }
+        }
+
+        "States"
+        {
+          "MODIFIER_STATE_STUNNED"    "MODIFIER_STATE_VALUE_ENABLED"
+        }
+      }
+
+      "modifier_glacial_tomb_ai"
+      {
+        "Passive"      "1"
+        "IsHidden"      "0"
+    
+        "OnCreated"
+        {
+          "RunScript"
+          {
+            "ScriptFile"  "neutrals/ice_dragon/glacial_tomb.lua"
+            "Function"    "GlacialAI"
+          }
         }
       }
     }

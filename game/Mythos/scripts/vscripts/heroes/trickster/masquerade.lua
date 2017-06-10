@@ -53,6 +53,7 @@ function Masquerade(keys)
 		table.insert(illusion_table, illusion)
 		illusion:AddNoDraw()
 		illusion:SetPlayerID(target:GetPlayerID())
+		local random_duration = math.random(0.5, illusion_duration)
 		
 
 		-- Level Up the unit to the targets level
@@ -75,10 +76,10 @@ function Masquerade(keys)
 
 		-- Set the unit as an illusion
 		-- modifier_illusion controls many illusion properties like +Green damage not adding to the unit damage, not being able to cast spells and the team-only blue particle
-		illusion:AddNewModifier(caster, ability, "modifier_illusion", { duration = illusion_duration, outgoing_damage = 0, incoming_damage = 300 })
-		illusion:AddNewModifier(caster, ability, "modifier_phased", {duration = illusion_duration})
+		illusion:AddNewModifier(caster, ability, "modifier_illusion", { duration = random_duration, outgoing_damage = 0, incoming_damage = 300 })
+		illusion:AddNewModifier(caster, ability, "modifier_phased", {duration = random_duration})
 		ability:ApplyDataDrivenModifier(caster, illusion, "modifier_masquerade_illusion", {})
-		ability:ApplyDataDrivenModifier(caster, illusion, "modifier_masquerade_explosion", {duration = illusion_duration-0.1})
+		ability:ApplyDataDrivenModifier(caster, illusion, "modifier_masquerade_explosion", {duration = random_duration-0.1})
 		ability:ApplyDataDrivenModifier(caster, illusion, "modifier_masquerade_target", {})
 
 		-- Without MakeIllusion the unit counts as a hero, e.g. if it dies to neutrals it says killed by neutrals, it respawns, etc.

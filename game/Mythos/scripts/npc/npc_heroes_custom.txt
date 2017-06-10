@@ -199,7 +199,7 @@
     {
         "override_hero"      "npc_dota_hero_lich"
         "AbilityLayout" "4"
-        "Ability1"           "shatter"
+        "Ability1"           "frozen_shatter"
         "Ability2"           "crazed_acolyte"
         "Ability3"           "icy_rune"
         "Ability4"           "frozen_tomb"    
@@ -327,5 +327,15 @@
         //-------------------------------------------------------------------------------------------------------------
         "MovementSpeed"             "325"                                   // Speed.
         "MovementTurnRate"          "0.8"                                   // Turning rate.
+    }
+
+    "ice_dragon"
+    {
+        "AbilityLayout" "4"
+        "override_hero"     "npc_dota_hero_winter_wyvern"
+        "ModelScale"       "1.6"
+
+
+        "Ability3" "glacial_tomb"
     }
 }

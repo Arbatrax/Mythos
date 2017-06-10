@@ -154,6 +154,12 @@ function GameMode:InitGameMode()
   else
     print("Unknown Map")
   end
+
+  GameRules:SetCustomGameSetupAutoLaunchDelay(0);
+  GameRules:LockCustomGameSetupTeamAssignment( true );
+  GameRules:SetCustomGameSetupTimeout(1);
+  GameRules:SetStrategyTime(0);
+  GameRules:SetShowcaseTime(0);
 end
 
 function GameMode:OnHeroInGame(hero)
@@ -192,7 +198,7 @@ function GameMode:OnHeroInGame(hero)
 
   item = CreateItem("item_dagon_5", hero, hero)
   hero:AddItem(item)
-  item = CreateItem("item_stat_tome", hero, hero)
+  item = CreateItem("item_black_king_bar", hero, hero)
   hero:AddItem(item)
   item = CreateItem("item_speed_fruit", hero, hero)
   hero:AddItem(item)
@@ -486,7 +492,8 @@ function SpawnNeutralIsland()
       unit:AddNewModifier(caster, nil, "modifier_magic_immune", {})
     end
   end
-  SpawnCamp("neutral_campboss", "neutral_island_boss", 1)
+  local point = Entities:FindByName( nil, "neutral_campboss"):GetAbsOrigin()
+  local unit = CreateUnitByName("neutral_ice_dragon_boss", point, true, nil, nil, DOTA_TEAM_BADGUYS)
 end
 
 function RespawnNeutralIsland()
